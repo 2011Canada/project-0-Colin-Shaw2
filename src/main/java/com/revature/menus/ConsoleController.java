@@ -1,0 +1,88 @@
+package com.revature.menus;
+
+import java.util.Scanner;
+
+import com.revature.models.Customer;
+import com.revature.models.Employee;
+import com.revature.models.User;
+
+public class ConsoleController {
+
+	static User activeUser;
+	static Scanner userInputScanner = new Scanner(System.in);
+
+	// handles all of the exceptions
+	// and sanitizes strings
+
+	public static void displayWelcome() {
+		System.out.println("asdf");
+
+		// currently created in the top of controller
+//		myScanner = new Scanner(System.in); // Create a Scanner object
+		System.out.println("Welcome To Colin's Banking App");
+
+	}
+
+	public static void manageLoginInput() {
+		System.out.println("Please enter a username"); // Output user input
+
+		String userName = userInputScanner.nextLine(); // Read user input
+		System.out.println("Username is: " + userName); // Output user input
+
+		System.out.println("Please enter a password");
+		String pwd = userInputScanner.nextLine(); // Read user input
+		System.out.println("Password is: " + pwd); // Output user input
+
+		// check DB for user password combo
+		// TODO temp
+		if (userName.equals("e")) {
+			activeUser = new Employee(0);
+		} else if (userName.equals("c")) {
+			activeUser = new Customer(0, 0);
+		} else {
+			System.out.println("Invalid login");
+			// throw new InvalidLoginException();
+		}
+
+	}
+
+	public static void manageLoggedInInput() {
+		if (activeUser instanceof Customer) {
+			manageCustomerInput();
+		} else if (activeUser instanceof Employee) {
+			manageEmployeeInput();
+		}
+
+	}
+
+	private static void manageCustomerInput() {
+		String input = userInputScanner.nextLine(); // Read user input
+		
+		if(input.equals("login")) {}
+		else if(input.equals("registernewaccount")) {}
+		else if(input.equals("getbalance")) {}
+		else if(input.equals("withdraw")) {}
+		else if(input.equals("deposit")) {}
+		else if(input.equals("transfer")) {}
+		else if(input.equals("accepttransfer")) {}
+		else {System.out.println("Invalid option");}
+		// login
+		// registernewaccount
+		// getbalance
+		// withdraw
+		// deposit
+		// transfer
+		// accepttransfer
+	}
+
+	private static void manageEmployeeInput() {
+		String input = userInputScanner.nextLine(); // Read user input
+
+		// login
+		// registernewaccount
+		// approveaccount
+		// viewBalance
+		// viewlogs
+	}
+
+}
