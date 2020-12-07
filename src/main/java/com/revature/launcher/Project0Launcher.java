@@ -12,8 +12,8 @@ public class Project0Launcher {
 	public static void main(String[] args) {
 		project0Logger.info("Server has Started");
 		ConsoleController.displayWelcome();
-		ConsoleController.manageLoginInput();
-		ConsoleController.manageLoggedInInput();
+		ConsoleController.manageUserInput();
+//		ConsoleController.manageLoggedInInput();
 	}
 
 }

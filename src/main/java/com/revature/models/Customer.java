@@ -1,18 +1,17 @@
 package com.revature.models;
 
+import java.util.ArrayList;
+
 public class Customer extends User {
 	
-	long balance;
+	ArrayList<Account> accounts;
 	
-	public Customer(int id, long balance) {
+	
+	public Customer(int id) {
 		super(id);
-		this.balance = balance;
+		accounts.add(new Account());
 	}
 	
-	
-	public long getbalance() {
-		return balance;
-	}
 	
 	public void withdraw(long amount) {
 	}
