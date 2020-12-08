@@ -7,8 +7,8 @@ public class Customer extends User {
 	ArrayList<Account> accounts;
 	
 	
-	public Customer(int id) {
-		super(id);
+	public Customer(int id, String username, String password) {
+		super(id, username, password);
 		accounts.add(new Account());
 	}
 	

@@ -9,8 +9,8 @@ public class Employee extends User {
 	int vacationsHours;
 	int employeeNumber;
 	
-	public Employee(int id) {
-		super(id);
+	public Employee(int id, String username, String password) {
+		super(id, username, password);
 		int annualSalary = 0;
 		Date startDate = new Date();
 		int vacationsHours = 0;
