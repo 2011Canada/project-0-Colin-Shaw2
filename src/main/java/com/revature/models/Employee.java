@@ -30,14 +30,5 @@ public class Employee extends User {
 		return "LOGS";
 	}
 
-	public User login() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public User registerNewAcount() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
