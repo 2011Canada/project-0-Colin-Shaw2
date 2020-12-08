@@ -1,10 +1,11 @@
 package com.revature.repositories;
 
+import com.revature.models.Customer;
 import com.revature.models.User;
 
 public interface UserDAO {
-	
-	public User saveOne(User u);
+
+	public Customer addCustomer(Customer u);
 
 	public User updateUser(User u);
 	

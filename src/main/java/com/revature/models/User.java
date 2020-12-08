@@ -52,9 +52,11 @@ public abstract class User implements UserServiceInterface {
 	}
 
 	public User registerNewAcount(String username, String password, long acountBalance) {
-		// TODO Auto-generated method stub
+		dao.addCustomer(new Customer(0, username, password));
 		return null;
-	}public User registerNewAcount(String username, String password) {
+	}
+	
+	public User registerNewAcount(String username, String password) {
 		return registerNewAcount(username, password, 0);
 	}
 }

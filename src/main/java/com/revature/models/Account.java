@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class Account {
 	
-	int acountID;
+	int accountID;
 	Date openDate;
 	long Balance;
 
 	public Account() {
 		this.openDate = new Date();
 		this.Balance = 0;
+		int accountID = 0;
 	}
 	
 	public Account(long balance) {
@@ -21,7 +22,7 @@ public class Account {
 	public Account(Date openDate, long balance, int acountID) {
 		this.openDate = openDate;
 		this.Balance = balance;
-		this.acountID = acountID;
+		this.accountID = acountID;
 	}
 
 }

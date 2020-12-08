@@ -27,7 +27,7 @@ public class FileDAO implements UserDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User saveOne(User u) {
+	public Customer addCustomer(Customer u) {
 		
 		return null;
 	}
@@ -45,7 +45,7 @@ public class FileDAO implements UserDAO {
 	public User findUserByName(String s) {
 		for(User u : db) {
 			if(s.equals(u.getUsername())) {
-				
+				return u;
 			}
 		}
 		return null;

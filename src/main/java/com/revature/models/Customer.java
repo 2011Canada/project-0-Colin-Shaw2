@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Customer extends User {
 	
@@ -9,7 +10,8 @@ public class Customer extends User {
 	
 	public Customer(int id, String username, String password) {
 		super(id, username, password);
-		accounts.add(new Account());
+		accounts = new ArrayList<>();
+		accounts.add(new Account(new Date(), 0, 16));
 	}
 	
 	

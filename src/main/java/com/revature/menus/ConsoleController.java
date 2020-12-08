@@ -44,12 +44,15 @@ public class ConsoleController {
 		// check DB for user password combo
 		// TODO temp
 		User temp = dao.findUserByName(username);
-		if(temp.getPassword().equals(pwd)){
+		if(temp == null) {
+			System.out.println("Invalid login");
+		}
+		else if(temp.getPassword().equals(pwd)){
 			System.out.println("Successfull Login");
 			activeUser = temp;
 		}
 		else {
-			System.out.println("Invalid login");
+			System.out.println("Invalid login else");
 			// throw new InvalidLoginException();
 		}
 		manageUserInput();
