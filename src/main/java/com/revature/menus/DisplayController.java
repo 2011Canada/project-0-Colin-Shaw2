@@ -7,7 +7,7 @@ import com.revature.models.Employee;
 import com.revature.models.User;
 import com.revature.repositories.FileDAO;
 
-public class ConsoleController {
+public class DisplayController {
 
 	static User activeUser;
 	static FileDAO dao = new FileDAO();
@@ -102,7 +102,7 @@ public class ConsoleController {
 		
 		if (activeUser instanceof Customer) {
 //			manageCustomerInput();
-			ConsoleController.displayWelcome();
+			DisplayController.displayWelcome();
 		} else if (activeUser instanceof Employee) {
 //			manageEmployeeInput();
 		}
