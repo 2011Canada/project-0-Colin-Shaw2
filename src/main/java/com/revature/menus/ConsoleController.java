@@ -5,18 +5,18 @@ import java.util.Scanner;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
+import com.revature.repositories.FileDAO;
 
 public class ConsoleController {
 
 	static User activeUser;
+	static FileDAO dao = new FileDAO();
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
 	// and sanitizes strings
 
 	public static void displayWelcome() {
-		// currently created in the top of controller
-//		myScanner = new Scanner(System.in); // Create a Scanner object
 		System.out.println("Welcome To Colin's Banking App");
 
 	}
@@ -34,8 +34,8 @@ public class ConsoleController {
 
 		System.out.println("Please enter a username"); // Output user input
 
-		String userName = userInputScanner.nextLine(); // Read user input
-		System.out.println("Username is: " + userName); // Output user input
+		String username = userInputScanner.nextLine(); // Read user input
+		System.out.println("Username is: " + username); // Output user input
 
 		System.out.println("Please enter a password");
 		String pwd = userInputScanner.nextLine(); // Read user input
@@ -43,11 +43,12 @@ public class ConsoleController {
 
 		// check DB for user password combo
 		// TODO temp
-		if (userName.equals("e")) {
-			activeUser = new Employee(0);
-		} else if (userName.equals("c")) {
-			activeUser = new Customer(0);
-		} else {
+		User temp = dao.findUserByName(username);
+		if(temp.getPassword().equals(pwd)){
+			System.out.println("Successfull Login");
+			activeUser = temp;
+		}
+		else {
 			System.out.println("Invalid login");
 			// throw new InvalidLoginException();
 		}

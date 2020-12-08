@@ -1,7 +1,7 @@
 package com.revature.models;
 
 import com.revature.repositories.UserDAO;
-import com.revature.repositories.fileDAO;
+import com.revature.repositories.FileDAO;
 import com.revature.services.UserServiceInterface;
 
 public abstract class User implements UserServiceInterface {
@@ -9,7 +9,7 @@ public abstract class User implements UserServiceInterface {
 	private String username;
 	private String password;
 	
-	static private UserDAO dao = new fileDAO();
+	static private UserDAO dao = new FileDAO();
 
 	User(){
 		this.userID = 0;
@@ -29,6 +29,22 @@ public abstract class User implements UserServiceInterface {
 		this.password = password;
 	}
 	
+	public int getUserID() {
+		return userID;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public static UserDAO getDao() {
+		return dao;
+	}
+
 	//can be null
 	public User login(String username, String password) {
 		User u = dao.findUserByName(username);
