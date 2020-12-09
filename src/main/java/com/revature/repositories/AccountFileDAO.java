@@ -11,6 +11,8 @@ public class AccountFileDAO implements AccountDAO {
 
 	static HashMap<String, User> db = FakeFileDB.db;
 	
+	static UserDAO userDAO = new UserFileDAO();
+	
 	@Override
 	public Customer addAccount(Customer u, Account a) {
 		// TODO Auto-generated method stub
@@ -18,9 +20,9 @@ public class AccountFileDAO implements AccountDAO {
 	}
 
 	@Override
-	public Customer updateAccount(Customer u, Account a) {
-		// TODO Auto-generated method stub
-		return null;
+	public Account updateAccountByCustomerandID(Customer c, int id, Account a) {
+		db.put(c.getUsername(), c);
+		return a;
 	}
 
 	@Override
@@ -30,9 +32,8 @@ public class AccountFileDAO implements AccountDAO {
 	}
 
 	@Override
-	public Account findAccountByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Account findAccountByCustomerandID(Customer c, int id) {
+		return userDAO.findCustomerByName(c.getUsername()).getAccountByID(id);
 	}
 
 }

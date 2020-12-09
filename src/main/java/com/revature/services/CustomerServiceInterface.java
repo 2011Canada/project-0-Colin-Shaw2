@@ -10,11 +10,13 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 	
 	Customer applyForBankAccount(Customer currentCustomer, long initialBalance);
 	
-	Account viewBalance(Customer currentCustomer, int accountID);
+	long viewBalance(Customer currentCustomer, int accountID);
 	
-	Account withdraw(Customer currentCustomer, int accountID);
+	//returns amount withdrawn
+	Account withdraw(Customer currentCustomer, int accountID, int amount);
 	
-	Account deposit(Customer currentCustomer, int accountID);
+	//returns amount deposited
+	Account deposit(Customer currentCustomer, int accountID, int amount);
 
 	Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID);
 	

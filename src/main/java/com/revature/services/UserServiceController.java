@@ -7,7 +7,7 @@ import com.revature.repositories.UserDAO;
 
 public class UserServiceController implements UserServiceInterface {
 	
-	protected static UserDAO dao = new UserFileDAO();
+	protected static UserDAO userDAO = new UserFileDAO();
 
 	public UserServiceController() {
 		// TODO Auto-generated constructor stub
@@ -16,13 +16,13 @@ public class UserServiceController implements UserServiceInterface {
 	//can be null
 	@Override
 	public User login(String username, String password) {
-		User u = dao.findUserByName(username);
+		User u = userDAO.findUserByName(username);
 		return u;
 	}
 	
 	@Override
 	public Boolean registerNewCustomerAccount(String username, String password) {
-		return (dao.addCustomer(new Customer(username, password)))== null?false:true;
+		return (userDAO.addCustomer(new Customer(username, password)))== null?false:true;
 	}
 
 	@Override

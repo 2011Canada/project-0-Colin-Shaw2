@@ -7,10 +7,10 @@ public interface AccountDAO {
 
 	public Customer addAccount(Customer u, Account a);
 
-	public Customer updateAccount(Customer u, Account a);
+	public Account updateAccountByCustomerandID(Customer c, int id,  Account a);
 
 	public Account[] findAllAccounts();
 	
-	public Account findAccountByID(int id);
+	public Account findAccountByCustomerandID(Customer c,int id);
 
 }

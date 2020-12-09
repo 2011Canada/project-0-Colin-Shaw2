@@ -6,32 +6,37 @@ import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
 import com.revature.repositories.UserFileDAO;
+import com.revature.repositories.AccountDAO;
+import com.revature.repositories.AccountFileDAO;
 import com.revature.repositories.UserDAO;
 
 public class CustomerServiceController extends UserServiceController implements CustomerServiceInterface {
 
+	private static AccountDAO accountDAO = new AccountFileDAO();
+	
 	@Override
 	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) {
 		currentCustomer.addAccount(new Account(initialBalance));
-		return dao.updateCustomer(currentCustomer);
+		return userDAO.updateCustomer(currentCustomer);
 	}
 
 	@Override
-	public Account viewBalance(Customer currentCustomer, int accountID) {
-		Customer c = dao.findCustomerByName(currentCustomer.getUsername());
-		return null;
+	public long viewBalance(Customer currentCustomer, int accountID) {
+		return accountDAO.findAccountByCustomerandID(currentCustomer, accountID).getBalance();
 	}
 
 	@Override
-	public Account withdraw(Customer currentCustomer, int accountID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Account withdraw(Customer currentCustomer, int accountID, int amount) {
+		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
+		acc.setBalance(acc.getBalance() - amount);
+		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
 	@Override
-	public Account deposit(Customer currentCustomer, int accountID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Account deposit(Customer currentCustomer, int accountID, int amount) {
+		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
+		acc.setBalance(acc.getBalance() + amount);
+		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
 	@Override

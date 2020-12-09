@@ -99,21 +99,25 @@ public class DisplayController {
 		
 		if(userArgs[0].equals("newacc")) {
 			System.out.println("TEMP newacc being made");
-			//TODO check for execption
+			//TODO check for exception
 			if(userArgs.length == 2) {
 				int initialBalance = Integer.parseInt(userArgs[1]);
 				customerServiceManager.applyForBankAccount((Customer)activeUser, initialBalance);				
+			}else {
+				customerServiceManager.applyForBankAccount((Customer)activeUser, 0);
 			}
-			customerServiceManager.applyForBankAccount((Customer)activeUser, 0);
 		}
 		else if(userArgs[0].equals("getbal")) {
-			System.out.println("TEMP CurrentBallance is");
-			customerServiceManager.viewBalance((Customer)activeUser, 0);
+			System.out.println("CurrentBallance is " +
+			customerServiceManager.viewBalance((Customer)activeUser, 0));
 		}
 		else if(userArgs[0].equals("withdraw")) {
-			
+			System.out.println("Withdrawing " +
+			customerServiceManager.withdraw((Customer)activeUser, 0, 54).getBalance());
 		}
 		else if(userArgs[0].equals("deposit")) {
+			System.out.println("Depositting " +
+			customerServiceManager.deposit((Customer)activeUser, 0, 5).getBalance());
 			
 		}
 		else if(userArgs[0].equals("transfer")) {
