@@ -1,7 +1,9 @@
 package com.revature.menus;
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
@@ -107,6 +109,12 @@ public class DisplayController {
 				customerServiceManager.applyForBankAccount((Customer)activeUser, 0);
 			}
 		}
+		else if(userArgs[0].equals("viewacc")) {
+			List<Account> accounts = customerServiceManager.viewAccounts((Customer)activeUser, 0);
+			for(Account a : accounts) {
+				System.out.println(a);
+			}
+		}
 		else if(userArgs[0].equals("getbal")) {
 			System.out.println("CurrentBallance is " +
 			customerServiceManager.viewBalance((Customer)activeUser, 0));
@@ -120,7 +128,7 @@ public class DisplayController {
 			customerServiceManager.deposit((Customer)activeUser, 0, 5).getBalance());
 			
 		}
-		else if(userArgs[0].equals("transfer")) {
+		else if(userArgs[0].equals("createTransfer")) {
 			
 		}
 		else if(userArgs[0].equals("acceptTransfer")) {

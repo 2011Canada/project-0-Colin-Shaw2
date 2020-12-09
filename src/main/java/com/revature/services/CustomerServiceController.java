@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -19,7 +20,12 @@ public class CustomerServiceController extends UserServiceController implements 
 		currentCustomer.addAccount(new Account(initialBalance));
 		return userDAO.updateCustomer(currentCustomer);
 	}
-
+	
+	@Override
+	public List<Account> viewAccounts(Customer currentCustomer, int accountID){
+		return userDAO.findCustomerByName(currentCustomer.getUsername()).getAccounts();
+	}
+	
 	@Override
 	public long viewBalance(Customer currentCustomer, int accountID) {
 		return accountDAO.findAccountByCustomerandID(currentCustomer, accountID).getBalance();

@@ -1,6 +1,6 @@
 package com.revature.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -9,6 +9,9 @@ import com.revature.models.Transfer;
 public interface CustomerServiceInterface extends UserServiceInterface{
 	
 	Customer applyForBankAccount(Customer currentCustomer, long initialBalance);
+	
+	
+	List<Account> viewAccounts(Customer currentCustomer, int accountID);
 	
 	long viewBalance(Customer currentCustomer, int accountID);
 	
@@ -24,6 +27,6 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 	
 	Boolean acceptTransfer(Customer currentCustomer, int transferID);
 	
-	ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer);
+	List<Transfer> viewPendingTransfers(Customer currentCustomer);
 	
 }

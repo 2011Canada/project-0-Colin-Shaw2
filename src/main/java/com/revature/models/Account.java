@@ -50,4 +50,10 @@ public class Account {
 	public void setBalance(long balance) {
 		Balance = balance;
 	}
+	
+	@Override
+	public String toString() {
+		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + ", openDate=" + openDate
+				+ ", Balance=" + Balance + "]";
+	}
 }
