@@ -5,14 +5,19 @@ import java.util.Scanner;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
-import com.revature.repositories.FileDAO;
+import com.revature.repositories.UserFileDAO;
+import com.revature.services.CustomerServiceController;
+import com.revature.services.CustomerServiceInterface;
 import com.revature.services.UserServiceController;
 import com.revature.services.UserServiceInterface;
 
 public class DisplayController {
 
 	static User activeUser;
+	static Customer activeCustomer;
+	static Employee activeEmployee;
 	static UserServiceInterface userServiceManager = new UserServiceController();
+	static CustomerServiceInterface customerServiceManager = new CustomerServiceController();
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
@@ -91,16 +96,19 @@ public class DisplayController {
 	private static void manageCustomerInput(String[] userArgs) {
 		System.out.println("CUST");
 			
-
 		
 		if(userArgs[0].equals("newacc")) {
-			
+			System.out.println("TEMP newacc being made");
+			//TODO check for execption
+			if(userArgs.length == 2) {
+				int initialBalance = Integer.parseInt(userArgs[1]);
+				customerServiceManager.applyForBankAccount((Customer)activeUser, initialBalance);				
+			}
+			customerServiceManager.applyForBankAccount((Customer)activeUser, 0);
 		}
 		else if(userArgs[0].equals("getbal")) {
 			System.out.println("TEMP CurrentBallance is");
-			if(activeUser instanceof Customer) {
-				
-			}
+			customerServiceManager.viewBalance((Customer)activeUser, 0);
 		}
 		else if(userArgs[0].equals("withdraw")) {
 			

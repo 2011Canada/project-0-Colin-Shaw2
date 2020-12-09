@@ -11,14 +11,21 @@ public class Account {
 	public Account() {
 		this.openDate = new Date();
 		this.Balance = 0;
-		int accountID = 0;
+		this.accountID = 0;
 	}
 	
 	public Account(long balance) {
 		this.openDate = new Date();
 		this.Balance = balance;
+		this.accountID = 0;
 	}
-	
+
+	public Account(long balance, int acountID) {
+		this.openDate = new Date();
+		this.Balance = balance;
+		this.accountID = acountID;
+	}
+
 	public Account(Date openDate, long balance, int acountID) {
 		this.openDate = openDate;
 		this.Balance = balance;

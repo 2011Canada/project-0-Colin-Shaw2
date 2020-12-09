@@ -21,18 +21,8 @@ public class Customer extends User {
 	}
 	
 	
-	public void withdraw(long amount) {
-	}
-	
-	public void deposit(long amount) {
-	}
-	
-	public void transfer(long amount, Customer customer) {
-		
-	}
-	
-	public void acceptTransfer() {
-		
+	public boolean addAccount(Account a) {
+		return accounts.add(a);
 	}
 
 
