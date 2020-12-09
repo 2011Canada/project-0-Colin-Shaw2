@@ -13,9 +13,9 @@ public class FileDAO implements UserDAO {
 	
 	static {
 		Customer cust1 = new Customer(1, "kyle", "g");
-		Customer cust2 = new Customer(1, "colin", "s");
+		Customer cust2 = new Customer(1, "erica", "s");
 		Employee emp1 = new Employee(1, "kurt", "g");
-		Employee emp2 = new Employee(1, "erica", "s");
+		Employee emp2 = new Employee(1, "colin", "s");
 		db.add(cust1);
 		db.add(cust2);
 		db.add(emp1);

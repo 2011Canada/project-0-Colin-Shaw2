@@ -6,11 +6,14 @@ import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
 import com.revature.repositories.FileDAO;
+import com.revature.services.UserServiceController;
+import com.revature.services.UserServiceInterface;
 
 public class DisplayController {
 
 	static User activeUser;
-	static FileDAO dao = new FileDAO();
+	static UserServiceInterface userServiceManager = new UserServiceController();
+	//static FileDAO dao = new FileDAO();
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
@@ -43,40 +46,53 @@ public class DisplayController {
 
 		// check DB for user password combo
 		// TODO temp
-		User temp = dao.findUserByName(username);
+		
+		User temp = userServiceManager.login(username, pwd);
 		if(temp == null) {
 			System.out.println("Invalid login");
-		}
-		else if(temp.getPassword().equals(pwd)){
-			System.out.println("Successfull Login");
-			activeUser = temp;
+			// throw new InvalidLoginException();
 		}
 		else {
-			System.out.println("Invalid login else");
-			// throw new InvalidLoginException();
+			activeUser = temp;
+			System.out.println("Welcome " + activeUser.getUsername());
 		}
 		manageUserInput();
 		
 	}
 
 	private static void manageLoggedInInput() {
-		System.out.println("TEMP NOW EXECPTING USER INPUT");
-		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-		System.out.println(userArgs[0]);
 		
-		if(activeUser instanceof Customer){
-			manageCustomerInput();
-		}else if(activeUser instanceof Employee){
-			manageEmployeeInput();
-		}
+		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
+		
+		System.out.println("CHOOSING CUST OR EMP OR USER COMMAND");
 		if(userArgs[0].equals("logout")) {
-			System.out.println("TEMP Logging out");
+			userServiceManager.logout();
+			System.out.println("Logging out");
 			activeUser = null;
 		}
 		else if(userArgs[0].equals("q")) {
+			System.out.println("QUITTING");
 			System.exit(0);
 		}
-		else if(userArgs[0].equals("newacc")) {
+		else if(userArgs[0].equals("newcust")) {
+			userServiceManager.registerNewCustomerAccount("", "");
+		}
+		else if(activeUser instanceof Customer){
+			manageCustomerInput(userArgs);
+		}else if(activeUser instanceof Employee){
+			manageEmployeeInput(userArgs);
+		}
+
+		manageUserInput();
+
+	}
+
+	private static void manageCustomerInput(String[] userArgs) {
+		System.out.println("CUST");
+			
+
+		
+		if(userArgs[0].equals("newacc")) {
 			
 		}
 		else if(userArgs[0].equals("getbal")) {
@@ -100,44 +116,28 @@ public class DisplayController {
 		else {System.out.println("Invalid option");}
 		
 		
-		if (activeUser instanceof Customer) {
-//			manageCustomerInput();
-			DisplayController.displayWelcome();
-		} else if (activeUser instanceof Employee) {
-//			manageEmployeeInput();
-		}
-
-		manageUserInput();
-
+		
 	}
 
-	private static void manageCustomerInput() {
-		String input = userInputScanner.nextLine(); // Read user input
+	private static void manageEmployeeInput(String[] userArgs) {
+		System.out.println("EMP");
 		
-		if(input.equals("logout")) {
-			activeUser = null;
-		}
-		else if(input.equals("newacc")) {}
-		else if(input.equals("getbal")) {}
-		else if(input.equals("withdraw")) {}
-		else if(input.equals("deposit")) {}
-		else if(input.equals("transfer")) {}
-		else if(input.equals("acceptTransfer")) {}
-		else {System.out.println("Invalid option");}
+//		if(userArgs[0].equals("logout")) {
+//			System.out.println("TEMP Logging out");
+//			activeUser = null;
+//		}
+//		else if(userArgs[0].equals("q")) {
+//			System.out.println("QUITTING");
+//			System.exit(0);
+//		}
+//		else if(userArgs[0].equals("newcust")) {
+//			
+//		}
+//		else if(userArgs[0].equals("newacc")) {
+//			
+//		}
+//		
 		
-		
-		// login
-		// registernewaccount
-		// getbalance
-		// withdraw
-		// deposit
-		// transfer
-		// accepttransfer
-	}
-
-	private static void manageEmployeeInput() {
-		String input = userInputScanner.nextLine(); // Read user input
-
 		// login
 		// registernewaccount
 		// approveaccount

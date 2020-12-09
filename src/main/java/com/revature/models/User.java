@@ -4,7 +4,7 @@ import com.revature.repositories.UserDAO;
 import com.revature.repositories.FileDAO;
 import com.revature.services.UserServiceInterface;
 
-public abstract class User implements UserServiceInterface {
+public abstract class User{
 	private int userID;
 	private String username;
 	private String password;
@@ -45,18 +45,5 @@ public abstract class User implements UserServiceInterface {
 		return dao;
 	}
 
-	//can be null
-	public User login(String username, String password) {
-		User u = dao.findUserByName(username);
-		return u;
-	}
 
-	public User registerNewAcount(String username, String password, long acountBalance) {
-		dao.addCustomer(new Customer(0, username, password));
-		return null;
-	}
-	
-	public User registerNewAcount(String username, String password) {
-		return registerNewAcount(username, password, 0);
-	}
 }

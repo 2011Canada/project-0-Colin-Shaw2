@@ -6,6 +6,9 @@ public interface UserServiceInterface {
 
 	public User login(String username, String password);
 
-	public User registerNewAcount(String username, String password, long acountBalance);
+	public void logout();
+
+	public User registerNewCustomerAccount(String username, String password);
+
 	
 }
