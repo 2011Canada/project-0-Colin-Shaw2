@@ -20,5 +20,4 @@ public interface UserDAO {
 
 	public Customer findCustomerByName(String username);
 	
-
 }

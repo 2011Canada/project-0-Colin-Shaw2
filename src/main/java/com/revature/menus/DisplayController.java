@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
+import com.revature.models.Transfer;
 import com.revature.models.User;
 import com.revature.repositories.UserFileDAO;
 import com.revature.services.CustomerServiceController;
@@ -128,15 +129,57 @@ public class DisplayController {
 			customerServiceManager.deposit((Customer)activeUser, 0, 5).getBalance());
 			
 		}
-		else if(userArgs[0].equals("createTransfer")) {
-			
-		}
-		else if(userArgs[0].equals("acceptTransfer")) {
-			
+		else if(userArgs[0].equals("transfer")) {
+			manageUserTransfers();
 		}
 		else {System.out.println("Invalid option");}
 		
 		
+		
+	}
+	
+	private static void manageUserTransfers() {
+		System.out.println("Choose a Transfer option");
+		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
+		
+		
+		if(userArgs[0].equals("self")) {
+			customerServiceManager.internalAccountTransfer((Customer)activeUser, 0, 1, 33);
+			manageUserTransfers();
+		}
+		else if(userArgs[0].equals("other")) {
+			customerServiceManager.externalAccountTransfer((Customer)activeUser, 0, 
+					"erica", 0, 0);
+			manageUserTransfers();
+		}
+		else if(userArgs[0].equals("pending")) {
+			List<Transfer> transfers = customerServiceManager.viewPendingTransfers((Customer)activeUser);
+			for(Transfer t: transfers) {
+				System.out.println(t);
+			}
+			manageUserTransfers();
+		}
+		else if(userArgs[0].equals("approve")) {
+			manageUserTransfers();
+		}
+		else if(userArgs[0].equals("logout")) {
+			userServiceManager.logout();
+			System.out.println("Logging out");
+			activeUser = null;
+			manageUserInput();
+		}
+		else if(userArgs[0].equals("q")) {
+			System.out.println("QUITTING");
+			System.exit(0);
+		}
+		else if(userArgs[0].equals("back")) {
+			System.out.println("Back to main menu");
+			manageUserInput();
+		}
+		else {
+			System.out.println("Invalid Transfer option");
+			manageUserTransfers();
+		}
 		
 	}
 
@@ -166,4 +209,5 @@ public class DisplayController {
 		// viewlogs
 	}
 
+	
 }

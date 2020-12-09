@@ -1,19 +1,21 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
-import com.revature.repositories.UserFileDAO;
 import com.revature.repositories.AccountDAO;
 import com.revature.repositories.AccountFileDAO;
-import com.revature.repositories.UserDAO;
+import com.revature.repositories.TransferDAO;
+import com.revature.repositories.TransferFileDAO;
 
 public class CustomerServiceController extends UserServiceController implements CustomerServiceInterface {
 
 	private static AccountDAO accountDAO = new AccountFileDAO();
+	private static TransferDAO transferDAO = new TransferFileDAO();
 	
 	@Override
 	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) {
@@ -46,15 +48,23 @@ public class CustomerServiceController extends UserServiceController implements 
 	}
 
 	@Override
-	public Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID) {
-		// TODO Auto-generated method stub
-		return null;
+	//TODO return type
+	public Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
+			int toAccountID, int amount) {
+		//TODO exceptions
+		this.withdraw(currentCustomer, fromAccountID, amount);
+		this.deposit(currentCustomer, toAccountID, amount);
+		return true;
 	}
 
 	@Override
-	public Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, Customer toAccount,
-			int toAccountID) {
+	//TODO return type
+	public Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
+			int toAccountID, int amount) {
 		// TODO Auto-generated method stub
+		Customer toCustomer = userDAO.findCustomerByName(toCustomerName);
+		Transfer t = new Transfer(amount, currentCustomer, toCustomer);
+		transferDAO.addTransfer(t);
 		return null;
 	}
 
@@ -66,8 +76,7 @@ public class CustomerServiceController extends UserServiceController implements 
 
 	@Override
 	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(transferDAO.findAllPendingTransfers());
 	}
 
 }

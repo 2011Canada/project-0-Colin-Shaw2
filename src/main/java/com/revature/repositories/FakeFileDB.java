@@ -2,14 +2,17 @@ package com.revature.repositories;
 
 import java.util.HashMap;
 
+
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
+import com.revature.models.Transfer;
 import com.revature.models.User;
 
 public class FakeFileDB {
-	
+
 	static HashMap<String, User> db = new HashMap<>();
+	static HashMap<Integer, Transfer> transfer = new HashMap<>();
 	
 	static {
 		Customer cust1 = new Customer(0, "kyle", "g");
@@ -26,6 +29,7 @@ public class FakeFileDB {
 		
 		cust2.addAccount(new Account(1000,0, cust2.getUsername()));
 		cust2.addAccount(new Account(2000,1, cust2.getUsername()));
+		
 
 	}
 }

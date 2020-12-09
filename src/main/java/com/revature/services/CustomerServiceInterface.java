@@ -21,9 +21,10 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 	//returns amount deposited
 	Account deposit(Customer currentCustomer, int accountID, int amount);
 
-	Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID);
+	Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID,
+			int amount);
 	
-	Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, Customer toAccount,int toAccountID);
+	Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount);
 	
 	Boolean acceptTransfer(Customer currentCustomer, int transferID);
 	
