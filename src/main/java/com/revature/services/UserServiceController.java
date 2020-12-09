@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.models.Customer;
 import com.revature.models.User;
 import com.revature.repositories.FileDAO;
 import com.revature.repositories.UserDAO;
@@ -20,9 +21,8 @@ public class UserServiceController implements UserServiceInterface {
 	}
 	
 	@Override
-	public User registerNewCustomerAccount(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean registerNewCustomerAccount(String username, String password) {
+		return dao.addCustomer(new Customer(username, password));
 	}
 
 	@Override

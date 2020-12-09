@@ -27,9 +27,8 @@ public class FileDAO implements UserDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer addCustomer(Customer u) {
-		
-		return null;
+	public Boolean addCustomer(Customer u) {
+		return db.add(u);
 	}
 
 	public User updateUser(User u) {

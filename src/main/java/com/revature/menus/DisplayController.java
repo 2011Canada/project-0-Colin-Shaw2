@@ -13,7 +13,6 @@ public class DisplayController {
 
 	static User activeUser;
 	static UserServiceInterface userServiceManager = new UserServiceController();
-	//static FileDAO dao = new FileDAO();
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
@@ -75,7 +74,9 @@ public class DisplayController {
 			System.exit(0);
 		}
 		else if(userArgs[0].equals("newcust")) {
-			userServiceManager.registerNewCustomerAccount("", "");
+			//TODO throw exception for arg length
+			//TODO throw boolean exception
+			userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 		}
 		else if(activeUser instanceof Customer){
 			manageCustomerInput(userArgs);

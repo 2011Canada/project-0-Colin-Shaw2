@@ -8,7 +8,7 @@ public interface UserServiceInterface {
 
 	public void logout();
 
-	public User registerNewCustomerAccount(String username, String password);
+	public Boolean registerNewCustomerAccount(String username, String password);
 
 	
 }
