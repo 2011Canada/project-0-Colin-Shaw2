@@ -10,7 +10,6 @@ public abstract class User implements Displayable{
 	private String username;
 	private String password;
 	
-	static private UserDAO dao = new UserFileDAO();
 
 	User(){
 		this.userID = 0;
@@ -42,9 +41,6 @@ public abstract class User implements Displayable{
 		return password;
 	}
 
-	public static UserDAO getDao() {
-		return dao;
-	}
 
 	@Override
 	public String display() {

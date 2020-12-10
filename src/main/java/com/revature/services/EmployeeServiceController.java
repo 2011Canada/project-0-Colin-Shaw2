@@ -48,13 +48,19 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 
 	@Override
 	public Boolean approveAccount(String customerName, int accountID) {
-		// TODO Auto-generated method stub
+		Customer customer = custDAO.findCustomerByName(customerName);
+		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
+		a.approveAccount();
+		accDAO.updateAccountByCustomerandID(customer, accountID, a);
 		return null;
 	}
 
 	@Override
 	public Boolean declineAccount(String customerName, int accountID) {
-		// TODO Auto-generated method stub
+		Customer customer = custDAO.findCustomerByName(customerName);
+		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
+		a.declineAccount();
+		accDAO.updateAccountByCustomerandID(customer, accountID, a);
 		return null;
 	}
 
