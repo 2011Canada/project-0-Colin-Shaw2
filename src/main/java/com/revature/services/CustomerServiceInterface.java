@@ -25,8 +25,10 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 			int amount);
 	
 	Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount);
-	
+
 	Boolean acceptTransfer(Customer currentCustomer, int transferID);
+
+	Boolean declineTransfer(Customer currentCustomer, int transferID);
 	
 	List<Transfer> viewPendingTransfers(Customer currentCustomer);
 	

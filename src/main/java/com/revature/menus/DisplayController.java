@@ -28,10 +28,11 @@ public class DisplayController {
 
 	public static void displayWelcome() {
 		System.out.println("Welcome To Colin's Banking App");
+		manageUserInput();
 
 	}
 
-	public static void manageUserInput() {
+	private static void manageUserInput() {
 		if(null == activeUser) {
 			manageNotLoggedInInput();
 		}else {
@@ -160,6 +161,11 @@ public class DisplayController {
 			manageUserTransfers();
 		}
 		else if(userArgs[0].equals("approve")) {
+			customerServiceManager.acceptTransfer((Customer)activeUser, 0);
+			manageUserTransfers();
+		}
+		else if(userArgs[0].equals("decline")) {
+			customerServiceManager.declineTransfer((Customer)activeUser, 0);
 			manageUserTransfers();
 		}
 		else if(userArgs[0].equals("logout")) {

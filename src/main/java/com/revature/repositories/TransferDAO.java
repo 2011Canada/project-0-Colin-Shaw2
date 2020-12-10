@@ -14,7 +14,7 @@ public interface TransferDAO {
 	
 	Collection<Transfer> findAllPendingTransfers();
 	
-	Transfer findTransferByID(Transfer c,int id);
+	Transfer findTransferByID(int id);
 
 
 }

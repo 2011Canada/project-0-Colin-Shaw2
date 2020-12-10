@@ -61,7 +61,6 @@ public class CustomerServiceController extends UserServiceController implements 
 	//TODO return type
 	public Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
 			int toAccountID, int amount) {
-		// TODO Auto-generated method stub
 		Customer toCustomer = userDAO.findCustomerByName(toCustomerName);
 		Transfer t = new Transfer(amount, currentCustomer, toCustomer);
 		transferDAO.addTransfer(t);
@@ -69,11 +68,24 @@ public class CustomerServiceController extends UserServiceController implements 
 	}
 
 	@Override
+	//TODO return type
 	public Boolean acceptTransfer(Customer currentCustomer, int transferID) {
-		// TODO Auto-generated method stub
+		Transfer t = transferDAO.findTransferByID(transferID);
+		t.approveTransfer();
+		transferDAO.updateTransferByID(t, transferID);
 		return null;
 	}
 
+	@Override
+	//TODO return type
+	public Boolean declineTransfer(Customer currentCustomer, int transferID) {
+		Transfer t = transferDAO.findTransferByID(transferID);
+		t.declineTransfer();
+		transferDAO.updateTransferByID(t, transferID);
+		return null;
+	}
+	
+	
 	@Override
 	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) {
 		return new ArrayList<>(transferDAO.findAllPendingTransfers());

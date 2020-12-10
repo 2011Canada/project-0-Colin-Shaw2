@@ -10,7 +10,7 @@ public class Transfer {
 	int transferId;
 	Customer sendingCustomer;
 	Customer receivingCustomer;
-	Enum<TransferState> transferState;
+	TransferState transferState;
 	
 	public Transfer(int ammount, Customer sendingCustomer, Customer receivingCustomer) {
 		this.dateMade = new Date();
@@ -34,8 +34,23 @@ public class Transfer {
 		return transferId;
 	}
 
-	public Enum<TransferState> getTransferState() {
+	public TransferState getTransferState() {
 		return transferState;
+	}
+	
+	public void approveTransfer() {
+		if(transferState.equals(TransferState.PENDING)) {
+			transferState = TransferState.APPROVED;
+		}else {
+			//TODO execption
+		}
+	}
+	public void declineTransfer() {
+		if(transferState.equals(TransferState.PENDING)) {
+			transferState = TransferState.DENIED;
+		}else {
+			//TODO execption
+		}
 	}
 
 	@Override

@@ -40,9 +40,8 @@ public class TransferFileDAO implements TransferDAO {
 	}
 
 	@Override
-	public Transfer findTransferByID(Transfer c, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Transfer findTransferByID(int id) {
+		return FakeFileDB.transfer.get(id);
 	}
 
 }
