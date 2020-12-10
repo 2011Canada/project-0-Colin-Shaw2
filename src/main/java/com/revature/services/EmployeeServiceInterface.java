@@ -8,8 +8,8 @@ import com.revature.models.Transfer;
 
 public interface EmployeeServiceInterface {
 
-	List<Account> viewAccounts(Customer currentCustomer);
-	
+//	List<Account> viewAccounts(Customer currentCustomer);
+//	
 	Account viewAccount(Customer currentCustomer, int accountID);
 	
 	List<Account> viewPendingAccounts(int accountID);

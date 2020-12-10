@@ -190,8 +190,6 @@ public class DisplayController {
 			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 		}
 		//////////////////////////////////////EMP specific actions//////////////
-		else if(userArgs[0].equals("viewallacc")) {
-		}
 		else if(userArgs[0].equals("viewpendingaccs")) {
 		}
 		else if(userArgs[0].equals("viewpendingtransfers")) {
