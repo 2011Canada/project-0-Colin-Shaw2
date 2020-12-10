@@ -1,7 +1,9 @@
 package com.revature.services;
 
+import java.util.Collection;
 import java.util.List;
 
+import com.revature.menus.Displayable;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
@@ -10,11 +12,11 @@ public interface EmployeeServiceInterface {
 
 //	List<Account> viewAccounts(Customer currentCustomer);
 //	
-	Account viewAccount(Customer currentCustomer, int accountID);
+	Customer viewCustomer(String customerName);
 	
-	List<Account> viewPendingAccounts(int accountID);
+	List<Account> viewPendingAccountsForCustomer(String customerName);
 
-	List<Transfer> viewPendingTransfers(Customer currentCustomer);
+	List<Transfer> viewPendingTransfersForCustomer(String customerName);
 //	
 //	List<Transfer> viewAllTransfers(Customer currentCustomer);
 //	
@@ -22,10 +24,10 @@ public interface EmployeeServiceInterface {
 //	
 //	List<Transfer> viewApprovedTransfers(Customer currentCustomer);
 	
-	List<String> viewTransactionLogs();
+	Collection<Displayable> viewTransactionLogs();
 	
-	Boolean approveAccount(Customer currentCustomer, int accountID);
+	Boolean approveAccount(String customerName, int accountID);
 	
-	Boolean declineAccount(Customer currentCustomer, int accountID);
+	Boolean declineAccount(String customerName, int accountID);
 	
 }

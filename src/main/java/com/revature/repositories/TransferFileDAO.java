@@ -24,7 +24,12 @@ public class TransferFileDAO implements TransferDAO {
 	public Collection<Transfer> findAllTransfers() {
 		return FakeFileDB.transfer.values();
 	}
-	
+
+	@Override
+	public Collection<Transfer> findAllTransfersForCustomer(String username){
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public Collection<Transfer> findAllPendingTransfers() {
 		
@@ -37,6 +42,10 @@ public class TransferFileDAO implements TransferDAO {
 		}
 
 		return pending;
+	}@Override
+	public Collection<Transfer> findAllPendingTransfersForCustomer(String username){
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

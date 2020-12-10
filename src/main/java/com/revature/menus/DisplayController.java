@@ -11,6 +11,8 @@ import com.revature.models.Transfer;
 import com.revature.models.User;
 import com.revature.services.CustomerServiceController;
 import com.revature.services.CustomerServiceInterface;
+import com.revature.services.EmployeeServiceController;
+import com.revature.services.EmployeeServiceInterface;
 import com.revature.services.UserServiceController;
 import com.revature.services.UserServiceInterface;
 
@@ -22,6 +24,7 @@ public class DisplayController {
 	static Employee activeEmployee;
 	static UserServiceInterface userServiceManager = new UserServiceController();
 	static CustomerServiceInterface customerServiceManager = new CustomerServiceController();
+	static EmployeeServiceInterface employeeServiceManager = new EmployeeServiceController();
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
@@ -176,6 +179,7 @@ public class DisplayController {
 
 	private static void manageEmployeeInput() {
 		System.out.println("EMP");
+		activeEmployee = (Employee)activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 			
 		if(userArgs[0].equals("logout")) {
@@ -191,16 +195,28 @@ public class DisplayController {
 		}
 		//////////////////////////////////////EMP specific actions//////////////
 		else if(userArgs[0].equals("viewpendingaccs")) {
+			for(Account a : employeeServiceManager.viewPendingAccountsForCustomer("kyle")) {
+				System.out.println(a);
+			}
 		}
 		else if(userArgs[0].equals("viewpendingtransfers")) {
+			for(Transfer t : employeeServiceManager.viewPendingTransfersForCustomer("kyle")) {
+				System.out.println(t);
+			}
 		}
 		else if(userArgs[0].equals("viewcust")) {
+			System.out.println(employeeServiceManager.viewCustomer("kyle"));
 		}
 		else if(userArgs[0].equals("viewlogs")) {
+			//TODO make aray of displayble objects
 		}
 		else if(userArgs[0].equals("approveaccount")) {
+			System.out.println("Account approved");
+			employeeServiceManager.approveAccount("kyle", 0);
 		}
 		else if(userArgs[0].equals("declineaccount")) {
+			System.out.println("Account declined");
+			employeeServiceManager.declineAccount("kyle", 0);
 		}						
 		else {System.out.println("Invalid option");}
 		

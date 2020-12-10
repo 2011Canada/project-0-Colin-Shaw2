@@ -12,7 +12,11 @@ public interface TransferDAO {
 
 	Collection<Transfer> findAllTransfers();
 	
+	Collection<Transfer> findAllTransfersForCustomer(String username);
+	
 	Collection<Transfer> findAllPendingTransfers();
+	
+	Collection<Transfer> findAllPendingTransfersForCustomer(String username);
 	
 	Transfer findTransferByID(int id);
 

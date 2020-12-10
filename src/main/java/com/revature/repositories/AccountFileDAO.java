@@ -30,6 +30,12 @@ public class AccountFileDAO implements AccountDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+
+	public Account[] findAllAccountsFromCustomerName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public Account findAccountByCustomerandID(Customer c, int id) {

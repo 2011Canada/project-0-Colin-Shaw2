@@ -11,6 +11,8 @@ public interface AccountDAO {
 
 	public Account[] findAllAccounts();
 	
+	public Account[] findAllAccountsFromCustomerName(String username);
+	
 	public Account findAccountByCustomerandID(Customer c,int id);
 
 }
