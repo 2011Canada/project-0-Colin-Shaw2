@@ -10,7 +10,6 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 	
 	Customer applyForBankAccount(Customer currentCustomer, long initialBalance);
 	
-	
 	List<Account> viewAccounts(Customer currentCustomer, int accountID);
 	
 	long viewBalance(Customer currentCustomer, int accountID);

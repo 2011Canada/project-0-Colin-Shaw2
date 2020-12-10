@@ -119,7 +119,7 @@ public class DisplayController {
 		else if(userArgs[0].equals("newcust")) {
 			//TODO throw exception for arg length
 			//TODO throw boolean exception
-			userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
+			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 		}
 		//////////////////////////////////////CUST specific actions//////////////
 		else if(userArgs[0].equals("newacc")) {
