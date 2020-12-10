@@ -2,12 +2,15 @@ package com.revature.models;
 
 import java.util.Date;
 
+import com.revature.enums.AccountState;
+
 public class Account {
 
 	int accountID;
 	String accountOwner;
 	Date openDate;
 	long Balance;
+	AccountState accountState = AccountState.PENDING;
 
 	public Account() {
 		this.openDate = new Date();
@@ -50,6 +53,22 @@ public class Account {
 	public void setBalance(long balance) {
 		Balance = balance;
 	}
+	
+	
+	public void approveAccount() {
+		if(this.accountState != AccountState.PENDING) {
+			//TODO exception
+		}
+		this.accountState= AccountState.APPROVED;
+	}
+	
+	public void declineAccount() {
+		if(this.accountState != AccountState.PENDING) {
+			//TODO exception
+		}
+		this.accountState= AccountState.DENIED;
+	}
+	
 	
 	@Override
 	public String toString() {

@@ -15,12 +15,12 @@ public interface EmployeeServiceInterface {
 	List<Account> viewPendingAccounts(int accountID);
 
 	List<Transfer> viewPendingTransfers(Customer currentCustomer);
-	
-	List<Transfer> viewAllTransfers(Customer currentCustomer);
-	
-	List<Transfer> viewDeclinedTransfers(Customer currentCustomer);
-	
-	List<Transfer> viewApprovedTransfers(Customer currentCustomer);
+//	
+//	List<Transfer> viewAllTransfers(Customer currentCustomer);
+//	
+//	List<Transfer> viewDeclinedTransfers(Customer currentCustomer);
+//	
+//	List<Transfer> viewApprovedTransfers(Customer currentCustomer);
 	
 	List<String> viewTransactionLogs();
 	
