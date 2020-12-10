@@ -6,10 +6,15 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 	
+	private static ConnectionFactory cf = new ConnectionFactory(1);
+	
+	public static ConnectionFactory getConnectionFactory() {
+		return cf;
+	}
 	
 	private Connection[] conns;
 	
-	public ConnectionFactory(int numberOfConnections) {
+	private ConnectionFactory(int numberOfConnections) {
 
 		String url = System.getenv("DB_URL");
 		String username = System.getenv("DB_USER");

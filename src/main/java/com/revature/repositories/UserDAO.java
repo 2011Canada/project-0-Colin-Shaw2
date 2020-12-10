@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
+import java.util.List;
+
 import com.revature.models.Employee;
 import com.revature.models.User;
 
@@ -9,7 +11,7 @@ public interface UserDAO {
 	
 	public Employee updateEmployee(Employee u);
 	
-	public User[] findAllUsers();
+	public List<User> findAllUsers();
 	
 	public User findUserByName(String s);
 

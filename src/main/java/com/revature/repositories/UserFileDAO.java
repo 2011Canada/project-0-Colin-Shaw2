@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.revature.models.Customer;
 import com.revature.models.Employee;
@@ -28,7 +29,7 @@ public class UserFileDAO implements UserDAO {
 		return null;
 	}
 
-	public User[] findAllUsers() {
+	public List<User> findAllUsers() {
 		// TODO Auto-generated method stub
 		return null;
 	}
