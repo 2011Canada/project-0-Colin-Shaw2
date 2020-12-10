@@ -16,16 +16,6 @@ public class UserFileDAO implements UserDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer addCustomer(Customer u) {
-		db.put(u.getUsername(), u);
-		return u;
-	}
-
-	@Override
-	public Customer updateCustomer(Customer u) {
-		db.put(u.getUsername(), u);
-		return u;
-	}
 	
 	@Override
 	public Employee updateEmployee(Employee u) {
@@ -52,15 +42,7 @@ public class UserFileDAO implements UserDAO {
 		return null;
 	}
 
-	@Override
-	public Customer findCustomerByName(String s) {
-		for(User u : db.values()) {
-			if(s.equals(u.getUsername()) && u instanceof Customer) {
-				return (Customer)u;
-			}
-		}
-		return null;
-	}
+	
 
 
 }

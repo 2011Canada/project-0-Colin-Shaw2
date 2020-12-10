@@ -20,12 +20,12 @@ public class CustomerServiceController extends UserServiceController implements 
 	@Override
 	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) {
 		currentCustomer.addAccount(new Account(initialBalance));
-		return userDAO.updateCustomer(currentCustomer);
+		return customerDAO.updateCustomer(currentCustomer);
 	}
 	
 	@Override
 	public List<Account> viewAccounts(Customer currentCustomer, int accountID){
-		return userDAO.findCustomerByName(currentCustomer.getUsername()).getAccounts();
+		return customerDAO.findCustomerByName(currentCustomer.getUsername()).getAccounts();
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class CustomerServiceController extends UserServiceController implements 
 	//TODO return type
 	public Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
 			int toAccountID, int amount) {
-		Customer toCustomer = userDAO.findCustomerByName(toCustomerName);
+		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
 		Transfer t = new Transfer(amount, currentCustomer, toCustomer);
 		transferDAO.addTransfer(t);
 		return null;

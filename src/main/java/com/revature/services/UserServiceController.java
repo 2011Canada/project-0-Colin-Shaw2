@@ -3,11 +3,14 @@ package com.revature.services;
 import com.revature.models.Customer;
 import com.revature.models.User;
 import com.revature.repositories.UserFileDAO;
+import com.revature.repositories.CustomerDAO;
+import com.revature.repositories.CustomerFileDAO;
 import com.revature.repositories.UserDAO;
 
 public class UserServiceController implements UserServiceInterface {
-	
+
 	protected static UserDAO userDAO = new UserFileDAO();
+	protected static CustomerDAO customerDAO = new CustomerFileDAO();
 
 	public UserServiceController() {
 		// TODO Auto-generated constructor stub
@@ -22,7 +25,7 @@ public class UserServiceController implements UserServiceInterface {
 	
 	@Override
 	public Boolean registerNewCustomerAccount(String username, String password) {
-		return (userDAO.addCustomer(new Customer(username, password)))== null?false:true;
+		return (customerDAO.addCustomer(new Customer(username, password)))== null?false:true;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class AccountFileDAO implements AccountDAO {
 
 	static HashMap<String, User> db = FakeFileDB.db;
 	
-	static UserDAO userDAO = new UserFileDAO();
+	static CustomerDAO customerDAO = new CustomerFileDAO();
 	
 	@Override
 	public Customer addAccount(Customer u, Account a) {
@@ -33,7 +33,7 @@ public class AccountFileDAO implements AccountDAO {
 
 	@Override
 	public Account findAccountByCustomerandID(Customer c, int id) {
-		return userDAO.findCustomerByName(c.getUsername()).getAccountByID(id);
+		return customerDAO.findCustomerByName(c.getUsername()).getAccountByID(id);
 	}
 
 }
