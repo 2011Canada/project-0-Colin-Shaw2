@@ -42,6 +42,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 
 	@Override
 	public Collection<Displayable> viewTransactionLogs() {
+		//TODO figure this out
 		return null;
 	}
 

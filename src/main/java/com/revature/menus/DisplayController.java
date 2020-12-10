@@ -18,7 +18,7 @@ import com.revature.services.UserServiceInterface;
 
 public class DisplayController {
 
-	static MenuState  menuState = MenuState.NOT_LOGGED_IN;
+	static MenuState menuState = MenuState.NOT_LOGGED_IN;
 	static User activeUser;
 	static Customer activeCustomer;
 	static Employee activeEmployee;
@@ -28,10 +28,10 @@ public class DisplayController {
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// handles all of the exceptions
-	//TODO and sanitizes strings
+	// TODO and sanitizes strings
 
 	public static void diplayMenu() {
-		
+
 		switch (menuState) {
 		case NOT_LOGGED_IN:
 			manageNotLoggedInInput();
@@ -50,7 +50,7 @@ public class DisplayController {
 			break;
 		}
 	}
-		
+
 	private static void manageNotLoggedInInput() {
 		System.out.println("Welcome To Colin's Banking App");
 
@@ -65,18 +65,17 @@ public class DisplayController {
 
 		// check DB for user password combo
 		// TODO temp
-		
+
 		User temp = userServiceManager.login(username, pwd);
-		if(temp == null) {
+		if (temp == null) {
 			System.out.println("Invalid login");
 			// throw new InvalidLoginException();
-		}
-		else {
+		} else {
 			activeUser = temp;
 			System.out.println("Welcome " + activeUser.getUsername());
-			if(activeUser instanceof Customer){
+			if (activeUser instanceof Customer) {
 				menuState = MenuState.MAIN_CUSTOMER_MENU;
-			}else if(activeUser instanceof Employee){
+			} else if (activeUser instanceof Employee) {
 				menuState = MenuState.MAIN_EMPLOYEE_MENU;
 			}
 		}
@@ -84,158 +83,133 @@ public class DisplayController {
 
 	private static void manageCustomerInput() {
 		System.out.println("CUST");
-		activeCustomer = (Customer)activeUser;
+		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-			
-		if(userArgs[0].equals("logout")) {
+
+		if (userArgs[0].equals("logout")) {
 			logout();
-		}
-		else if(userArgs[0].equals("q")) {
+		} else if (userArgs[0].equals("q")) {
 			quit();
-		}
-		else if(userArgs[0].equals("newcust")) {
-			//TODO throw exception for arg length
-			//TODO throw boolean exception
+		} else if (userArgs[0].equals("newcust")) {
+			// TODO throw exception for arg length
+			// TODO throw boolean exception
 			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 		}
-		//////////////////////////////////////CUST specific actions//////////////
-		else if(userArgs[0].equals("newacc")) {
+		////////////////////////////////////// CUST specific actions//////////////
+		else if (userArgs[0].equals("newacc")) {
 			System.out.println("TEMP newacc being made");
-			//TODO check for exception
-			if(userArgs.length == 2) {
+			// TODO check for exception
+			if (userArgs.length == 2) {
 				int initialBalance = Integer.parseInt(userArgs[1]);
-				customerServiceManager.applyForBankAccount(activeCustomer, initialBalance);				
-			}else {
+				customerServiceManager.applyForBankAccount(activeCustomer, initialBalance);
+			} else {
 				customerServiceManager.applyForBankAccount(activeCustomer, 0);
 			}
-		}
-		else if(userArgs[0].equals("viewacc")) {
+		} else if (userArgs[0].equals("viewacc")) {
 			List<Account> accounts = customerServiceManager.viewAccounts(activeCustomer, 0);
-			for(Account a : accounts) {
+			for (Account a : accounts) {
 				System.out.println(a);
 			}
-		}
-		else if(userArgs[0].equals("getbal")) {
-			System.out.println("CurrentBallance is " +
-			customerServiceManager.viewBalance(activeCustomer, 0));
-		}
-		else if(userArgs[0].equals("withdraw")) {
-			System.out.println("Withdrawing " +
-			customerServiceManager.withdraw(activeCustomer, 0, 54).getBalance());
-		}
-		else if(userArgs[0].equals("deposit")) {
-			System.out.println("Depositting " +
-			customerServiceManager.deposit(activeCustomer, 0, 5).getBalance());
-			
-		}
-		else if(userArgs[0].equals("transfer")) {
+		} else if (userArgs[0].equals("getbal")) {
+			System.out.println("CurrentBallance is " + customerServiceManager.viewBalance(activeCustomer, 0));
+		} else if (userArgs[0].equals("withdraw")) {
+			System.out.println("Withdrawing " + customerServiceManager.withdraw(activeCustomer, 0, 54).getBalance());
+		} else if (userArgs[0].equals("deposit")) {
+			System.out.println("Depositting " + customerServiceManager.deposit(activeCustomer, 0, 5).getBalance());
+
+		} else if (userArgs[0].equals("transfer")) {
 			menuState = MenuState.CUSTOMER_TRANSFER_MENU;
+		} else {
+			System.out.println("Invalid option");
 		}
-		else {System.out.println("Invalid option");}
-		
-		
-		
+
 	}
-	
+
 	private static void manageCustomerTransfers() {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-		
-		
-		if(userArgs[0].equals("self")) {
+
+		if (userArgs[0].equals("self")) {
 			customerServiceManager.internalAccountTransfer(activeCustomer, 0, 1, 33);
-		}
-		else if(userArgs[0].equals("other")) {
-			customerServiceManager.externalAccountTransfer(activeCustomer, 0, 
-					"erica", 0, 0);
-		}
-		else if(userArgs[0].equals("pending")) {
+		} else if (userArgs[0].equals("other")) {
+			customerServiceManager.externalAccountTransfer(activeCustomer, 0, "erica", 0, 0);
+		} else if (userArgs[0].equals("pending")) {
 			List<Transfer> transfers = customerServiceManager.viewPendingTransfers(activeCustomer);
-			for(Transfer t: transfers) {
+			for (Transfer t : transfers) {
 				System.out.println(t);
 			}
-		}
-		else if(userArgs[0].equals("approve")) {
+		} else if (userArgs[0].equals("approve")) {
 			customerServiceManager.acceptTransfer(activeCustomer, 0);
-		}
-		else if(userArgs[0].equals("decline")) {
+		} else if (userArgs[0].equals("decline")) {
 			customerServiceManager.declineTransfer(activeCustomer, 0);
-		}
-		else if(userArgs[0].equals("logout")) {
+		} else if (userArgs[0].equals("logout")) {
 			logout();
-		}
-		else if(userArgs[0].equals("q")) {
+		} else if (userArgs[0].equals("q")) {
 			quit();
-		}
-		else if(userArgs[0].equals("back")) {
+		} else if (userArgs[0].equals("back")) {
 			System.out.println("Back to main menu");
 			menuState = MenuState.MAIN_CUSTOMER_MENU;
-		}
-		else {
+		} else {
 			System.out.println("Invalid Transfer option");
 		}
-		
+
 	}
 
 	private static void manageEmployeeInput() {
 		System.out.println("EMP");
-		activeEmployee = (Employee)activeUser;
+		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-			
-		if(userArgs[0].equals("logout")) {
+
+		if (userArgs[0].equals("logout")) {
 			logout();
-		}
-		else if(userArgs[0].equals("q")) {
+		} else if (userArgs[0].equals("q")) {
 			quit();
-		}
-		else if(userArgs[0].equals("newcust")) {
-			//TODO throw exception for arg length
-			//TODO throw boolean exception
+		} else if (userArgs[0].equals("newcust")) {
+			// TODO throw exception for arg length
+			// TODO throw boolean exception
 			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 		}
-		//////////////////////////////////////EMP specific actions//////////////
-		else if(userArgs[0].equals("viewpendingaccs")) {
-			for(Account a : employeeServiceManager.viewPendingAccountsForCustomer("kyle")) {
+		////////////////////////////////////// EMP specific actions//////////////
+		else if (userArgs[0].equals("viewpendingaccs")) {
+			for (Account a : employeeServiceManager.viewPendingAccountsForCustomer("kyle")) {
 				System.out.println(a);
 			}
-		}
-		else if(userArgs[0].equals("viewpendingtransfers")) {
-			for(Transfer t : employeeServiceManager.viewPendingTransfersForCustomer("kyle")) {
+		} else if (userArgs[0].equals("viewpendingtransfers")) {
+			for (Transfer t : employeeServiceManager.viewPendingTransfersForCustomer("kyle")) {
 				System.out.println(t);
 			}
-		}
-		else if(userArgs[0].equals("viewcust")) {
+		} else if (userArgs[0].equals("viewcust")) {
 			System.out.println(employeeServiceManager.viewCustomer("kyle"));
-		}
-		else if(userArgs[0].equals("viewlogs")) {
-			//TODO make aray of displayble objects
-		}
-		else if(userArgs[0].equals("approveaccount")) {
+		} else if (userArgs[0].equals("viewlogs")) {
+			for (Displayable d : employeeServiceManager.viewTransactionLogs()) {
+				System.out.println(d);
+			}
+		} else if (userArgs[0].equals("approveaccount")) {
 			System.out.println("Account approved");
 			employeeServiceManager.approveAccount("kyle", 0);
-		}
-		else if(userArgs[0].equals("declineaccount")) {
+		} else if (userArgs[0].equals("declineaccount")) {
 			System.out.println("Account declined");
 			employeeServiceManager.declineAccount("kyle", 0);
-		}						
-		else {System.out.println("Invalid option");}
-		
+		} else {
+			System.out.println("Invalid option");
+		}
+
 	}
 
-	//this is a helper function to reduce code being rewritten
+	// this is a helper function to reduce code being rewritten
 	private static void logout() {
 		userServiceManager.logout();
 		System.out.println("Logging out");
 		activeUser = null;
 		activeCustomer = null;
 		activeEmployee = null;
-		menuState = MenuState.NOT_LOGGED_IN;		
+		menuState = MenuState.NOT_LOGGED_IN;
 	}
 
-	//this is a helper function to reduce code being rewritten
+	// this is a helper function to reduce code being rewritten
 	private static void quit() {
 		System.out.println("QUITTING");
-		System.exit(0);	
+		System.exit(0);
 	}
-	
+
 }

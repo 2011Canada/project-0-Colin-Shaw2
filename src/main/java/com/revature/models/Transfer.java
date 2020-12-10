@@ -3,8 +3,9 @@ package com.revature.models;
 import java.util.Date;
 
 import com.revature.enums.TransferState;
+import com.revature.menus.Displayable;
 
-public class Transfer {
+public class Transfer implements Displayable{
 	Date dateMade;
 	int ammount;
 	int transferId;
@@ -60,5 +61,10 @@ public class Transfer {
 				+ ", transferState=" + transferState + "]";
 	}
 
+	@Override
+	public String display() {
+		//TODO
+		return toString();
+	}
 
 }

@@ -3,8 +3,9 @@ package com.revature.models;
 import java.util.Date;
 
 import com.revature.enums.AccountState;
+import com.revature.menus.Displayable;
 
-public class Account {
+public class Account implements Displayable{
 
 	int accountID;
 	String accountOwner;
@@ -74,5 +75,11 @@ public class Account {
 	public String toString() {
 		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + ", openDate=" + openDate
 				+ ", Balance=" + Balance + "]";
+	}
+
+	@Override
+	public String display() {
+		//TODO
+		return toString();
 	}
 }
