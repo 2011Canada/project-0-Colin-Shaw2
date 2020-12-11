@@ -22,7 +22,15 @@ public class UserServiceController implements UserServiceInterface {
 	@Override
 	public User login(String username, String password) {
 		User u = userDAO.findUserByName(username);
-		return u;
+		if(u  == null) {
+			return null;
+		}
+		if(u.getPassword().equals(password)) {
+			return u;
+		}
+		else {
+			return null;
+		}
 	}
 	
 	@Override

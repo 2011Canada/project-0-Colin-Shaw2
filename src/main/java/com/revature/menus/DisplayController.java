@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.enums.MenuState;
+import com.revature.exceptions.InvalidArgumentLengthException;
+import com.revature.exceptions.InvalidLoginException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
@@ -32,42 +34,50 @@ public class DisplayController {
 
 	public static void diplayMenu() {
 
-		switch (menuState) {
-		case NOT_LOGGED_IN:
-			manageNotLoggedInInput();
-			break;
-		case MAIN_CUSTOMER_MENU:
-			manageCustomerInput();
-			break;
-		case MAIN_EMPLOYEE_MENU:
-			manageEmployeeInput();
-			break;
-		case CUSTOMER_TRANSFER_MENU:
-			manageCustomerTransfers();
-			break;
+		try {
+			switch (menuState) {
+			case NOT_LOGGED_IN:
+				manageNotLoggedInInput();
+				break;
+			case MAIN_CUSTOMER_MENU:
+				manageCustomerInput();
+				break;
+			case MAIN_EMPLOYEE_MENU:
+				manageEmployeeInput();
+				break;
+			case CUSTOMER_TRANSFER_MENU:
+				manageCustomerTransfers();
+				break;
 
-		default:
-			break;
+			default:
+				break;
+			}
+		} catch (InvalidArgumentLengthException e) {
+			System.out.println(e.getMessage());
+		} catch (InvalidLoginException e) {
+			System.out.println(e.getMessage());
+		} catch (NumberFormatException e) {
+			System.out.print("Ooops we expected an integer ");
+			System.out.println(e.getMessage());
 		}
 	}
 
-	private static void manageNotLoggedInInput() {
+	private static void manageNotLoggedInInput() throws InvalidLoginException {
 		System.out.println("Welcome To Colin's Banking App");
 
 		System.out.println("Please enter a username"); // Output user input
 
-		//TODO exception
+		// TODO exception
 		String username = userInputScanner.nextLine(); // Read user input
 		System.out.println("Username is: " + username); // Output user input
 
 		System.out.println("Please enter a password");
 		String pwd = userInputScanner.nextLine(); // Read user input
 
-		//TODO exception
+		// TODO exception
 		User temp = userServiceManager.login(username, pwd);
 		if (temp == null) {
-			System.out.println("Invalid login");
-			// throw new InvalidLoginException();
+			throw new InvalidLoginException();
 		} else {
 			activeUser = temp;
 			System.out.println("Welcome " + activeUser.getUsername());
@@ -79,43 +89,49 @@ public class DisplayController {
 		}
 	}
 
-	private static void manageCustomerInput() {
+	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException {
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
+		if (0 == userArgs.length) {
+			throw new InvalidArgumentLengthException(1, 0);
+		}
 		if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {
 			quit();
 		} else if (userArgs[0].equals("newcust")) {
-			// TODO throw exception for arg length
-			// TODO throw boolean exception
 			registerNewCustomerAccount(userArgs);
 		}
 		////////////////////////////////////// CUST specific actions//////////////
 		else if (userArgs[0].equals("newacc")) {
+			checkInputLength(2, userArgs.length);
+			customerServiceManager.applyForBankAccount(activeCustomer, Integer.parseInt(userArgs[1]));
 			System.out.println("TEMP newacc being made");
-			// TODO check for exception
-			if (userArgs.length == 2) {
-				int initialBalance = Integer.parseInt(userArgs[1]);
-				customerServiceManager.applyForBankAccount(activeCustomer, initialBalance);
-			} else {
-				customerServiceManager.applyForBankAccount(activeCustomer, 0);
-			}
+
 		} else if (userArgs[0].equals("viewacc")) {
-			List<Account> accounts = customerServiceManager.viewAccounts(activeCustomer, 0);
+			checkInputLength(2, userArgs.length);
+			List<Account> accounts = customerServiceManager.viewAccounts(activeCustomer, Integer.parseInt(userArgs[1]));
 			for (Account a : accounts) {
 				System.out.println(a);
 			}
 		} else if (userArgs[0].equals("getbal")) {
-			System.out.println("CurrentBallance is " + customerServiceManager.viewBalance(activeCustomer, 0));
+			checkInputLength(2, userArgs.length);
+			System.out.println("CurrentBallance is "
+					+ customerServiceManager.viewBalance(activeCustomer, Integer.parseInt(userArgs[1])));
 		} else if (userArgs[0].equals("withdraw")) {
-			System.out.println("Withdrawing " + customerServiceManager.withdraw(activeCustomer, 0, 54).getBalance());
+			checkInputLength(3, userArgs.length);
+			System.out.println("Withdrawing " + customerServiceManager
+					.withdraw(activeCustomer, Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]))
+					.getBalance());
 		} else if (userArgs[0].equals("deposit")) {
-			System.out.println("Depositting " + customerServiceManager.deposit(activeCustomer, 0, 5).getBalance());
-
+			checkInputLength(3, userArgs.length);
+			System.out.println("Depositting " + customerServiceManager
+					.deposit(activeCustomer, Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]))
+					.getBalance());
 		} else if (userArgs[0].equals("transfer")) {
+			checkInputLength(1, userArgs.length);
 			menuState = MenuState.CUSTOMER_TRANSFER_MENU;
 		} else {
 			System.out.println("Invalid option");
@@ -123,23 +139,31 @@ public class DisplayController {
 
 	}
 
-	private static void manageCustomerTransfers() {
+	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
+		checkInputLength(1, userArgs.length);
 		if (userArgs[0].equals("self")) {
-			customerServiceManager.internalAccountTransfer(activeCustomer, 0, 1, 33);
+			checkInputLength(4, userArgs.length);
+			customerServiceManager.internalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]),
+					Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
 		} else if (userArgs[0].equals("other")) {
-			customerServiceManager.externalAccountTransfer(activeCustomer, 0, "erica", 0, 0);
+			checkInputLength(4, userArgs.length);
+			customerServiceManager.externalAccountTransfer(activeCustomer, 0, userArgs[1],
+					Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
 		} else if (userArgs[0].equals("pending")) {
+			checkInputLength(1, userArgs.length);
 			List<Transfer> transfers = customerServiceManager.viewPendingTransfers(activeCustomer);
 			for (Transfer t : transfers) {
 				System.out.println(t);
 			}
 		} else if (userArgs[0].equals("approve")) {
-			customerServiceManager.acceptTransfer(activeCustomer, 0);
+			checkInputLength(2, userArgs.length);
+			customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
 		} else if (userArgs[0].equals("decline")) {
-			customerServiceManager.declineTransfer(activeCustomer, 0);
+			checkInputLength(2, userArgs.length);
+			customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
 		} else if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {
@@ -153,11 +177,16 @@ public class DisplayController {
 
 	}
 
-	private static void manageEmployeeInput() {
+	private static void manageEmployeeInput() throws InvalidArgumentLengthException, NumberFormatException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-
+		
+		
+		if (0 == userArgs.length) {
+			throw new InvalidArgumentLengthException(1, 0);
+		}
+		checkInputLength(1, userArgs.length);
 		if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {
@@ -167,25 +196,31 @@ public class DisplayController {
 		}
 		////////////////////////////////////// EMP specific actions//////////////
 		else if (userArgs[0].equals("viewpendingaccs")) {
-			for (Account a : employeeServiceManager.viewPendingAccountsForCustomer("kyle")) {
+			checkInputLength(2, userArgs.length);
+			for (Account a : employeeServiceManager.viewPendingAccountsForCustomer(userArgs[2])) {
 				System.out.println(a);
 			}
 		} else if (userArgs[0].equals("viewpendingtransfers")) {
-			for (Transfer t : employeeServiceManager.viewPendingTransfersForCustomer("kyle")) {
+			checkInputLength(2, userArgs.length);
+			for (Transfer t : employeeServiceManager.viewPendingTransfersForCustomer(userArgs[2])) {
 				System.out.println(t);
 			}
 		} else if (userArgs[0].equals("viewcust")) {
-			System.out.println(employeeServiceManager.viewCustomer("kyle"));
+			checkInputLength(2, userArgs.length);
+			System.out.println(employeeServiceManager.viewCustomer(userArgs[2]));
 		} else if (userArgs[0].equals("viewlogs")) {
+			checkInputLength(1, userArgs.length);
 			for (Displayable d : employeeServiceManager.viewTransactionLogs()) {
 				System.out.println(d);
 			}
 		} else if (userArgs[0].equals("approveaccount")) {
+			checkInputLength(3, userArgs.length);
+			employeeServiceManager.approveAccount(userArgs[2], Integer.parseInt(userArgs[2]));
 			System.out.println("Account approved");
-			employeeServiceManager.approveAccount("kyle", 0);
 		} else if (userArgs[0].equals("declineaccount")) {
+			checkInputLength(3, userArgs.length);
+			employeeServiceManager.declineAccount(userArgs[2], Integer.parseInt(userArgs[2]));
 			System.out.println("Account declined");
-			employeeServiceManager.declineAccount("kyle", 0);
 		} else {
 			System.out.println("Invalid option");
 		}
@@ -207,9 +242,15 @@ public class DisplayController {
 		System.out.println("QUITTING");
 		System.exit(0);
 	}
-	
-	private static void registerNewCustomerAccount(String[] userArgs) {
+
+	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException {
+		checkInputLength(3, userArgs.length);
 		customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 	}
 
+	private static void checkInputLength(int expected, int got) throws InvalidArgumentLengthException {
+		if (expected != got) {
+			throw new InvalidArgumentLengthException(expected, got);
+		}
+	}
 }
