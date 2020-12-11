@@ -9,6 +9,11 @@ public class Project0Launcher {
 	
 	static Logger project0Logger = LogManager.getLogger("com.revature.e720");
 
+	
+	//TODO list
+	//remove all unnecessary ids
+	//fix user input
+	//add exceptions
 	public static void main(String[] args) {
 		project0Logger.info("Server has Started");
 		while(true) {

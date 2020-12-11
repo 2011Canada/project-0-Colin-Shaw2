@@ -6,32 +6,22 @@ import com.revature.repositories.UserFileDAO;
 import com.revature.services.UserServiceInterface;
 
 public abstract class User implements Displayable{
-	private int userID;
+
 	private String username;
 	private String password;
 	
 
 	User(){
-		this.userID = 0;
-		this.username = "user";
-		this.password = "user";
+		this.username = "default";
+		this.password = "default";
 	}
 
-	User(int id){
-		this.userID = id;
-		this.username = "user";
-		this.password = "user";
-	}
 
-	User(int id, String username, String password){
-		this.userID = id;
+	User(String username, String password){
 		this.username = username;
 		this.password = password;
 	}
 	
-	public int getUserID() {
-		return userID;
-	}
 
 	public String getUsername() {
 		return username;

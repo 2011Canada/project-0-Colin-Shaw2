@@ -56,16 +56,14 @@ public class DisplayController {
 
 		System.out.println("Please enter a username"); // Output user input
 
+		//TODO exception
 		String username = userInputScanner.nextLine(); // Read user input
 		System.out.println("Username is: " + username); // Output user input
 
 		System.out.println("Please enter a password");
 		String pwd = userInputScanner.nextLine(); // Read user input
-		System.out.println("Password is: " + pwd); // Output user input
 
-		// check DB for user password combo
-		// TODO temp
-
+		//TODO exception
 		User temp = userServiceManager.login(username, pwd);
 		if (temp == null) {
 			System.out.println("Invalid login");
@@ -93,7 +91,7 @@ public class DisplayController {
 		} else if (userArgs[0].equals("newcust")) {
 			// TODO throw exception for arg length
 			// TODO throw boolean exception
-			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
+			registerNewCustomerAccount(userArgs);
 		}
 		////////////////////////////////////// CUST specific actions//////////////
 		else if (userArgs[0].equals("newacc")) {
@@ -165,9 +163,7 @@ public class DisplayController {
 		} else if (userArgs[0].equals("q")) {
 			quit();
 		} else if (userArgs[0].equals("newcust")) {
-			// TODO throw exception for arg length
-			// TODO throw boolean exception
-			customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
+			registerNewCustomerAccount(userArgs);
 		}
 		////////////////////////////////////// EMP specific actions//////////////
 		else if (userArgs[0].equals("viewpendingaccs")) {
@@ -210,6 +206,10 @@ public class DisplayController {
 	private static void quit() {
 		System.out.println("QUITTING");
 		System.exit(0);
+	}
+	
+	private static void registerNewCustomerAccount(String[] userArgs) {
+		customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 	}
 
 }

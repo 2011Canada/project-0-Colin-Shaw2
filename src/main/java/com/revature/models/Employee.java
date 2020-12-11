@@ -4,17 +4,13 @@ import java.util.Date;
 
 public class Employee extends User {
 
-	int annualSalary;
-	Date startDate;
-	int vacationsHours;
-	int employeeNumber;
+//	int annualSalary;
+//	Date startDate;
+//	int vacationsHours;
+//	int employeeNumber;
 	
-	public Employee(int id, String username, String password) {
-		super(id, username, password);
-		int annualSalary = 0;
-		Date startDate = new Date();
-		int vacationsHours = 0;
-		int employeeNumber = 0;
+	public Employee(String username, String password) {
+		super(username, password);
 	}
 	
 	public void approveAccount(Customer c, boolean isApproved){

@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.revature.models.Account;
@@ -39,7 +40,12 @@ public class AccountFileDAO implements AccountDAO {
 
 	@Override
 	public Account findAccountByCustomerandID(Customer c, int id) {
-		return customerDAO.findCustomerByName(c.getUsername()).getAccountByID(id);
+		for(Account a :c.getAccounts()) {
+			if(a.getAccountID() == id) {
+				return a;
+			}
+		}
+		return null;
 	}
 
 }

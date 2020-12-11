@@ -1,41 +1,37 @@
 package com.revature.models;
 
-import java.util.Date;
+
 
 import com.revature.enums.AccountState;
 import com.revature.menus.Displayable;
 
 public class Account implements Displayable{
 
-	int accountID;
+	int accountID;//this is not unique for every account just for every user
 	String accountOwner;
-	Date openDate;
+//	Date openDate;
 	long Balance;
 	AccountState accountState = AccountState.PENDING;
 
 	public Account() {
-		this.openDate = new Date();
+//		this.openDate = new Date();
 		this.Balance = 0;
 		this.accountID = 0;
+		this.accountOwner = "default";
 	}
 	
-	public Account(long balance) {
-		this.openDate = new Date();
-		this.Balance = balance;
-		this.accountID = 0;
-	}
-
+	
 	public Account(long balance, int acountID, String accountOwner) {
-		this.openDate = new Date();
+//		this.openDate = new Date();
 		this.Balance = balance;
 		this.accountID = acountID;
 		this.accountOwner = accountOwner;
 	}
 
-	public Account(Date openDate, long balance, int acountID) {
-		this.openDate = openDate;
+	public Account(long balance) {
+//		this.openDate = openDate;
 		this.Balance = balance;
-		this.accountID = acountID;
+		this.accountID = 0;
 	}
 
 	
@@ -43,10 +39,10 @@ public class Account implements Displayable{
 		return accountID;
 	}
 	
-	public Date getOpenDate() {
-		return openDate;
-	}
-	
+//	public Date getOpenDate() {
+//		return openDate;
+//	}
+//	
 	public long getBalance() {
 		return Balance;
 	}
@@ -73,8 +69,8 @@ public class Account implements Displayable{
 	
 	@Override
 	public String toString() {
-		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + ", openDate=" + openDate
-				+ ", Balance=" + Balance + "]";
+		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + 
+				", Balance=" + Balance + "]";
 	}
 
 	@Override

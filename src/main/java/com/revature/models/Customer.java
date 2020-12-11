@@ -9,20 +9,13 @@ public class Customer extends User {
 	
 	
 	public Customer(String username, String password) {
-		super(0, username, password);
+		super(username, password);
 		accounts = new ArrayList<>();
-		accounts.add(new Account(new Date(), 0, 16));
 	}
+		
 	
-	public Customer(int id, String username, String password) {
-		super(id, username, password);
-		accounts = new ArrayList<>();
-		accounts.add(new Account(new Date(), 0, 16));
-	}
-	
-	
-	public Customer(int id, String username, String password, ArrayList<Account> accounts) {
-		super(id, username, password);
+	public Customer(String username, String password, ArrayList<Account> accounts) {
+		super(username, password);
 		this.accounts = accounts;
 	}
 
@@ -35,28 +28,5 @@ public class Customer extends User {
 		return accounts;
 	}
 	
-	public Account getAccountByID(int id) {
-		for(Account a : accounts) {
-			if(a.getAccountID() == id) {
-				return a;
-			}
-		}
-		return null;
-	}
-	
-	public Account updateAccountByID(int id, Account newAccount) {
-		for(Account a : accounts) {
-			if(a.getAccountID() == id) {
-				a = newAccount;
-				return newAccount;
-			}
-		}
-		return null;
-	}
-
-
-
-
-
 
 }
