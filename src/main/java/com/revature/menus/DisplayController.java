@@ -38,16 +38,16 @@ public class DisplayController {
 		try {
 			switch (menuState) {
 			case NOT_LOGGED_IN:
-				manageNotLoggedInInput();
+				showNotLoggedInMenu();
 				break;
 			case MAIN_CUSTOMER_MENU:
-				manageCustomerInput();
+				showCustomerInputMenu();
 				break;
 			case MAIN_EMPLOYEE_MENU:
-				manageEmployeeInput();
+				showEmployeeInputMenu();
 				break;
 			case CUSTOMER_TRANSFER_MENU:
-				manageCustomerTransfers();
+				showCustomerTransfersMenu();
 				break;
 
 			default:
@@ -69,7 +69,7 @@ public class DisplayController {
 		}
 	}
 
-	private static void manageNotLoggedInInput() throws UserNotFoundException {
+	private static void showNotLoggedInMenu() throws UserNotFoundException {
 		System.out.println("Welcome To Colin's Banking App");
 
 		System.out.println("Please enter a username"); // Output user input
@@ -92,7 +92,7 @@ public class DisplayController {
 		}
 	}
 
-	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException,
+	private static void showCustomerInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
 			UnexpectedTransferStateException, NegativeBalanceException {
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
@@ -143,7 +143,7 @@ public class DisplayController {
 
 	}
 
-	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException,
+	private static void showCustomerTransfersMenu() throws InvalidArgumentLengthException, NumberFormatException,
 			UnexpectedTransferStateException, NegativeBalanceException {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -182,7 +182,7 @@ public class DisplayController {
 
 	}
 
-	private static void manageEmployeeInput()
+	private static void showEmployeeInputMenu()
 			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
