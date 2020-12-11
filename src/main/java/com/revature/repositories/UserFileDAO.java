@@ -4,6 +4,7 @@ package com.revature.repositories;
 import java.util.HashMap;
 import java.util.List;
 
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
@@ -18,29 +19,29 @@ public class UserFileDAO implements UserDAO {
 	}
 
 	
-	@Override
-	public Employee updateEmployee(Employee u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public User updateUser(User u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Employee updateEmployee(Employee u) throws UserNotFoundException{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	
+//	public User updateUser(User u) throws UserNotFoundException{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public List<User> findAllUsers() throws UserNotFoundException{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public User findUserByName(String s) {
+	public User findUserByName(String s) throws UserNotFoundException{
 		for(User u : db.values()) {
 			if(s.equals(u.getUsername())) {
 				return u;
 			}
 		}
-		return null;
+		throw new UserNotFoundException();
 	}
 
 	

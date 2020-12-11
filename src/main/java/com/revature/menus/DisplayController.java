@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import com.revature.enums.MenuState;
 import com.revature.exceptions.InvalidArgumentLengthException;
-import com.revature.exceptions.InvalidLoginException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UnexpectedTransferStateException;
@@ -32,7 +32,7 @@ public class DisplayController {
 	static EmployeeServiceInterface employeeServiceManager = new EmployeeServiceController();
 	static Scanner userInputScanner = new Scanner(System.in);
 
-	//TODO make menu give more info
+	// TODO make menu give more info
 	public static void diplayMenu() {
 
 		try {
@@ -53,29 +53,23 @@ public class DisplayController {
 			default:
 				break;
 			}
-		} 
-		catch (InvalidArgumentLengthException e) {
+		} catch (InvalidArgumentLengthException e) {
 			System.out.println(e.getMessage());
-		} 
-		catch (InvalidLoginException e) {
+		} catch (UserNotFoundException e) {
 			System.out.println(e.getMessage());
-		} 
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
-		} 
-		catch (UnexpectedAccountStateException e) {
+		} catch (UnexpectedAccountStateException e) {
 			System.out.println(e.getMessage());
-		}
-		catch (UnexpectedTransferStateException e) {
+		} catch (UnexpectedTransferStateException e) {
 			System.out.println(e.getMessage());
-		}
-		catch (NegativeBalanceException e) {
+		} catch (NegativeBalanceException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	private static void manageNotLoggedInInput() throws InvalidLoginException {
+	private static void manageNotLoggedInInput() throws UserNotFoundException {
 		System.out.println("Welcome To Colin's Banking App");
 
 		System.out.println("Please enter a username"); // Output user input
@@ -87,21 +81,19 @@ public class DisplayController {
 		String pwd = userInputScanner.nextLine(); // Read user input
 
 		User temp = userServiceManager.login(username, pwd);
-		if (temp == null) {
-			throw new InvalidLoginException();
-		} else {
-			activeUser = temp;
-			System.out.println("Welcome " + activeUser.getUsername());
-			if (activeUser instanceof Customer) {
-				menuState = MenuState.MAIN_CUSTOMER_MENU;
-			} else if (activeUser instanceof Employee) {
-				menuState = MenuState.MAIN_EMPLOYEE_MENU;
-			}
+		
+		
+		activeUser = temp;
+		System.out.println("Welcome " + activeUser.getUsername());
+		if (activeUser instanceof Customer) {
+			menuState = MenuState.MAIN_CUSTOMER_MENU;
+		} else if (activeUser instanceof Employee) {
+			menuState = MenuState.MAIN_EMPLOYEE_MENU;
 		}
 	}
 
-	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException, 
-			UnexpectedTransferStateException, NegativeBalanceException{
+	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException,
+			UnexpectedTransferStateException, NegativeBalanceException {
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -152,7 +144,7 @@ public class DisplayController {
 	}
 
 	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException,
-											UnexpectedTransferStateException, NegativeBalanceException{
+			UnexpectedTransferStateException, NegativeBalanceException {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -190,12 +182,12 @@ public class DisplayController {
 
 	}
 
-	private static void manageEmployeeInput() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException {
+	private static void manageEmployeeInput()
+			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
-		
-		
+
 		if (0 == userArgs.length) {
 			throw new InvalidArgumentLengthException(1, 0);
 		}

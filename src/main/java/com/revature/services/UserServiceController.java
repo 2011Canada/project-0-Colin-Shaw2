@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.User;
 import com.revature.repositories.UserFileDAO;
@@ -17,17 +18,18 @@ public class UserServiceController implements UserServiceInterface {
 
 	//can be null
 	@Override
-	public User login(String username, String password) {
-		User u = userDAO.findUserByName(username);
-		if(u  == null) {
-			return null;
-		}
-		if(u.getPassword().equals(password)) {
-			return u;
-		}
-		else {
-			return null;
-		}
+	public User login(String username, String password) throws UserNotFoundException{
+		return userDAO.findUserByName(username);
+				//User u = userDAO.findUserByName(username);
+//		if(u  == null) {
+//			return null;
+//		}
+//		if(u.getPassword().equals(password)) {
+//			return u;
+//		}
+//		else {
+//			return null;
+//		}
 	}
 	
 	@Override
