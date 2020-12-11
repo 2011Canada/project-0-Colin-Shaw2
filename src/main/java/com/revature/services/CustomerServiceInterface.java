@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.List;
 
+import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -16,13 +17,13 @@ public interface CustomerServiceInterface extends UserServiceInterface{
 	long viewBalance(Customer currentCustomer, int accountID);
 	
 	//returns amount withdrawn
-	Account withdraw(Customer currentCustomer, int accountID, int amount);
+	Account withdraw(Customer currentCustomer, int accountID, int amount) throws NegativeBalanceException;
 	
 	//returns amount deposited
-	Account deposit(Customer currentCustomer, int accountID, int amount);
+	Account deposit(Customer currentCustomer, int accountID, int amount) throws NegativeBalanceException;
 
 	Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID,
-			int amount);
+			int amount) throws NegativeBalanceException;
 	
 	Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount);
 

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.revature.enums.MenuState;
 import com.revature.exceptions.InvalidArgumentLengthException;
 import com.revature.exceptions.InvalidLoginException;
+import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
@@ -52,16 +53,24 @@ public class DisplayController {
 			default:
 				break;
 			}
-		} catch (InvalidArgumentLengthException e) {
+		} 
+		catch (InvalidArgumentLengthException e) {
 			System.out.println(e.getMessage());
-		} catch (InvalidLoginException e) {
+		} 
+		catch (InvalidLoginException e) {
 			System.out.println(e.getMessage());
-		} catch (NumberFormatException e) {
+		} 
+		catch (NumberFormatException e) {
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
-		} catch (UnexpectedAccountStateException e) {
+		} 
+		catch (UnexpectedAccountStateException e) {
 			System.out.println(e.getMessage());
-		}catch (UnexpectedTransferStateException e) {
+		}
+		catch (UnexpectedTransferStateException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (NegativeBalanceException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -91,7 +100,8 @@ public class DisplayController {
 		}
 	}
 
-	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException {
+	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException, 
+			UnexpectedTransferStateException, NegativeBalanceException{
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -141,7 +151,8 @@ public class DisplayController {
 
 	}
 
-	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException {
+	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException,
+											UnexpectedTransferStateException, NegativeBalanceException{
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 

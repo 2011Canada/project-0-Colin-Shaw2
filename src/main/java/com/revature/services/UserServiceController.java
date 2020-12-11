@@ -13,9 +13,7 @@ public class UserServiceController implements UserServiceInterface {
 	protected static UserDAO userDAO = new UserFileDAO();
 	protected static CustomerDAO customerDAO = new CustomerFileDAO();
 
-	public UserServiceController() {
-		// TODO Auto-generated constructor stub
-	}
+	public UserServiceController() {}
 
 	//can be null
 	@Override

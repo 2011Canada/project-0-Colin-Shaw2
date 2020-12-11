@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -35,14 +36,14 @@ public class CustomerServiceController extends UserServiceController implements 
 	}
 
 	@Override
-	public Account withdraw(Customer currentCustomer, int accountID, int amount) {
+	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException{
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() - amount);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
 	@Override
-	public Account deposit(Customer currentCustomer, int accountID, int amount) {
+	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException{
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() + amount);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
@@ -51,7 +52,7 @@ public class CustomerServiceController extends UserServiceController implements 
 	@Override
 	//TODO return type
 	public Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
-			int toAccountID, int amount) {
+			int toAccountID, int amount)  throws NegativeBalanceException {
 		//TODO exceptions
 		this.withdraw(currentCustomer, fromAccountID, amount);
 		this.deposit(currentCustomer, toAccountID, amount);

@@ -3,6 +3,7 @@ package com.revature.models;
 
 
 import com.revature.enums.AccountState;
+import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.menus.Displayable;
 
@@ -11,12 +12,12 @@ public class Account implements Displayable{
 	int accountID;//this is not unique for every account just for every user
 	String accountOwner;
 //	Date openDate;
-	long Balance;
+	long balance;
 	AccountState accountState = AccountState.PENDING;
 
 	public Account() {
 //		this.openDate = new Date();
-		this.Balance = 0;
+		this.balance = 0;
 		this.accountID = 0;
 		this.accountOwner = "default";
 	}
@@ -24,14 +25,14 @@ public class Account implements Displayable{
 	
 	public Account(long balance, int acountID, String accountOwner) {
 //		this.openDate = new Date();
-		this.Balance = balance;
+		this.balance = balance;
 		this.accountID = acountID;
 		this.accountOwner = accountOwner;
 	}
 
 	public Account(long balance) {
 //		this.openDate = openDate;
-		this.Balance = balance;
+		this.balance = balance;
 		this.accountID = 0;
 	}
 
@@ -45,11 +46,14 @@ public class Account implements Displayable{
 //	}
 //	
 	public long getBalance() {
-		return Balance;
+		return balance;
 	}
 	
-	public void setBalance(long balance) {
-		Balance = balance;
+	public void setBalance(long balance) throws NegativeBalanceException{
+		if(balance < 0) {
+			throw new NegativeBalanceException();
+		}
+		this.balance = balance;
 	}
 	
 	
@@ -71,7 +75,7 @@ public class Account implements Displayable{
 	@Override
 	public String toString() {
 		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + 
-				", Balance=" + Balance + "]";
+				", Balance=" + balance + "]";
 	}
 
 	@Override
