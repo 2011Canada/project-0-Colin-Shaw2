@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
@@ -69,7 +70,7 @@ public class CustomerServiceController extends UserServiceController implements 
 
 	@Override
 	//TODO return type
-	public Boolean acceptTransfer(Customer currentCustomer, int transferID) {
+	public Boolean acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException {
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.approveTransfer();
 		transferDAO.updateTransferByID(t, transferID);
@@ -78,7 +79,7 @@ public class CustomerServiceController extends UserServiceController implements 
 
 	@Override
 	//TODO return type
-	public Boolean declineTransfer(Customer currentCustomer, int transferID) {
+	public Boolean declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException {
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.declineTransfer();
 		transferDAO.updateTransferByID(t, transferID);

@@ -6,6 +6,8 @@ import java.util.Scanner;
 import com.revature.enums.MenuState;
 import com.revature.exceptions.InvalidArgumentLengthException;
 import com.revature.exceptions.InvalidLoginException;
+import com.revature.exceptions.UnexpectedAccountStateException;
+import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
@@ -29,9 +31,7 @@ public class DisplayController {
 	static EmployeeServiceInterface employeeServiceManager = new EmployeeServiceController();
 	static Scanner userInputScanner = new Scanner(System.in);
 
-	// handles all of the exceptions
-	// TODO and sanitizes strings
-
+	//TODO make menu give more info
 	public static void diplayMenu() {
 
 		try {
@@ -59,6 +59,10 @@ public class DisplayController {
 		} catch (NumberFormatException e) {
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
+		} catch (UnexpectedAccountStateException e) {
+			System.out.println(e.getMessage());
+		}catch (UnexpectedTransferStateException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -67,14 +71,12 @@ public class DisplayController {
 
 		System.out.println("Please enter a username"); // Output user input
 
-		// TODO exception
 		String username = userInputScanner.nextLine(); // Read user input
 		System.out.println("Username is: " + username); // Output user input
 
 		System.out.println("Please enter a password");
 		String pwd = userInputScanner.nextLine(); // Read user input
 
-		// TODO exception
 		User temp = userServiceManager.login(username, pwd);
 		if (temp == null) {
 			throw new InvalidLoginException();
@@ -89,7 +91,7 @@ public class DisplayController {
 		}
 	}
 
-	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException {
+	private static void manageCustomerInput() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException {
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -139,7 +141,7 @@ public class DisplayController {
 
 	}
 
-	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException {
+	private static void manageCustomerTransfers() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -177,7 +179,7 @@ public class DisplayController {
 
 	}
 
-	private static void manageEmployeeInput() throws InvalidArgumentLengthException, NumberFormatException {
+	private static void manageEmployeeInput() throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -248,6 +250,7 @@ public class DisplayController {
 		customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 	}
 
+	// this just throws errors
 	private static void checkInputLength(int expected, int got) throws InvalidArgumentLengthException {
 		if (expected != got) {
 			throw new InvalidArgumentLengthException(expected, got);

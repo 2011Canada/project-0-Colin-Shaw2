@@ -4,23 +4,20 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.menus.Displayable;
 import com.revature.models.Account;
 import com.revature.models.Customer;
-import com.revature.models.Employee;
 import com.revature.models.Transfer;
 import com.revature.repositories.AccountDAO;
 import com.revature.repositories.AccountFileDAO;
 import com.revature.repositories.CustomerDAO;
 import com.revature.repositories.CustomerFileDAO;
-import com.revature.repositories.EmployeeDAO;
-import com.revature.repositories.EmployeeFileDAO;
 import com.revature.repositories.TransferDAO;
 import com.revature.repositories.TransferFileDAO;
 
 public class EmployeeServiceController implements EmployeeServiceInterface {
 
-	private static EmployeeDAO empDAO = new EmployeeFileDAO();
 	private static CustomerDAO custDAO = new CustomerFileDAO();
 	private static AccountDAO accDAO = new AccountFileDAO();
 	private static TransferDAO transDAO = new TransferFileDAO();
@@ -47,7 +44,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean approveAccount(String customerName, int accountID) {
+	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException{
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.approveAccount();
@@ -56,7 +53,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean declineAccount(String customerName, int accountID) {
+	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException{
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.declineAccount();

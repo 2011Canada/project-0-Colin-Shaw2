@@ -3,6 +3,7 @@ package com.revature.models;
 import java.util.Date;
 
 import com.revature.enums.TransferState;
+import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.menus.Displayable;
 
 public class Transfer implements Displayable{
@@ -39,18 +40,18 @@ public class Transfer implements Displayable{
 		return transferState;
 	}
 	
-	public void approveTransfer() {
+	public void approveTransfer() throws UnexpectedTransferStateException{
 		if(transferState.equals(TransferState.PENDING)) {
 			transferState = TransferState.APPROVED;
 		}else {
-			//TODO execption
+			throw new UnexpectedTransferStateException(TransferState.PENDING, this.transferState);
 		}
 	}
-	public void declineTransfer() {
+	public void declineTransfer() throws UnexpectedTransferStateException{
 		if(transferState.equals(TransferState.PENDING)) {
 			transferState = TransferState.DENIED;
 		}else {
-			//TODO execption
+			throw new UnexpectedTransferStateException(TransferState.PENDING, this.transferState);
 		}
 	}
 

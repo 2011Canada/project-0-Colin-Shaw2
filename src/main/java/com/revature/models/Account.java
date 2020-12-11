@@ -3,6 +3,7 @@ package com.revature.models;
 
 
 import com.revature.enums.AccountState;
+import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.menus.Displayable;
 
 public class Account implements Displayable{
@@ -52,16 +53,16 @@ public class Account implements Displayable{
 	}
 	
 	
-	public void approveAccount() {
+	public void approveAccount() throws UnexpectedAccountStateException{
 		if(this.accountState != AccountState.PENDING) {
-			//TODO exception
+			throw new UnexpectedAccountStateException(AccountState.PENDING, this.accountState);
 		}
 		this.accountState= AccountState.APPROVED;
 	}
 	
-	public void declineAccount() {
+	public void declineAccount() throws UnexpectedAccountStateException{
 		if(this.accountState != AccountState.PENDING) {
-			//TODO exception
+			throw new UnexpectedAccountStateException(AccountState.PENDING, this.accountState);
 		}
 		this.accountState= AccountState.DENIED;
 	}
