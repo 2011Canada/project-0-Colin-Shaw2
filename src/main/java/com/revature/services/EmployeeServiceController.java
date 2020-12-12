@@ -1,7 +1,11 @@
 package com.revature.services;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.revature.exceptions.UnexpectedAccountStateException;
@@ -20,7 +24,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	private static CustomerDAO custDAO = new CustomerFileDAO();
 	private static AccountDAO accDAO = new AccountFileDAO();
 	private static TransferDAO transDAO = new TransferFileDAO();
-	
+
 	@Override
 	public Customer viewCustomer(String customerName) {
 		return custDAO.findCustomerByName(customerName);
@@ -37,13 +41,28 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
+	// this does not use a DAO for simplicity
 	public Collection<String> viewTransactionLogs() {
-		//TODO figure this out
-		return null;
+		BufferedReader reader;
+		Collection<String> allTransactions = new LinkedList<>();
+		try {
+			reader = new BufferedReader(new FileReader("transactions.log"));
+			String line = reader.readLine();
+			while (line != null) {
+				allTransactions.add(line);
+				// read next line
+				line = reader.readLine();
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return allTransactions;
+				
 	}
 
 	@Override
-	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException{
+	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.approveAccount();
@@ -52,7 +71,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException{
+	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.declineAccount();

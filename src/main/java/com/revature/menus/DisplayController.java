@@ -27,7 +27,6 @@ import com.revature.services.UserServiceInterface;
 public class DisplayController {
 
 	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
-	static Logger transactionLogger = LogManager.getLogger("com.revature.project0ColinTransactionLogger");
 	static MenuState menuState = MenuState.NOT_LOGGED_IN;
 	static User activeUser;
 	static Customer activeCustomer;

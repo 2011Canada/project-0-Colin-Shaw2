@@ -17,6 +17,9 @@ public class Project0Launcher {
 	//TODO tests on service layer
 	//TODO remove all TODO
 	
+	
+	//Things to extend robustness
+	//move logs to a db
 	public static void main(String[] args) {
 		eventLogger.info("Program started");
 		while(true) {
