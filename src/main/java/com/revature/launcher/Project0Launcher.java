@@ -18,7 +18,7 @@ public class Project0Launcher {
 	//TODO remove all TODO
 	
 	public static void main(String[] args) {
-		eventLogger.info("TransactionLogger is working");
+		eventLogger.info("Program started");
 		while(true) {
 			DisplayController.diplayMenu();
 		}

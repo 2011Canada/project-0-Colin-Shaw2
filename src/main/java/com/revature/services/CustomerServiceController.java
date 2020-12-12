@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
@@ -18,6 +21,8 @@ public class CustomerServiceController extends UserServiceController implements 
 
 	private static AccountDAO accountDAO = new AccountFileDAO();
 	private static TransferDAO transferDAO = new TransferFileDAO();
+	private static Logger transactionLogger = LogManager.getLogger("com.revature.project0ColinTransactionLogger");
+	
 	
 	@Override
 	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) {
@@ -39,6 +44,7 @@ public class CustomerServiceController extends UserServiceController implements 
 	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException{
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() - amount);
+		transactionLogger.info(currentCustomer.getUsername() + " Withdrew "+ amount + " from account with ID "+ accountID);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
@@ -46,6 +52,7 @@ public class CustomerServiceController extends UserServiceController implements 
 	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException{
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() + amount);
+		transactionLogger.info(currentCustomer.getUsername() + " Depositted "+ amount + " from account with ID "+ accountID);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
