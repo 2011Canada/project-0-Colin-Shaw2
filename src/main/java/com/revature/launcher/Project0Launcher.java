@@ -7,9 +7,8 @@ import com.revature.menus.DisplayController;
 
 public class Project0Launcher {
 
-	static Logger project0Logger = LogManager.getLogger("com.revature.project0ColinEventLogger");
-	static Logger project0TransactionLogger = LogManager.getLogger("com.revature.project0ColinTransactionLogger");
-
+	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
+	
 	//TODO addLogging
 	//TODO double check we are throwing errors
 	//TODO makeDataBase
@@ -19,8 +18,7 @@ public class Project0Launcher {
 	//TODO remove all TODO
 	
 	public static void main(String[] args) {
-		project0TransactionLogger.info("TransactionLogger is working");
-		project0Logger.info("Program has Started");
+		eventLogger.info("TransactionLogger is working");
 		while(true) {
 			DisplayController.diplayMenu();
 		}

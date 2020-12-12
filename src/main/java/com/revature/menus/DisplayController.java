@@ -3,7 +3,6 @@ package com.revature.menus;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +26,8 @@ import com.revature.services.UserServiceInterface;
 
 public class DisplayController {
 
-	static Logger project0Logger = LogManager.getLogger("com.revature.project0ColinEventLogger");
+	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
+	static Logger transactionLogger = LogManager.getLogger("com.revature.project0ColinTransactionLogger");
 	static MenuState menuState = MenuState.NOT_LOGGED_IN;
 	static User activeUser;
 	static Customer activeCustomer;
@@ -272,9 +272,9 @@ public class DisplayController {
 
 	private static void logException(Exception e) {
 		if (activeUser == null) {
-			project0Logger.info("Current User" + " " + activeUser + " " + e.getMessage());
+			eventLogger.info("Current User" + " " + activeUser + " " + e.getMessage());
 		} else {
-			project0Logger.info("Current User" + " " +activeUser.getUsername() + " " + e.getMessage());
+			eventLogger.info("Current User" + " " +activeUser.getUsername() + " " + e.getMessage());
 		}
 	}
 }
