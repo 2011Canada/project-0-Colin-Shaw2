@@ -1,21 +1,60 @@
-2020-12-11 10:07:47 e720 [INFO] Server has Started
-2020-12-11 10:46:34 e720 [INFO] Server has Started
-2020-12-11 10:47:08 e720 [INFO] Server has Started
-2020-12-11 10:47:26 e720 [INFO] Server has Started
-2020-12-11 11:04:17 e720 [INFO] Server has Started
-2020-12-11 11:07:29 e720 [INFO] Server has Started
-2020-12-11 11:09:38 e720 [INFO] Server has Started
-2020-12-11 11:11:03 e720 [INFO] Server has Started
-2020-12-11 11:18:13 e720 [INFO] Server has Started
-2020-12-11 11:34:37 e720 [INFO] Server has Started
-2020-12-11 11:35:19 e720 [INFO] Server has Started
-2020-12-11 11:36:08 e720 [INFO] Server has Started
-2020-12-11 11:43:54 e720 [INFO] Server has Started
-2020-12-11 11:46:32 e720 [INFO] Server has Started
-2020-12-11 11:48:15 e720 [INFO] Server has Started
-2020-12-11 11:49:29 e720 [INFO] Server has Started
-2020-12-11 11:52:03 e720 [INFO] Server has Started
-2020-12-11 11:59:05 e720 [INFO] Server has Started
-2020-12-11 12:01:50 e720 [INFO] Server has Started
-2020-12-11 12:23:09 project0Colin [INFO] Server has Started
-2020-12-11 13:25:53 project0Colin [INFO] Server has Started
+2020-12-12 15:49:03 project0Colin [INFO] Program has Started
+2020-12-12 15:49:10 project0Colin [ERROR] Catching
+com.revature.exceptions.UserNotFoundException: Invalid Login Information
+	at com.revature.repositories.UserFileDAO.findUserByName(UserFileDAO.java:44) ~[classes/:?]
+	at com.revature.services.UserServiceController.login(UserServiceController.java:22) ~[classes/:?]
+	at com.revature.menus.DisplayController.showNotLoggedInMenu(DisplayController.java:93) [classes/:?]
+	at com.revature.menus.DisplayController.diplayMenu(DisplayController.java:45) [classes/:?]
+	at com.revature.launcher.Project0Launcher.main(Project0Launcher.java:23) [classes/:?]
+2020-12-12 15:49:59 project0Colin [INFO] Program has Started
+2020-12-12 15:50:01 project0Colin [DEBUG] Catching
+com.revature.exceptions.UserNotFoundException: Invalid Login Information
+	at com.revature.repositories.UserFileDAO.findUserByName(UserFileDAO.java:44) ~[classes/:?]
+	at com.revature.services.UserServiceController.login(UserServiceController.java:22) ~[classes/:?]
+	at com.revature.menus.DisplayController.showNotLoggedInMenu(DisplayController.java:94) [classes/:?]
+	at com.revature.menus.DisplayController.diplayMenu(DisplayController.java:46) [classes/:?]
+	at com.revature.launcher.Project0Launcher.main(Project0Launcher.java:23) [classes/:?]
+2020-12-12 15:50:32 project0Colin [INFO] Program has Started
+2020-12-12 15:50:36 project0Colin [INFO] Catching
+com.revature.exceptions.UserNotFoundException: Invalid Login Information
+	at com.revature.repositories.UserFileDAO.findUserByName(UserFileDAO.java:44) ~[classes/:?]
+	at com.revature.services.UserServiceController.login(UserServiceController.java:22) ~[classes/:?]
+	at com.revature.menus.DisplayController.showNotLoggedInMenu(DisplayController.java:94) [classes/:?]
+	at com.revature.menus.DisplayController.diplayMenu(DisplayController.java:46) [classes/:?]
+	at com.revature.launcher.Project0Launcher.main(Project0Launcher.java:23) [classes/:?]
+2020-12-12 15:55:57 project0Colin [INFO] Program has Started
+2020-12-12 15:55:59 project0Colin [INFO] Invalid Login Information
+2020-12-12 15:57:09 project0Colin [INFO] Program has Started
+2020-12-12 15:57:12 project0Colin [INFO] Invalid Login Information
+2020-12-12 15:57:12 project0Colin [INFO] null
+2020-12-12 15:57:23 project0Colin [INFO] Program has Started
+2020-12-12 15:57:33 project0Colin [INFO] Wrong Number of Arguments Passed
+Excepted 2 Got 1
+2020-12-12 15:57:33 project0Colin [INFO] com.revature.models.Customer@6c7a164b
+2020-12-12 15:59:11 project0Colin [INFO] Program has Started
+2020-12-12 15:59:17 project0Colin [INFO] Invalid Login Information
+2020-12-12 15:59:17 project0Colin [INFO] null
+2020-12-12 15:59:39 project0Colin [INFO] Program has Started
+2020-12-12 15:59:47 project0Colin [INFO] Wrong Number of Arguments Passed
+Excepted 3 Got 1
+2020-12-12 15:59:47 project0Colin [INFO] com.revature.models.Customer@34129c78
+2020-12-12 16:01:30 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:01:32 project0ColinEventLogger [INFO] Invalid Login Information
+2020-12-12 16:01:32 project0ColinEventLogger [INFO] null
+2020-12-12 16:08:49 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:08:53 project0ColinEventLogger [INFO] Current UsernullInvalid Login Information
+2020-12-12 16:11:31 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:11:34 project0ColinEventLogger [INFO] Current User null Invalid Login Information
+2020-12-12 16:12:06 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:12:08 project0ColinEventLogger [INFO] Current User null Invalid Login Information
+2020-12-12 16:12:53 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:12:58 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:13:05 project0ColinEventLogger [INFO] Current User null Invalid Login Information
+2020-12-12 16:14:19 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:14:27 project0ColinEventLogger [INFO] Current User null Invalid Login Information
+2020-12-12 16:15:22 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:15:34 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:17:30 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:17:32 project0ColinEventLogger [INFO] Current User null Invalid Login Information
+2020-12-12 16:18:30 project0ColinEventLogger [INFO] Program has Started
+2020-12-12 16:20:54 project0ColinEventLogger [INFO] Program has Started

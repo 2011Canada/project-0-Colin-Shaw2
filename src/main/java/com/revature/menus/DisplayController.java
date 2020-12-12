@@ -3,6 +3,10 @@ package com.revature.menus;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.enums.MenuState;
 import com.revature.exceptions.InvalidArgumentLengthException;
 import com.revature.exceptions.UserNotFoundException;
@@ -23,6 +27,7 @@ import com.revature.services.UserServiceInterface;
 
 public class DisplayController {
 
+	static Logger project0Logger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	static MenuState menuState = MenuState.NOT_LOGGED_IN;
 	static User activeUser;
 	static Customer activeCustomer;
@@ -54,17 +59,23 @@ public class DisplayController {
 				break;
 			}
 		} catch (InvalidArgumentLengthException e) {
+			logException(e);
 			System.out.println(e.getMessage());
 		} catch (UserNotFoundException e) {
+			logException(e);
 			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
+			logException(e);
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
 		} catch (UnexpectedAccountStateException e) {
+			logException(e);
 			System.out.println(e.getMessage());
 		} catch (UnexpectedTransferStateException e) {
+			logException(e);
 			System.out.println(e.getMessage());
 		} catch (NegativeBalanceException e) {
+			logException(e);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -81,8 +92,7 @@ public class DisplayController {
 		String pwd = userInputScanner.nextLine(); // Read user input
 
 		User temp = userServiceManager.login(username, pwd);
-		
-		
+
 		activeUser = temp;
 		System.out.println("Welcome " + activeUser.getUsername());
 		if (activeUser instanceof Customer) {
@@ -257,6 +267,14 @@ public class DisplayController {
 	private static void checkInputLength(int expected, int got) throws InvalidArgumentLengthException {
 		if (expected != got) {
 			throw new InvalidArgumentLengthException(expected, got);
+		}
+	}
+
+	private static void logException(Exception e) {
+		if (activeUser == null) {
+			project0Logger.info("Current User" + " " + activeUser + " " + e.getMessage());
+		} else {
+			project0Logger.info("Current User" + " " +activeUser.getUsername() + " " + e.getMessage());
 		}
 	}
 }
