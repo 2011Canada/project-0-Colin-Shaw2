@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import com.revature.exceptions.UnexpectedAccountStateException;
-import com.revature.menus.Displayable;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
@@ -17,7 +16,7 @@ public interface EmployeeServiceInterface {
 
 	List<Transfer> viewPendingTransfersForCustomer(String customerName);
 	
-	Collection<Displayable> viewTransactionLogs();
+	Collection<String> viewTransactionLogs();
 	
 	Boolean approveAccount(String customerName, int accountID)throws UnexpectedAccountStateException;
 	

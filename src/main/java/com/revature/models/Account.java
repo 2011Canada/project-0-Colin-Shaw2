@@ -5,9 +5,8 @@ package com.revature.models;
 import com.revature.enums.AccountState;
 import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.UnexpectedAccountStateException;
-import com.revature.menus.Displayable;
 
-public class Account implements Displayable{
+public class Account{
 
 	int accountID;//this is not unique for every account just for every user
 	String accountOwner;
@@ -78,9 +77,4 @@ public class Account implements Displayable{
 				", Balance=" + balance + "]";
 	}
 
-	@Override
-	public String display() {
-		//TODO
-		return toString();
-	}
 }

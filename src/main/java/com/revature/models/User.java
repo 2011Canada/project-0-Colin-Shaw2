@@ -1,11 +1,10 @@
 package com.revature.models;
 
-import com.revature.menus.Displayable;
 import com.revature.repositories.UserDAO;
 import com.revature.repositories.UserFileDAO;
 import com.revature.services.UserServiceInterface;
 
-public abstract class User implements Displayable{
+public abstract class User{
 
 	private String username;
 	private String password;
@@ -29,12 +28,5 @@ public abstract class User implements Displayable{
 
 	public String getPassword() {
 		return password;
-	}
-
-
-	@Override
-	public String display() {
-		//TODO
-		return toString();
 	}
 }

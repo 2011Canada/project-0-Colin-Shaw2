@@ -4,9 +4,8 @@ import java.util.Date;
 
 import com.revature.enums.TransferState;
 import com.revature.exceptions.UnexpectedTransferStateException;
-import com.revature.menus.Displayable;
 
-public class Transfer implements Displayable{
+public class Transfer {
 	Date dateMade;
 	int ammount;
 	int transferId;
@@ -62,10 +61,5 @@ public class Transfer implements Displayable{
 				+ ", transferState=" + transferState + "]";
 	}
 
-	@Override
-	public String display() {
-		//TODO
-		return toString();
-	}
 
 }

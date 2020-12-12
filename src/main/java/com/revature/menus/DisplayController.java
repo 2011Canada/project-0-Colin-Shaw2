@@ -215,7 +215,7 @@ public class DisplayController {
 			System.out.println(employeeServiceManager.viewCustomer(userArgs[2]));
 		} else if (userArgs[0].equals("viewlogs")) {
 			checkInputLength(1, userArgs.length);
-			for (Displayable d : employeeServiceManager.viewTransactionLogs()) {
+			for (String d : employeeServiceManager.viewTransactionLogs()) {
 				System.out.println(d);
 			}
 		} else if (userArgs[0].equals("approveaccount")) {

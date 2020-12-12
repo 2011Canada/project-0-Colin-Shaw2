@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import com.revature.exceptions.UnexpectedAccountStateException;
-import com.revature.menus.Displayable;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
@@ -38,7 +37,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Collection<Displayable> viewTransactionLogs() {
+	public Collection<String> viewTransactionLogs() {
 		//TODO figure this out
 		return null;
 	}

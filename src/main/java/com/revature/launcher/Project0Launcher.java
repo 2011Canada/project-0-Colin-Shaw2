@@ -18,7 +18,7 @@ public class Project0Launcher {
 	//TODO remove all TODO
 	
 	public static void main(String[] args) {
-		project0Logger.info("Server has Started");
+		project0Logger.info("Program has Started");
 		while(true) {
 			DisplayController.diplayMenu();
 		}
