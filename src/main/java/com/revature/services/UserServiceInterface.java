@@ -7,7 +7,7 @@ public interface UserServiceInterface {
 
 	public User login(String username, String password) throws UserNotFoundException;
 
-	public void logout();
+	public void logout(String username);
 
 	public Boolean registerNewCustomerAccount(String username, String password);
 

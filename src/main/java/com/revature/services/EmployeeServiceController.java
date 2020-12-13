@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -24,25 +27,30 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	private static CustomerDAO custDAO = new CustomerFileDAO();
 	private static AccountDAO accDAO = new AccountFileDAO();
 	private static TransferDAO transDAO = new TransferFileDAO();
+	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 
 	@Override
 	public Customer viewCustomer(String customerName) {
+		eventLogger.info("viewCustomer "  + customerName);
 		return custDAO.findCustomerByName(customerName);
 	}
 
 	@Override
 	public List<Account> viewPendingAccountsForCustomer(String customerName) {
+		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return Arrays.asList(accDAO.findAllAccountsFromCustomerName(customerName));
 	}
 
 	@Override
 	public List<Transfer> viewPendingTransfersForCustomer(String customerName) {
+		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return (List<Transfer>) transDAO.findAllPendingTransfersForCustomer(customerName);
 	}
 
 	@Override
 	// this does not use a DAO for simplicity
 	public Collection<String> viewTransactionLogs() {
+		eventLogger.info("viewTransactionLogs");
 		BufferedReader reader;
 		Collection<String> allTransactions = new LinkedList<>();
 		try {
@@ -63,6 +71,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 
 	@Override
 	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
+		eventLogger.info("approveAccount "  + customerName + " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.approveAccount();
@@ -72,6 +81,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 
 	@Override
 	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
+		eventLogger.info("declineAccount "  + customerName +  " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
 		a.declineAccount();

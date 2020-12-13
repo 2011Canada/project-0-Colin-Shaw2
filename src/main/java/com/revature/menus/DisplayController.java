@@ -243,7 +243,7 @@ public class DisplayController {
 
 	// this is a helper function to reduce code being rewritten
 	private static void logout() {
-		userServiceManager.logout();
+		userServiceManager.logout(activeUser.getUsername());
 		System.out.println("Logging out");
 		activeUser = null;
 		activeCustomer = null;
@@ -259,7 +259,7 @@ public class DisplayController {
 
 	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException {
 		checkInputLength(3, userArgs.length);
-		customerServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
+		userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
 	}
 
 	// this just throws errors

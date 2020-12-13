@@ -8,7 +8,7 @@ import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
 
-public interface CustomerServiceInterface extends UserServiceInterface{
+public interface CustomerServiceInterface{
 	
 	Customer applyForBankAccount(Customer currentCustomer, long initialBalance);
 	

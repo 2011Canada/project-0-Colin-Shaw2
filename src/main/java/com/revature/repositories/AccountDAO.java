@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import com.revature.exceptions.AccountNotFoundException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 
@@ -13,6 +14,6 @@ public interface AccountDAO {
 	
 	public Account[] findAllAccountsFromCustomerName(String username);
 	
-	public Account findAccountByCustomerandID(Customer c,int id);
+	public Account findAccountByCustomerandID(Customer c,int id) throws AccountNotFoundException;
 
 }

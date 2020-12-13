@@ -9,13 +9,14 @@ public class Project0Launcher {
 
 	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
-	//TODO addLogging
 	//TODO double check we are throwing errors
+	//TODO make menu give more info
 	//TODO makeDataBase
 	//TODO SQLdaos
 	//TODO consider re adding IDs
 	//TODO tests on service layer
 	//TODO remove all TODO
+	//TODO addLogging
 	
 	
 	//Things to extend robustness

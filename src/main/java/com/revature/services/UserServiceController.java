@@ -1,5 +1,8 @@
 package com.revature.services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.User;
@@ -11,36 +14,28 @@ import com.revature.repositories.UserDAO;
 
 public class UserServiceController implements UserServiceInterface {
 
-	protected static UserDAO userDAO = new UserFileDAO();
-	protected static CustomerDAO customerDAO = new CustomerFileDAO();
-
+	private static UserDAO userDAO = new UserFileDAO();
+	private static CustomerDAO customerDAO = new CustomerFileDAO();
+	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
+	
 	public UserServiceController() {}
 
 	//can be null
 	@Override
 	public User login(String username, String password) throws UserNotFoundException{
+		eventLogger.info("login "  + username);
 		return userDAO.findUserByName(username);
-				//User u = userDAO.findUserByName(username);
-//		if(u  == null) {
-//			return null;
-//		}
-//		if(u.getPassword().equals(password)) {
-//			return u;
-//		}
-//		else {
-//			return null;
-//		}
 	}
 	
 	@Override
 	public Boolean registerNewCustomerAccount(String username, String password) {
+		eventLogger.info("registerNewCustomerAccount "  + username + " " + password);
 		return (customerDAO.addCustomer(new Customer(username, password)))== null?false:true;
 	}
 
 	@Override
-	public void logout() {
-		//TODO
-		//does logging
+	public void logout(String username) {
+		eventLogger.info("logout"  + username);
 	}
 
 }
