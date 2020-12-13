@@ -1,9 +1,5 @@
 package com.revature.models;
 
-import com.revature.repositories.UserDAO;
-import com.revature.repositories.UserFileDAO;
-import com.revature.services.UserServiceInterface;
-
 public abstract class User{
 
 	private String username;
