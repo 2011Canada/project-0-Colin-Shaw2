@@ -11,7 +11,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.UnexpectedAccountStateException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
@@ -30,19 +32,19 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 
 	@Override
-	public Customer viewCustomer(String customerName) {
+	public Customer viewCustomer(String customerName) throws UserNotFoundException {
 		eventLogger.info("viewCustomer "  + customerName);
 		return custDAO.findCustomerByName(customerName);
 	}
 
 	@Override
-	public List<Account> viewPendingAccountsForCustomer(String customerName) {
+	public List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return Arrays.asList(accDAO.findAllAccountsFromCustomerName(customerName));
 	}
 
 	@Override
-	public List<Transfer> viewPendingTransfersForCustomer(String customerName) {
+	public List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return (List<Transfer>) transDAO.findAllPendingTransfersForCustomer(customerName);
 	}
@@ -70,7 +72,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
+	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
 		eventLogger.info("approveAccount "  + customerName + " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
@@ -80,7 +82,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException {
+	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException, UserNotFoundException, AccountNotFoundException {
 		eventLogger.info("declineAccount "  + customerName +  " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);

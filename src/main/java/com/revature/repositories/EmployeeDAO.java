@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Employee;
 
 public interface EmployeeDAO {
@@ -8,6 +9,6 @@ public interface EmployeeDAO {
 
 	public Employee updateEmployee(Employee u);
 		
-	public Employee findEmployeeByName(String username);
+	public Employee findEmployeeByName(String username) throws UserNotFoundException;
 	
 }

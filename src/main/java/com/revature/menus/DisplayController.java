@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.enums.MenuState;
+import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.InvalidArgumentLengthException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
@@ -57,23 +58,33 @@ public class DisplayController {
 			default:
 				break;
 			}
-		} catch (InvalidArgumentLengthException e) {
+		} 
+		catch (InvalidArgumentLengthException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} catch (UserNotFoundException e) {
+		} 
+		catch (UserNotFoundException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} catch (NumberFormatException e) {
+		}
+		catch (AccountNotFoundException e) {
+			logException(e);
+			System.out.println(e.getMessage());
+		} 
+		catch (NumberFormatException e) {
 			logException(e);
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
-		} catch (UnexpectedAccountStateException e) {
+		} 
+		catch (UnexpectedAccountStateException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} catch (UnexpectedTransferStateException e) {
+		} 
+		catch (UnexpectedTransferStateException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} catch (NegativeBalanceException e) {
+		} 
+		catch (NegativeBalanceException e) {
 			logException(e);
 			System.out.println(e.getMessage());
 		}
@@ -102,7 +113,7 @@ public class DisplayController {
 	}
 
 	private static void showCustomerInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedTransferStateException, NegativeBalanceException {
+			UnexpectedTransferStateException, NegativeBalanceException, UserNotFoundException, AccountNotFoundException {
 		System.out.println("CUST");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -153,7 +164,7 @@ public class DisplayController {
 	}
 
 	private static void showCustomerTransfersMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedTransferStateException, NegativeBalanceException {
+			UnexpectedTransferStateException, NegativeBalanceException, AccountNotFoundException, UserNotFoundException {
 		System.out.println("Choose a Transfer option");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -192,7 +203,7 @@ public class DisplayController {
 	}
 
 	private static void showEmployeeInputMenu()
-			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException {
+			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
