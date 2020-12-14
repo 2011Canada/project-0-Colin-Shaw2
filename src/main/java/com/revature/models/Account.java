@@ -83,4 +83,14 @@ public class Account{
 				" current balance is " + balance;
 	}
 
+
+	public AccountState getAccountState() {
+		return accountState;
+	}
+
+
+	public void setAccountId(int i) {
+		this.accountID = i;
+	}
+
 }

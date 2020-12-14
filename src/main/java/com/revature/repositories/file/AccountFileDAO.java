@@ -18,7 +18,7 @@ public class AccountFileDAO implements AccountDAO {
 	static CustomerDAO customerDAO = new CustomerFileDAO();
 	
 	@Override
-	public Customer addAccount(Customer u, Account a) {
+	public Account addAccount(Customer u, Account a) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -29,11 +29,6 @@ public class AccountFileDAO implements AccountDAO {
 		return a;
 	}
 
-	@Override
-	public List<Account> findAllAccounts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 	public List<Account> findAllAccountsFromCustomerName(String username) {

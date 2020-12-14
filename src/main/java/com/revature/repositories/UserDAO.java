@@ -8,7 +8,7 @@ import com.revature.models.User;
 
 public interface UserDAO {
 
-	public User findUserByName(String s, Boolean isEmployee) throws UserNotFoundException, SQLException, AccountNotFoundException;
+	public User findUserByName(String username, Boolean isEmployee) throws UserNotFoundException, SQLException, AccountNotFoundException;
 
 	
 }

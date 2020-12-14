@@ -10,12 +10,10 @@ import com.revature.models.Customer;
 
 public interface AccountDAO {
 
-	public Customer addAccount(Customer u, Account a)throws SQLException;
+	public Account addAccount(Customer u, Account a)throws SQLException;
 
 	public Account updateAccountByCustomerandID(Customer customer, int id,  Account account) throws AccountNotFoundException, UserNotFoundException, SQLException;
 
-	public List<Account> findAllAccounts() throws AccountNotFoundException, SQLException;
-	
 	public List<Account> findAllAccountsFromCustomerName(String username) throws AccountNotFoundException, SQLException;
 	
 	public Account findAccountByCustomerandID(Customer c,int id) throws AccountNotFoundException, SQLException;
