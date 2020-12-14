@@ -28,6 +28,12 @@ public class Account{
 		this.accountID = acountID;
 		this.accountOwner = accountOwner;
 	}
+	public Account(long balance, int acountID, String accountOwner, AccountState accountState) {
+		this.balance = balance;
+		this.accountID = acountID;
+		this.accountOwner = accountOwner;
+		this.accountState = accountState;
+	}
 
 	public Account(long balance) {
 //		this.openDate = openDate;

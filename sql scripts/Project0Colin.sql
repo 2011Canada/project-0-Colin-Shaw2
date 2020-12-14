@@ -29,9 +29,11 @@ create table accounts(
 --join table
 create table transfers (
 	date_made timestamp,
-	sending_customer text references customers("username"),
-	receiving_customer text references customers("username"),
 	ammount int not null,
+	sending_customer text references customers("username") not null,
+	sending_account_id int not null,
+	receiving_customer text references customers("username") not null,
+	receiving_account_id int not null,
 	transfer_state text check (transfer_state like 'PENDING' or transfer_state like 'APPROVED' or transfer_state like 'DENIED') not null,
 	transfers_id serial primary key
 );
@@ -60,19 +62,19 @@ insert into accounts(accountuser, balance, account_state)
 	('erica', 202,  'DENIED')
 	returning accountuser;
 
-insert into transfers(date_made, sending_customer, receiving_customer, ammount, transfer_state)
+insert into transfers(
+date_made, ammount, sending_customer, sending_account_id, receiving_customer,receiving_account_id, transfer_state)
 	values 
-	(current_timestamp, 'kyle', 'erica', 1, 'APPROVED'),
-	(current_timestamp, 'kyle', 'erica', 2, 'PENDING'),
-	(current_timestamp, 'kyle', 'erica', 3, 'DENIED'),
-	(current_timestamp, 'erica', 'kyle', 4, 'APPROVED'),
-	(current_timestamp, 'erica', 'kyle', 5, 'PENDING'),
-	(current_timestamp, 'erica', 'kyle', 6, 'DENIED')
+	(current_timestamp, 1, 'kyle', 1, 'erica', 0, 'APPROVED'),
+	(current_timestamp, 2, 'kyle', 0, 'erica', 0, 'PENDING'),
+	(current_timestamp, 3, 'kyle', 0, 'erica', 1, 'DENIED'),
+	(current_timestamp, 4, 'erica', 0, 'kyle', 1, 'APPROVED'),
+	(current_timestamp, 5, 'erica', 0, 'kyle', 0, 'PENDING'),
+	(current_timestamp, 6, 'erica', 1, 'kyle', 0, 'DENIED')
 	;
 
-select * from customers where username like 'kyle';
-
 commit;
+
 /*  			     
 
 select m.price , m."type" , m."name" , m.copyright_owner , m.release_date, m.rating, m.max_age , m.min_age , m.media_id , m2.runtime , m2.movie_id , array_agg(c."name") as credits from media m 

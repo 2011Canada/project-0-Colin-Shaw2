@@ -32,7 +32,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 
 	@Override
-	public Customer viewCustomer(String customerName) throws UserNotFoundException {
+	public Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException {
 		eventLogger.info("viewCustomer "  + customerName);
 		return custDAO.findCustomerByName(customerName);
 	}
@@ -40,7 +40,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	@Override
 	public List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
-		return Arrays.asList(accDAO.findAllAccountsFromCustomerName(customerName));
+		return accDAO.findAllAccountsFromCustomerName(customerName);
 	}
 
 	@Override

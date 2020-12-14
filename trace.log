@@ -121,3 +121,4 @@ Excepted 2 Got 1
 2020-12-14 12:49:52 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
 2020-12-14 12:50:29 project0ColinEventLogger [INFO] Program started
 2020-12-14 12:50:32 project0ColinEventLogger [INFO] login colin
+2020-12-14 12:50:54 project0ColinEventLogger [INFO] viewTransactionLogs

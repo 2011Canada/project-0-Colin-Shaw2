@@ -1,6 +1,7 @@
 package com.revature.repositories;
 
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,13 +36,11 @@ public class UserFileDAO implements UserDAO {
 //		return null;
 //	}
 
-	public User findUserByName(String s) throws UserNotFoundException{
-		for(User u : db.values()) {
-			if(s.equals(u.getUsername())) {
-				return u;
-			}
-		}
-		throw new UserNotFoundException();
+
+	@Override
+	public User findUserByName(String s, Boolean isEmployee) throws UserNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

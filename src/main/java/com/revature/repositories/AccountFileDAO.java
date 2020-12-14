@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.revature.models.Account;
 import com.revature.models.Customer;
@@ -27,13 +28,13 @@ public class AccountFileDAO implements AccountDAO {
 	}
 
 	@Override
-	public Account[] findAllAccounts() {
+	public List<Account> findAllAccounts() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 
-	public Account[] findAllAccountsFromCustomerName(String username) {
+	public List<Account> findAllAccountsFromCustomerName(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}

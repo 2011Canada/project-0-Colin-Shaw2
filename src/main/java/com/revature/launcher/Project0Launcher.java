@@ -9,7 +9,6 @@ public class Project0Launcher {
 
 	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
-	//TODO make menu give more info
 	//TODO makeDataBase
 	//TODO SQLdaos
 	//TODO tests on service layer
@@ -18,6 +17,7 @@ public class Project0Launcher {
 	//TODO addLogging
 	//TODO double check we are throwing errors
 	//TODO check deposit and withdraw are positive
+	//TODO make menu give more info
 	
 	
 	//Things to extend robustness

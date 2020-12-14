@@ -12,7 +12,7 @@ import com.revature.models.Transfer;
 
 public interface EmployeeServiceInterface {
 
-	Customer viewCustomer(String customerName) throws UserNotFoundException;
+	Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException;
 	
 	List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException;
 

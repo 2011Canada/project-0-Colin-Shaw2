@@ -1,5 +1,6 @@
 package com.revature.menus;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,13 +85,20 @@ public class DisplayController {
 		} catch (NegativeBalanceException e) {
 			logException(e);
 			System.out.println(e.getMessage());
+		}catch (SQLException e) {
+			logException(e);
+			System.out.println(e.getMessage());
 		}
 		System.out.println("Press Enter to continue");
 		userInputScanner.nextLine();
 	}
 
-	private static void showNotLoggedInMenu() throws UserNotFoundException {
+	private static void showNotLoggedInMenu() throws UserNotFoundException, SQLException, AccountNotFoundException {
 		System.out.println("Welcome To Colin's Banking App");
+
+		System.out.println("Are you an Employee (y or n)"); // Output user input
+
+		Boolean isEmployee = (userInputScanner.nextLine().equals("y")?true:false); // Read user input
 
 		System.out.println("Please enter a username"); // Output user input
 
@@ -100,7 +108,7 @@ public class DisplayController {
 		System.out.println("Please enter a password");
 		String pwd = userInputScanner.nextLine(); // Read user input
 
-		User temp = userServiceManager.login(username, pwd);
+		User temp = userServiceManager.login(username, pwd, isEmployee);
 
 		activeUser = temp;
 		System.out.println("Welcome " + activeUser.getUsername());
@@ -113,7 +121,7 @@ public class DisplayController {
 
 	private static void showCustomerInputMenu()
 			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
-			NegativeBalanceException, UserNotFoundException, AccountNotFoundException {
+			NegativeBalanceException, UserNotFoundException, AccountNotFoundException, TransferNotFoundException {
 		System.out.println("Please enter a menu option or q to quit");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");
@@ -227,7 +235,7 @@ public class DisplayController {
 
 	//TODO make this menu better
 	private static void showEmployeeInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
+			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException {
 		System.out.println("Please enter a menu option or q to quit");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");
@@ -272,11 +280,11 @@ public class DisplayController {
 			}
 		} else if (userArgs[0].equals("approveaccount")) {
 			checkInputLength(3, userArgs.length);
-			employeeServiceManager.approveAccount(userArgs[2], Integer.parseInt(userArgs[3]));
+			employeeServiceManager.approveAccount(userArgs[1], Integer.parseInt(userArgs[2]));
 			System.out.println("Account approved");
 		} else if (userArgs[0].equals("declineaccount")) {
 			checkInputLength(3, userArgs.length);
-			employeeServiceManager.declineAccount(userArgs[2], Integer.parseInt(userArgs[3]));
+			employeeServiceManager.declineAccount(userArgs[1], Integer.parseInt(userArgs[2]));
 			System.out.println("Account declined");
 		} else {
 			System.out.println("Invalid option");
@@ -301,7 +309,7 @@ public class DisplayController {
 		System.exit(0);
 	}
 
-	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException {
+	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException, AccountNotFoundException, TransferNotFoundException, UserNotFoundException {
 		checkInputLength(3, userArgs.length);
 		System.out.println(
 				"New account created " + userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]));
