@@ -16,49 +16,47 @@ import com.revature.util.ConnectionFactory;
 public class UserPostgresDAO implements UserDAO {
 
 	private ConnectionFactory cf = ConnectionFactory.getConnectionFactory();
-	
-//	@Override
-//	public User updateUser(User u) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Employee updateEmployee(Employee u) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<User> findAllUsers() {
-////		Connection conn = this.cf.getConnection();
-////		
-////		String sql = "select * from customers;";
-////		
-////		try {
-////			Statement s = conn.createStatement();
-////			
-////			ResultSet res = s.executeQuery(sql);
-////			List<User> all = new ArrayList<>();
-////			
-////			while(res.next()){
-////				Customer c = new Customer(res.getInt(""), 
-////						String username, 
-////						String password, 
-////						ArrayList<Account> accounts);
-////			}
-////			
-////		} catch (SQLException e) {
-////			// TODO Auto-generated catch block
-////			e.printStackTrace();
-////		}
-//		return null;
-//	}
 
 	@Override
+	//TODO add throws
 	public User findUserByName(String s) {
-		// TODO Auto-generated method stub
-		return null;
+		User u = null;
+		Connection conn = this.cf.getConnection();
+
+		String sql = "select * from customers where username like \'" + s + "\';";
+		try {
+			Statement statement = conn.createStatement();
+
+			ResultSet res = statement.executeQuery(sql);
+			res.next();
+			u = new Customer(res.getString("username"), res.getString("password"));
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println(sql);
+		}
+
+		if(u != null) {return u;}
+		
+		sql = "select * from employees where username like \'" + s + "\';";
+
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet res = statement.executeQuery(sql);
+			res.next();
+			
+			u = new Employee(res.getString("username"), res.getString("password"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(sql);
+		}
+
+
+		return u;
 	}
 
 }

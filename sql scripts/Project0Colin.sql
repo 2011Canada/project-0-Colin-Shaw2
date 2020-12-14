@@ -70,6 +70,7 @@ insert into transfers(date_made, sending_customer, receiving_customer, ammount, 
 	(current_timestamp, 'erica', 'kyle', 6, 'DENIED')
 	;
 
+select * from customers where username like 'kyle';
 
 commit;
 /*  			     
