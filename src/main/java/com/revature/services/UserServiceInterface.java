@@ -14,7 +14,7 @@ public interface UserServiceInterface {
 
 	public void logout(String username);
 
-	public Customer registerNewCustomerAccount(String username, String password) throws AccountNotFoundException, TransferNotFoundException, UserNotFoundException;
+	public Customer registerNewCustomerAccount(String username, String password) throws AccountNotFoundException, TransferNotFoundException, UserNotFoundException, SQLException;
 
 	
 }

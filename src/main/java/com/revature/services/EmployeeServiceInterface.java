@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,16 +13,16 @@ import com.revature.models.Transfer;
 
 public interface EmployeeServiceInterface {
 
-	Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException;
+	Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException, SQLException;
 	
-	List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException;
+	List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException, SQLException;
 
 	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException;
 	
 	Collection<String> viewTransactionLogs();
 	
-	Boolean approveAccount(String customerName, int accountID)throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException;
+	Boolean approveAccount(String customerName, int accountID)throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, UnexpectedAccountStateException, SQLException;
 	
-	Boolean declineAccount(String customerName, int accountID)throws UnexpectedAccountStateException, UserNotFoundException, AccountNotFoundException;
+	Boolean declineAccount(String customerName, int accountID)throws UnexpectedAccountStateException, UserNotFoundException, AccountNotFoundException, SQLException;
 	
 }

@@ -3,6 +3,7 @@ package com.revature.services;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -32,13 +33,13 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 
 	@Override
-	public Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException {
+	public Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException, SQLException {
 		eventLogger.info("viewCustomer "  + customerName);
 		return custDAO.findCustomerByName(customerName);
 	}
 
 	@Override
-	public List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException {
+	public List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException, SQLException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return accDAO.findAllAccountsFromCustomerName(customerName);
 	}
@@ -72,7 +73,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
+	public Boolean approveAccount(String customerName, int accountID) throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, SQLException {
 		eventLogger.info("approveAccount "  + customerName + " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);
@@ -82,7 +83,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException, UserNotFoundException, AccountNotFoundException {
+	public Boolean declineAccount(String customerName, int accountID) throws UnexpectedAccountStateException, UserNotFoundException, AccountNotFoundException, SQLException {
 		eventLogger.info("declineAccount "  + customerName +  " " + accountID);
 		Customer customer = custDAO.findCustomerByName(customerName);
 		Account a = accDAO.findAccountByCustomerandID(customer, accountID);

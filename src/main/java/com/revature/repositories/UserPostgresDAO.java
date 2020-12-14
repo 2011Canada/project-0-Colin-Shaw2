@@ -19,7 +19,6 @@ public class UserPostgresDAO implements UserDAO {
 	private static EmployeeDAO ed = new EmployeePostgresDAO();
 
 	@Override
-	//TODO add throws
 	public User findUserByName(String s, Boolean isEmployee) throws UserNotFoundException, SQLException, AccountNotFoundException{
 		User u = cd.findCustomerByName(s);
 		

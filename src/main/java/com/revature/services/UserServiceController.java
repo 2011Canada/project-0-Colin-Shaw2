@@ -42,7 +42,7 @@ public class UserServiceController implements UserServiceInterface {
 	}
 	
 	@Override
-	public Customer registerNewCustomerAccount(String username, String password) throws AccountNotFoundException, TransferNotFoundException, UserNotFoundException {
+	public Customer registerNewCustomerAccount(String username, String password) throws AccountNotFoundException, TransferNotFoundException, UserNotFoundException, SQLException {
 		eventLogger.info("registerNewCustomerAccount "  + username + " " + password);
 		return customerDAO.addCustomer(new Customer(username, password));
 	}

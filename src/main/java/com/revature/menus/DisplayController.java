@@ -121,7 +121,7 @@ public class DisplayController {
 
 	private static void showCustomerInputMenu()
 			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
-			NegativeBalanceException, UserNotFoundException, AccountNotFoundException, TransferNotFoundException {
+			NegativeBalanceException, UserNotFoundException, AccountNotFoundException, TransferNotFoundException, SQLException {
 		System.out.println("Please enter a menu option or q to quit");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");
@@ -180,7 +180,7 @@ public class DisplayController {
 
 	private static void showCustomerTransfersMenu()
 			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
-			NegativeBalanceException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException {
+			NegativeBalanceException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException, SQLException {
 		System.out.println("Please enter a transfer option or q to quit");
 		System.out.println("logout");
 		System.out.println("selftrans {fromAccountID} {toAccountID} {amount}");
@@ -235,7 +235,7 @@ public class DisplayController {
 
 	//TODO make this menu better
 	private static void showEmployeeInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException {
+			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException, SQLException {
 		System.out.println("Please enter a menu option or q to quit");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");
@@ -309,7 +309,7 @@ public class DisplayController {
 		System.exit(0);
 	}
 
-	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException, AccountNotFoundException, TransferNotFoundException, UserNotFoundException {
+	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException, AccountNotFoundException, TransferNotFoundException, UserNotFoundException, SQLException {
 		checkInputLength(3, userArgs.length);
 		System.out.println(
 				"New account created " + userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]));

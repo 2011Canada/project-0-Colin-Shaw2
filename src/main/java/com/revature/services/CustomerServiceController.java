@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,26 +31,26 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
 	@Override
-	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException {
+	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException {
 		eventLogger.info("applyForBankAccount "  + currentCustomer + " " + initialBalance);
 		currentCustomer.addAccount(new Account(initialBalance));
 		return customerDAO.updateCustomer(currentCustomer);
 	}
 	
 	@Override
-	public List<Account> viewAccounts(Customer currentCustomer) throws UserNotFoundException, AccountNotFoundException{
+	public List<Account> viewAccounts(Customer currentCustomer) throws UserNotFoundException, AccountNotFoundException, SQLException{
 		eventLogger.info("viewAccounts "  + currentCustomer );
 		return customerDAO.findCustomerByName(currentCustomer.getUsername()).getAccounts();
 	}
 	
 	@Override
-	public long viewBalance(Customer currentCustomer, int accountID) throws AccountNotFoundException {
+	public long viewBalance(Customer currentCustomer, int accountID) throws AccountNotFoundException, SQLException {
 		eventLogger.info("viewBalance "  + currentCustomer + " " + accountID);
 		return accountDAO.findAccountByCustomerandID(currentCustomer, accountID).getBalance();
 	}
 
 	@Override
-	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException{
+	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException{
 		eventLogger.info("withdraw "  + currentCustomer + " " + accountID + " " + amount);
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() - amount);
@@ -58,7 +59,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException{
+	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException{
 		eventLogger.info("deposit "  + currentCustomer + " " + accountID + " " + amount);
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() + amount);
@@ -68,7 +69,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 
 	@Override
 	public List<Account> internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
-			int toAccountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException {
+			int toAccountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException {
 		eventLogger.info("internalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		List<Account> accounts = new ArrayList<>();
@@ -79,7 +80,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 
 	@Override
 	public Transfer externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
-			int toAccountID, int amount) throws UserNotFoundException, AccountNotFoundException {
+			int toAccountID, int amount) throws UserNotFoundException, AccountNotFoundException, SQLException, TransferNotFoundException {
 		eventLogger.info("externalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
