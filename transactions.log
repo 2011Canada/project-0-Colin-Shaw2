@@ -5,3 +5,5 @@
 2020-12-14 11:15:43 project0ColinTransactionLogger [INFO] kyle Depositted 3 from account with ID 0
 2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
 2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Depositted 1 from account with ID 1
+2020-12-14 12:04:45 project0ColinTransactionLogger [INFO] kyle Withdrew 20 from account with ID 0
+2020-12-14 12:04:45 project0ColinTransactionLogger [INFO] kyle Depositted 20 from account with ID 1

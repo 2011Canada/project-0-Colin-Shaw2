@@ -61,7 +61,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 		eventLogger.info("deposit "  + currentCustomer + " " + accountID + " " + amount);
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
 		acc.setBalance(acc.getBalance() + amount);
-		transactionLogger.info(currentCustomer.getUsername() + " Depositted "+ amount + " from account with ID "+ accountID);
+		transactionLogger.info(currentCustomer.getUsername() + " Deposited "+ amount + " from account with ID "+ accountID);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
@@ -77,34 +77,29 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	public List<Account> externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
+	public Transfer externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
 			int toAccountID, int amount) throws UserNotFoundException {
 		eventLogger.info("externalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
 		Transfer t = new Transfer(amount, currentCustomer, toCustomer);
-		transferDAO.addTransfer(t);
-		return null;
+		return transferDAO.addTransfer(t);
 	}
 
 	@Override
-	//TODO return type
-	public Account acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.approveTransfer();
-		transferDAO.updateTransferByID(t, transferID);
-		return null;
+		return transferDAO.updateTransferByID(t, transferID);
 	}
 
 	@Override
-	//TODO return type
-	public Account declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
 		eventLogger.info("declineTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.declineTransfer();
-		transferDAO.updateTransferByID(t, transferID);
-		return null;
+		return transferDAO.updateTransferByID(t, transferID);
 	}
 	
 	

@@ -187,13 +187,15 @@ public class DisplayController {
 		}
 		if (userArgs[0].equals("selftrans")) {
 			checkInputLength(4, userArgs.length);
-			customerServiceManager.internalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]),
-					Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
-			System.out.println("");
+			List<Account> accs = customerServiceManager.internalAccountTransfer(activeCustomer,
+					Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
+			System.out.println(accs.get(0));
+			System.out.println(accs.get(1));
 		} else if (userArgs[0].equals("externaltrans")) {
 			checkInputLength(5, userArgs.length);
-			customerServiceManager.externalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]), userArgs[2],
-					Integer.parseInt(userArgs[3]), Integer.parseInt(userArgs[4]));
+			System.out.println("Transfer created" +
+					customerServiceManager.externalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]),
+							userArgs[2], Integer.parseInt(userArgs[3]), Integer.parseInt(userArgs[4])));
 		} else if (userArgs[0].equals("viewpendingtrans")) {
 			checkInputLength(1, userArgs.length);
 			List<Transfer> transfers = customerServiceManager.viewPendingTransfers(activeCustomer);
@@ -201,11 +203,14 @@ public class DisplayController {
 				System.out.println(t);
 			}
 		} else if (userArgs[0].equals("approve")) {
+			//TODO check this again
 			checkInputLength(2, userArgs.length);
-			customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
+			System.out.println(
+			customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
 		} else if (userArgs[0].equals("decline")) {
 			checkInputLength(2, userArgs.length);
-			customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
+			System.out.println(
+			customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
 		} else if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {

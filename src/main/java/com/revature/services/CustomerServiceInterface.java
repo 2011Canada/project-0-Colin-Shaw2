@@ -27,11 +27,11 @@ public interface CustomerServiceInterface{
 	List<Account> internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID,
 			int amount) throws NegativeBalanceException, AccountNotFoundException;
 	
-	List<Account> externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException;
+	Transfer externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException;
 
-	Account acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
+	Transfer acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
 
-	Account declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
+	Transfer declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
 	
 	List<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException;
 	

@@ -56,9 +56,9 @@ public class Transfer {
 
 	@Override
 	public String toString() {
-		return "Transfer [dateMade=" + dateMade + ", ammount=" + ammount + ", transferId=" + transferId
-				+ ", sendingCustomer=" + sendingCustomer + ", receivingCustomer=" + receivingCustomer
-				+ ", transferState=" + transferState.toString() + "]";
+		return "Transfer dateMade " + dateMade + " ammount=" + ammount + ", transferId=" + transferId
+				+ ", from " + sendingCustomer + " to " + receivingCustomer
+				+ ", transfer is " + transferState.toString();
 	}
 
 
