@@ -1,10 +1,11 @@
-package com.revature.repositories;
+package com.revature.repositories.postgres;
 
 import java.util.Collection;
 
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.TransferNotFoundException;
 import com.revature.models.Transfer;
+import com.revature.repositories.TransferDAO;
 
 public class TransferPostgressDAO implements TransferDAO {
 

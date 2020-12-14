@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.repositories.postgres;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import com.revature.enums.AccountState;
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
+import com.revature.repositories.AccountDAO;
 import com.revature.util.ConnectionFactory;
 
 public class AccountPostgresDAO implements AccountDAO {

@@ -1,7 +1,11 @@
-package com.revature.repositories;
+package com.revature.repositories.postgres;
 
 import com.revature.models.Customer;
 import com.revature.models.Employee;
+import com.revature.repositories.AccountDAO;
+import com.revature.repositories.CustomerDAO;
+import com.revature.repositories.EmployeeDAO;
+import com.revature.repositories.UserDAO;
 
 public class PostgressDebugger {
 	public static void main(String[] args) {
@@ -22,8 +26,8 @@ public class PostgressDebugger {
 
 //			System.out.println(ed.addEmployee(testEmp));
 //			System.out.println(ed.findEmployeeByName("colin").getUsername());
-//			System.out.println(ed.updateEmployee(new Employee("colin", "alsdjkfhaosifufop")).getUsername());
-//			System.out.println(ed.updateEmployee(new Employee("colisn", "alsdjkfhaosifufop")).getUsername());
+//			System.out.println(cd.updateCustomer(new Customer("kyle", "alsdjkfhaosifufop")).getUsername());
+//			System.out.println(cd.updateCustomer(new Customer("colisn", "alsdjkfhaosifufop")).getUsername());
 
 //			System.out.println(userDAO.findUserByName("colin", true).getUsername());
 //			System.out.println(cd.findCustomerByName("erica").getAccounts());

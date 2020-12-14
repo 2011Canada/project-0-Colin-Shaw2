@@ -10,12 +10,12 @@ import com.revature.exceptions.TransferNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.User;
-import com.revature.repositories.UserFileDAO;
 import com.revature.repositories.CustomerDAO;
-import com.revature.repositories.CustomerFileDAO;
 import com.revature.repositories.EmployeeDAO;
-import com.revature.repositories.EmployeeFileDAO;
 import com.revature.repositories.UserDAO;
+import com.revature.repositories.file.CustomerFileDAO;
+import com.revature.repositories.file.EmployeeFileDAO;
+import com.revature.repositories.file.UserFileDAO;
 
 
 public class UserServiceController implements UserServiceInterface {

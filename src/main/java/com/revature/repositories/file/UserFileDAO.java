@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.repositories.file;
 
 
 import java.sql.SQLException;
@@ -9,6 +9,7 @@ import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
+import com.revature.repositories.UserDAO;
 
 public class UserFileDAO implements UserDAO {
 	

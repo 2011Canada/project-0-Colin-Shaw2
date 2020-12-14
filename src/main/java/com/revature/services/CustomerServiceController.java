@@ -16,11 +16,11 @@ import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Transfer;
 import com.revature.repositories.AccountDAO;
-import com.revature.repositories.AccountFileDAO;
 import com.revature.repositories.CustomerDAO;
-import com.revature.repositories.CustomerFileDAO;
 import com.revature.repositories.TransferDAO;
-import com.revature.repositories.TransferFileDAO;
+import com.revature.repositories.file.AccountFileDAO;
+import com.revature.repositories.file.CustomerFileDAO;
+import com.revature.repositories.file.TransferFileDAO;
 
 public class CustomerServiceController implements CustomerServiceInterface {
 

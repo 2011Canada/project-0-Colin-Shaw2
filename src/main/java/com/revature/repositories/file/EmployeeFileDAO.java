@@ -1,10 +1,11 @@
-package com.revature.repositories;
+package com.revature.repositories.file;
 
 import java.util.HashMap;
 
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
+import com.revature.repositories.EmployeeDAO;
 
 
 public class EmployeeFileDAO implements EmployeeDAO {

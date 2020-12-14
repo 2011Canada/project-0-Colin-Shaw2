@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.repositories.file;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,6 +6,7 @@ import java.util.Collection;
 import com.revature.enums.TransferState;
 import com.revature.exceptions.TransferNotFoundException;
 import com.revature.models.Transfer;
+import com.revature.repositories.TransferDAO;
 
 public class TransferFileDAO implements TransferDAO {
 	

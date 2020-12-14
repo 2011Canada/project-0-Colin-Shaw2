@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.repositories.postgres;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,9 @@ import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.User;
+import com.revature.repositories.CustomerDAO;
+import com.revature.repositories.EmployeeDAO;
+import com.revature.repositories.UserDAO;
 import com.revature.util.ConnectionFactory;
 
 public class UserPostgresDAO implements UserDAO {
