@@ -3,6 +3,7 @@ package com.revature.repositories;
 import java.util.Collection;
 
 import com.revature.exceptions.AccountNotFoundException;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.models.Transfer;
 
 public interface TransferDAO {
@@ -19,7 +20,7 @@ public interface TransferDAO {
 	
 	Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException;
 	
-	Transfer findTransferByID(int id) throws AccountNotFoundException;
+	Transfer findTransferByID(int id) throws TransferNotFoundException;
 
 
 }

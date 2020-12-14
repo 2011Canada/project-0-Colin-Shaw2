@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.revature.enums.TransferState;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.models.Transfer;
 
 public class TransferFileDAO implements TransferDAO {
@@ -49,7 +50,10 @@ public class TransferFileDAO implements TransferDAO {
 	}
 
 	@Override
-	public Transfer findTransferByID(int id) {
+	public Transfer findTransferByID(int id) throws TransferNotFoundException {
+		if(FakeFileDB.transfer.get(id) == null) {
+			throw new TransferNotFoundException();
+		}
 		return FakeFileDB.transfer.get(id);
 	}
 

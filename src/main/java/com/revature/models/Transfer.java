@@ -8,28 +8,25 @@ import com.revature.exceptions.UnexpectedTransferStateException;
 public class Transfer {
 	Date dateMade;
 	int ammount;
-	int transferId;
 	Customer sendingCustomer;
+	int sendingAccountId;
 	Customer receivingCustomer;
+	int receivingAccountId;
 	TransferState transferState;
+	int transferId;
 	
-	public Transfer(int ammount, Customer sendingCustomer, Customer receivingCustomer) {
+	public Transfer(int ammount, Customer sendingCustomer,int sendingAccountId, Customer receivingCustomer,
+			int receivingAccountId, int transferID) {
 		this.dateMade = new Date();
 		this.ammount = ammount;
-		this.transferId = 0;
 		this.sendingCustomer = sendingCustomer;
+		this.sendingAccountId = sendingAccountId;
 		this.receivingCustomer = receivingCustomer;
+		this.receivingAccountId = receivingAccountId;
 		this.transferState = TransferState.PENDING;
+		this.transferId = transferID;
 	}
 	
-	public Transfer(Date dateMade, int ammount, Customer sendingCustomer, Customer receivingCustomer) {
-		this.dateMade = dateMade;
-		this.ammount = ammount;
-		this.transferId = 0;
-		this.sendingCustomer = sendingCustomer;
-		this.receivingCustomer = receivingCustomer;
-		this.transferState = TransferState.PENDING;
-	}
 
 	public int getTransferId() {
 		return transferId;
@@ -57,8 +54,8 @@ public class Transfer {
 	@Override
 	public String toString() {
 		return "Transfer dateMade " + dateMade + " ammount=" + ammount + ", transferId=" + transferId
-				+ ", from " + sendingCustomer + " to " + receivingCustomer
-				+ ", transfer is " + transferState.toString();
+				+ ", from " + sendingCustomer + " account " + sendingAccountId+ " to " + receivingCustomer +
+				" account " + receivingAccountId + ", transfer is " + transferState.toString();
 	}
 
 

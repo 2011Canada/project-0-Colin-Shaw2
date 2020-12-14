@@ -11,6 +11,7 @@ import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.InvalidArgumentLengthException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.models.Account;
@@ -64,7 +65,10 @@ public class DisplayController {
 		} catch (UserNotFoundException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} catch (AccountNotFoundException e) {
+		} catch (TransferNotFoundException e) {
+			logException(e);
+			System.out.println(e.getMessage());
+		}catch (AccountNotFoundException e) {
 			logException(e);
 			System.out.println(e.getMessage());
 		} catch (NumberFormatException e) {
@@ -81,6 +85,8 @@ public class DisplayController {
 			logException(e);
 			System.out.println(e.getMessage());
 		}
+		System.out.println("Press Enter to continue");
+		userInputScanner.nextLine();
 	}
 
 	private static void showNotLoggedInMenu() throws UserNotFoundException {
@@ -162,21 +168,16 @@ public class DisplayController {
 		} else {
 			System.out.println("Invalid option");
 		}
-		// if we stay on the menu press enter to continue
-		if (menuState == MenuState.MAIN_CUSTOMER_MENU) {
-			System.out.println("Press Enter to continue");
-			userInputScanner.nextLine();
-		}
 	}
 
 	private static void showCustomerTransfersMenu()
 			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
-			NegativeBalanceException, AccountNotFoundException, UserNotFoundException {
+			NegativeBalanceException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException {
 		System.out.println("Please enter a transfer option or q to quit");
 		System.out.println("logout");
 		System.out.println("selftrans {fromAccountID} {toAccountID} {amount}");
 		System.out.println("externaltrans {fromAccountID} {toCustomerName} {toAccountID} {amount}");
-		System.out.println("viewpendingtrans");
+		System.out.println("viewpending");
 		System.out.println("approve {transferID}");
 		System.out.println("decline {transferID}");
 		System.out.println("back");
@@ -196,7 +197,7 @@ public class DisplayController {
 			System.out.println("Transfer created" +
 					customerServiceManager.externalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]),
 							userArgs[2], Integer.parseInt(userArgs[3]), Integer.parseInt(userArgs[4])));
-		} else if (userArgs[0].equals("viewpendingtrans")) {
+		} else if (userArgs[0].equals("viewpending")) {
 			checkInputLength(1, userArgs.length);
 			List<Transfer> transfers = customerServiceManager.viewPendingTransfers(activeCustomer);
 			for (Transfer t : transfers) {
@@ -208,6 +209,7 @@ public class DisplayController {
 			System.out.println(
 			customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
 		} else if (userArgs[0].equals("decline")) {
+			//TODO check this again
 			checkInputLength(2, userArgs.length);
 			System.out.println(
 			customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
@@ -221,23 +223,27 @@ public class DisplayController {
 		} else {
 			System.out.println("Invalid Transfer option");
 		}
-		// if we stay on the menu press enter to continue
-		if (menuState == MenuState.CUSTOMER_TRANSFER_MENU) {
-			System.out.println("Press Enter to continue");
-			userInputScanner.nextLine();
-		}
 	}
 
+	//TODO make this menu better
 	private static void showEmployeeInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
 			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
-		System.out.println("EMP");
+		System.out.println("Please enter a menu option or q to quit");
+		System.out.println("logout");
+		System.out.println("newcust {username} {password}");
+		System.out.println("viewpendingaccs {customerName}");
+		System.out.println("viewpendingtransfers {customerName}");
+		System.out.println("viewcust {customerName}");
+		System.out.println("viewlogs");
+		System.out.println("approveaccount {customerName} {accountID}");
+		System.out.println("declineaccount {customerName} {accountID}");
+		System.out.println("back");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
 		if (0 == userArgs.length) {
-			throw new InvalidArgumentLengthException(1, 0);
+			throw new InvalidArgumentLengthException(1, userArgs.length);
 		}
-		checkInputLength(1, userArgs.length);
 		if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {
@@ -248,17 +254,17 @@ public class DisplayController {
 		////////////////////////////////////// EMP specific actions//////////////
 		else if (userArgs[0].equals("viewpendingaccs")) {
 			checkInputLength(2, userArgs.length);
-			for (Account a : employeeServiceManager.viewPendingAccountsForCustomer(userArgs[2])) {
+			for (Account a : employeeServiceManager.viewPendingAccountsForCustomer(userArgs[1])) {
 				System.out.println(a);
 			}
 		} else if (userArgs[0].equals("viewpendingtransfers")) {
 			checkInputLength(2, userArgs.length);
-			for (Transfer t : employeeServiceManager.viewPendingTransfersForCustomer(userArgs[2])) {
+			for (Transfer t : employeeServiceManager.viewPendingTransfersForCustomer(userArgs[1])) {
 				System.out.println(t);
 			}
 		} else if (userArgs[0].equals("viewcust")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println(employeeServiceManager.viewCustomer(userArgs[2]));
+			System.out.println(employeeServiceManager.viewCustomer(userArgs[1]));
 		} else if (userArgs[0].equals("viewlogs")) {
 			checkInputLength(1, userArgs.length);
 			for (String d : employeeServiceManager.viewTransactionLogs()) {
@@ -266,15 +272,16 @@ public class DisplayController {
 			}
 		} else if (userArgs[0].equals("approveaccount")) {
 			checkInputLength(3, userArgs.length);
-			employeeServiceManager.approveAccount(userArgs[2], Integer.parseInt(userArgs[2]));
+			employeeServiceManager.approveAccount(userArgs[2], Integer.parseInt(userArgs[3]));
 			System.out.println("Account approved");
 		} else if (userArgs[0].equals("declineaccount")) {
 			checkInputLength(3, userArgs.length);
-			employeeServiceManager.declineAccount(userArgs[2], Integer.parseInt(userArgs[2]));
+			employeeServiceManager.declineAccount(userArgs[2], Integer.parseInt(userArgs[3]));
 			System.out.println("Account declined");
 		} else {
 			System.out.println("Invalid option");
 		}
+		
 
 	}
 

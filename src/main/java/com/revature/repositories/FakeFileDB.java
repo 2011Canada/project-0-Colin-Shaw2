@@ -30,6 +30,9 @@ public class FakeFileDB {
 		cust2.addAccount(new Account(1000,0, cust2.getUsername()));
 		cust2.addAccount(new Account(2000,1, cust2.getUsername()));
 		
+		transfer.put(0, new Transfer(6, (Customer)db.get("kyle"), 0, (Customer)db.get("erica"), 1, 0));
+		transfer.put(0, new Transfer(11, (Customer)db.get("erica"), 0, (Customer)db.get("kyle"), 1, 0));
+		
 
 	}
 }

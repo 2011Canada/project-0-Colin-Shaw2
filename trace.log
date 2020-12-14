@@ -68,3 +68,56 @@ Excepted 1 Got 4
 2020-12-14 11:29:27 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 1
 2020-12-14 11:29:54 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 0 12
 2020-12-14 11:30:16 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
+2020-12-14 12:04:20 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:04:28 project0ColinEventLogger [INFO] login kyle
+2020-12-14 12:04:45 project0ColinEventLogger [INFO] internalAccountTransfer User [username=kyle] 0 1 20
+2020-12-14 12:04:45 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 20
+2020-12-14 12:04:45 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 20
+2020-12-14 12:05:12 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 0 10
+2020-12-14 12:10:19 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
+2020-12-14 12:10:35 project0ColinEventLogger [INFO] acceptTransfer User [username=kyle] 0
+2020-12-14 12:10:52 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
+2020-12-14 12:10:52 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
+Excepted PENDING Got APPROVED
+2020-12-14 12:11:07 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
+2020-12-14 12:11:07 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
+Excepted PENDING Got APPROVED
+2020-12-14 12:11:11 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
+Excepted 2 Got 1
+2020-12-14 12:11:20 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
+2020-12-14 12:11:20 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
+Excepted PENDING Got APPROVED
+2020-12-14 12:20:40 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:20:43 project0ColinEventLogger [INFO] login kyle
+2020-12-14 12:20:59 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
+2020-12-14 12:25:14 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:25:17 project0ColinEventLogger [INFO] login kyle
+2020-12-14 12:25:29 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
+2020-12-14 12:25:52 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 1 100
+2020-12-14 12:26:53 project0ColinEventLogger [INFO] acceptTransfer User [username=kyle] 0
+2020-12-14 12:27:08 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 1
+2020-12-14 12:27:08 project0ColinEventLogger [INFO] Current User kyle Transfer Not Found
+2020-12-14 12:33:50 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:33:51 project0ColinEventLogger [INFO] login kyle
+2020-12-14 12:34:06 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
+2020-12-14 12:34:53 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
+2020-12-14 12:42:31 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:42:34 project0ColinEventLogger [INFO] login colin
+2020-12-14 12:43:30 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
+Excepted 3 Got 1
+2020-12-14 12:45:09 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
+Excepted 1 Got 4
+2020-12-14 12:45:51 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:45:54 project0ColinEventLogger [INFO] login colin
+2020-12-14 12:46:18 project0ColinEventLogger [INFO] registerNewCustomerAccount a a
+2020-12-14 12:47:56 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:48:00 project0ColinEventLogger [INFO] login colin
+2020-12-14 12:48:09 project0ColinEventLogger [INFO] registerNewCustomerAccount sa a
+2020-12-14 12:48:15 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-14 12:49:17 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:49:21 project0ColinEventLogger [INFO] login colin
+2020-12-14 12:49:40 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
+Excepted 2 Got 1
+2020-12-14 12:49:52 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-14 12:50:29 project0ColinEventLogger [INFO] Program started
+2020-12-14 12:50:32 project0ColinEventLogger [INFO] login colin

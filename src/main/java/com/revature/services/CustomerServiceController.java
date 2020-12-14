@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
@@ -82,12 +83,13 @@ public class CustomerServiceController implements CustomerServiceInterface {
 		eventLogger.info("externalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
-		Transfer t = new Transfer(amount, currentCustomer, toCustomer);
+		//TODO handle transferID
+		Transfer t = new Transfer(amount, currentCustomer, fromAccountID, toCustomer, toAccountID, 100);
 		return transferDAO.addTransfer(t);
 	}
 
 	@Override
-	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.approveTransfer();
@@ -95,7 +97,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException {
 		eventLogger.info("declineTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.declineTransfer();
