@@ -73,8 +73,8 @@ public class Account{
 	
 	@Override
 	public String toString() {
-		return "Account [accountID=" + accountID + ", accountOwner=" + accountOwner + 
-				", Balance=" + balance + "]";
+		return "Account owner is " + accountOwner + " accountID is " + accountID + 
+				" current balance is " + balance;
 	}
 
 }

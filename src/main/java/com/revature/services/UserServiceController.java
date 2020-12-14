@@ -24,13 +24,17 @@ public class UserServiceController implements UserServiceInterface {
 	@Override
 	public User login(String username, String password) throws UserNotFoundException{
 		eventLogger.info("login "  + username);
-		return userDAO.findUserByName(username);
+		User u = userDAO.findUserByName(username);
+		if(u.getPassword().equals(password)) {
+			return u;
+		}
+		throw new UserNotFoundException();
 	}
 	
 	@Override
-	public Boolean registerNewCustomerAccount(String username, String password) {
+	public Customer registerNewCustomerAccount(String username, String password) {
 		eventLogger.info("registerNewCustomerAccount "  + username + " " + password);
-		return (customerDAO.addCustomer(new Customer(username, password)))== null?false:true;
+		return customerDAO.addCustomer(new Customer(username, password));
 	}
 
 	@Override

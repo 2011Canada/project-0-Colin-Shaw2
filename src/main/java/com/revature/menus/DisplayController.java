@@ -58,33 +58,26 @@ public class DisplayController {
 			default:
 				break;
 			}
-		} 
-		catch (InvalidArgumentLengthException e) {
+		} catch (InvalidArgumentLengthException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} 
-		catch (UserNotFoundException e) {
+		} catch (UserNotFoundException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		}
-		catch (AccountNotFoundException e) {
+		} catch (AccountNotFoundException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} 
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			logException(e);
 			System.out.print("Ooops we expected an integer ");
 			System.out.println(e.getMessage());
-		} 
-		catch (UnexpectedAccountStateException e) {
+		} catch (UnexpectedAccountStateException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} 
-		catch (UnexpectedTransferStateException e) {
+		} catch (UnexpectedTransferStateException e) {
 			logException(e);
 			System.out.println(e.getMessage());
-		} 
-		catch (NegativeBalanceException e) {
+		} catch (NegativeBalanceException e) {
 			logException(e);
 			System.out.println(e.getMessage());
 		}
@@ -112,9 +105,18 @@ public class DisplayController {
 		}
 	}
 
-	private static void showCustomerInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedTransferStateException, NegativeBalanceException, UserNotFoundException, AccountNotFoundException {
-		System.out.println("CUST");
+	private static void showCustomerInputMenu()
+			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
+			NegativeBalanceException, UserNotFoundException, AccountNotFoundException {
+		System.out.println("Please enter a menu option or q to quit");
+		System.out.println("logout");
+		System.out.println("newcust {username} {password}");
+		System.out.println("viewaccs");
+		System.out.println("newacc {startingbalance}");
+		System.out.println("getbal {accountnumber}");
+		System.out.println("withdraw {accountnumber} {amount}");
+		System.out.println("deposit {accountnumber} {amount}");
+		System.out.println("transfer This will bring you to the transfer menu");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -127,57 +129,72 @@ public class DisplayController {
 			quit();
 		} else if (userArgs[0].equals("newcust")) {
 			registerNewCustomerAccount(userArgs);
-		}
-		////////////////////////////////////// CUST specific actions//////////////
-		else if (userArgs[0].equals("newacc")) {
-			checkInputLength(2, userArgs.length);
-			customerServiceManager.applyForBankAccount(activeCustomer, Integer.parseInt(userArgs[1]));
-			System.out.println("TEMP newacc being made");
-
-		} else if (userArgs[0].equals("viewacc")) {
-			checkInputLength(2, userArgs.length);
-			List<Account> accounts = customerServiceManager.viewAccounts(activeCustomer, Integer.parseInt(userArgs[1]));
+			////////////////////////////////////// CUST specific actions//////////////
+		} else if (userArgs[0].equals("viewaccs")) {
+			checkInputLength(1, userArgs.length);
+			List<Account> accounts = customerServiceManager.viewAccounts(activeCustomer);
 			for (Account a : accounts) {
 				System.out.println(a);
 			}
+		} else if (userArgs[0].equals("newacc")) {
+			checkInputLength(2, userArgs.length);
+			System.out.println("New Account"
+					+ customerServiceManager.applyForBankAccount(activeCustomer, Integer.parseInt(userArgs[1]))
+					+ "made");
+
 		} else if (userArgs[0].equals("getbal")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println("CurrentBallance is "
-					+ customerServiceManager.viewBalance(activeCustomer, Integer.parseInt(userArgs[1])));
+			System.out.println("Current ballance for account " + userArgs[1] + " is "
+					+ +customerServiceManager.viewBalance(activeCustomer, Integer.parseInt(userArgs[1])));
 		} else if (userArgs[0].equals("withdraw")) {
 			checkInputLength(3, userArgs.length);
-			System.out.println("Withdrawing " + customerServiceManager
-					.withdraw(activeCustomer, Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]))
-					.getBalance());
+			Account a = customerServiceManager.withdraw(activeCustomer, Integer.parseInt(userArgs[1]),
+					Integer.parseInt(userArgs[2]));
+			System.out.println("Withdrawing " + userArgs[2] + "$ from " + a);
 		} else if (userArgs[0].equals("deposit")) {
 			checkInputLength(3, userArgs.length);
-			System.out.println("Depositting " + customerServiceManager
-					.deposit(activeCustomer, Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]))
-					.getBalance());
+			Account a = customerServiceManager.deposit(activeCustomer, Integer.parseInt(userArgs[1]),
+					Integer.parseInt(userArgs[2]));
+			System.out.println("Depositting " + userArgs[2] + "$ from " + a);
 		} else if (userArgs[0].equals("transfer")) {
 			checkInputLength(1, userArgs.length);
 			menuState = MenuState.CUSTOMER_TRANSFER_MENU;
 		} else {
 			System.out.println("Invalid option");
 		}
-
+		// if we stay on the menu press enter to continue
+		if (menuState == MenuState.MAIN_CUSTOMER_MENU) {
+			System.out.println("Press Enter to continue");
+			userInputScanner.nextLine();
+		}
 	}
 
-	private static void showCustomerTransfersMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedTransferStateException, NegativeBalanceException, AccountNotFoundException, UserNotFoundException {
-		System.out.println("Choose a Transfer option");
+	private static void showCustomerTransfersMenu()
+			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedTransferStateException,
+			NegativeBalanceException, AccountNotFoundException, UserNotFoundException {
+		System.out.println("Please enter a transfer option or q to quit");
+		System.out.println("logout");
+		System.out.println("selftrans {fromAccountID} {toAccountID} {amount}");
+		System.out.println("externaltrans {fromAccountID} {toCustomerName} {toAccountID} {amount}");
+		System.out.println("viewpendingtrans");
+		System.out.println("approve {transferID}");
+		System.out.println("decline {transferID}");
+		System.out.println("back");
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
-		checkInputLength(1, userArgs.length);
-		if (userArgs[0].equals("self")) {
+		if (0 == userArgs.length) {
+			throw new InvalidArgumentLengthException(1, 0);
+		}
+		if (userArgs[0].equals("selftrans")) {
 			checkInputLength(4, userArgs.length);
 			customerServiceManager.internalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]),
 					Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
-		} else if (userArgs[0].equals("other")) {
-			checkInputLength(4, userArgs.length);
-			customerServiceManager.externalAccountTransfer(activeCustomer, 0, userArgs[1],
-					Integer.parseInt(userArgs[2]), Integer.parseInt(userArgs[3]));
-		} else if (userArgs[0].equals("pending")) {
+			System.out.println("");
+		} else if (userArgs[0].equals("externaltrans")) {
+			checkInputLength(5, userArgs.length);
+			customerServiceManager.externalAccountTransfer(activeCustomer, Integer.parseInt(userArgs[1]), userArgs[2],
+					Integer.parseInt(userArgs[3]), Integer.parseInt(userArgs[4]));
+		} else if (userArgs[0].equals("viewpendingtrans")) {
 			checkInputLength(1, userArgs.length);
 			List<Transfer> transfers = customerServiceManager.viewPendingTransfers(activeCustomer);
 			for (Transfer t : transfers) {
@@ -199,11 +216,15 @@ public class DisplayController {
 		} else {
 			System.out.println("Invalid Transfer option");
 		}
-
+		// if we stay on the menu press enter to continue
+		if (menuState == MenuState.CUSTOMER_TRANSFER_MENU) {
+			System.out.println("Press Enter to continue");
+			userInputScanner.nextLine();
+		}
 	}
 
-	private static void showEmployeeInputMenu()
-			throws InvalidArgumentLengthException, NumberFormatException, UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
+	private static void showEmployeeInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
+			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException {
 		System.out.println("EMP");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
@@ -270,7 +291,8 @@ public class DisplayController {
 
 	private static void registerNewCustomerAccount(String[] userArgs) throws InvalidArgumentLengthException {
 		checkInputLength(3, userArgs.length);
-		userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]);
+		System.out.println(
+				"New account created " + userServiceManager.registerNewCustomerAccount(userArgs[1], userArgs[2]));
 	}
 
 	// this just throws errors
@@ -284,7 +306,7 @@ public class DisplayController {
 		if (activeUser == null) {
 			eventLogger.info("Current User" + " " + activeUser + " " + e.getMessage());
 		} else {
-			eventLogger.info("Current User" + " " +activeUser.getUsername() + " " + e.getMessage());
+			eventLogger.info("Current User" + " " + activeUser.getUsername() + " " + e.getMessage());
 		}
 	}
 }

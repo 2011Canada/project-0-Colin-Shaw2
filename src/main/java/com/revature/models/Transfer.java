@@ -58,7 +58,7 @@ public class Transfer {
 	public String toString() {
 		return "Transfer [dateMade=" + dateMade + ", ammount=" + ammount + ", transferId=" + transferId
 				+ ", sendingCustomer=" + sendingCustomer + ", receivingCustomer=" + receivingCustomer
-				+ ", transferState=" + transferState + "]";
+				+ ", transferState=" + transferState.toString() + "]";
 	}
 
 

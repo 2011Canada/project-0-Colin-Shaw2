@@ -1,4 +1,7 @@
-2020-12-12 16:15:22 project0ColinTransactionLogger [INFO] TransactionLogger is working
-2020-12-12 16:15:34 project0ColinTransactionLogger [INFO] TransactionLogger is working
-2020-12-12 16:17:30 project0ColinTransactionLogger [INFO] TransactionLogger is working
-2020-12-12 16:18:30 project0ColinTransactionLogger [INFO] TransactionLogger is working
+2020-12-14 11:09:55 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:11:16 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:13:19 project0ColinTransactionLogger [INFO] kyle Depositted 0 from account with ID 1
+2020-12-14 11:14:52 project0ColinTransactionLogger [INFO] kyle Withdrew 3 from account with ID 0
+2020-12-14 11:15:43 project0ColinTransactionLogger [INFO] kyle Depositted 3 from account with ID 0
+2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Depositted 1 from account with ID 1

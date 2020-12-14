@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
@@ -19,7 +20,7 @@ public class UserPostgresDAO implements UserDAO {
 
 	@Override
 	//TODO add throws
-	public User findUserByName(String s) {
+	public User findUserByName(String s) throws UserNotFoundException{
 		User u = null;
 		Connection conn = this.cf.getConnection();
 
@@ -35,7 +36,7 @@ public class UserPostgresDAO implements UserDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
-			System.out.println(sql);
+			//System.out.println(sql);
 		}
 
 		if(u != null) {return u;}
@@ -51,7 +52,7 @@ public class UserPostgresDAO implements UserDAO {
 			u = new Employee(res.getString("username"), res.getString("password"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println(sql);
 		}
 

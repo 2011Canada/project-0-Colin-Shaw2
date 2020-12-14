@@ -14,7 +14,7 @@ public interface CustomerServiceInterface{
 	
 	Customer applyForBankAccount(Customer currentCustomer, long initialBalance);
 	
-	List<Account> viewAccounts(Customer currentCustomer, int accountID) throws UserNotFoundException;
+	List<Account> viewAccounts(Customer currentCustomer) throws UserNotFoundException;
 	
 	long viewBalance(Customer currentCustomer, int accountID) throws AccountNotFoundException;
 	
@@ -24,14 +24,14 @@ public interface CustomerServiceInterface{
 	//returns amount deposited
 	Account deposit(Customer currentCustomer, int accountID, int amount) throws NegativeBalanceException, AccountNotFoundException;
 
-	Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID,
+	List<Account> internalAccountTransfer(Customer currentCustomer, int fromAccountID, int toAccountID,
 			int amount) throws NegativeBalanceException, AccountNotFoundException;
 	
-	Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException;
+	List<Account> externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException;
 
-	Boolean acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
+	Account acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
 
-	Boolean declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
+	Account declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException ;
 	
 	List<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException;
 	

@@ -36,8 +36,8 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 	
 	@Override
-	public List<Account> viewAccounts(Customer currentCustomer, int accountID) throws UserNotFoundException{
-		eventLogger.info("viewAccounts "  + currentCustomer + " " + accountID);
+	public List<Account> viewAccounts(Customer currentCustomer) throws UserNotFoundException{
+		eventLogger.info("viewAccounts "  + currentCustomer );
 		return customerDAO.findCustomerByName(currentCustomer.getUsername()).getAccounts();
 	}
 	
@@ -66,19 +66,18 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	//TODO return type
-	public Boolean internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
+	public List<Account> internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
 			int toAccountID, int amount)  throws NegativeBalanceException, AccountNotFoundException {
 		eventLogger.info("internalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
-		this.withdraw(currentCustomer, fromAccountID, amount);
-		this.deposit(currentCustomer, toAccountID, amount);
-		return true;
+		List<Account> accounts = new ArrayList<>();
+		accounts.add(withdraw(currentCustomer, fromAccountID, amount));
+		accounts.add(deposit(currentCustomer, toAccountID, amount));
+		return accounts;
 	}
 
 	@Override
-	//TODO return type
-	public Boolean externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
+	public List<Account> externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName,
 			int toAccountID, int amount) throws UserNotFoundException {
 		eventLogger.info("externalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
@@ -90,7 +89,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 
 	@Override
 	//TODO return type
-	public Boolean acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Account acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.approveTransfer();
@@ -100,7 +99,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 
 	@Override
 	//TODO return type
-	public Boolean declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
+	public Account declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException {
 		eventLogger.info("declineTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.declineTransfer();

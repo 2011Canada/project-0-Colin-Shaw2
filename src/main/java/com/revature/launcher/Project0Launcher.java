@@ -17,6 +17,7 @@ public class Project0Launcher {
 	//TODO remove all TODO
 	//TODO addLogging
 	//TODO double check we are throwing errors
+	//TODO check deposit and withdraw are positive
 	
 	
 	//Things to extend robustness

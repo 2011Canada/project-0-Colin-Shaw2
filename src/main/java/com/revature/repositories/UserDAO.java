@@ -5,7 +5,7 @@ import com.revature.models.User;
 
 public interface UserDAO {
 
-	public User findUserByName(String s)throws UserNotFoundException;
+	public User findUserByName(String s) throws UserNotFoundException;
 
 	
 }
