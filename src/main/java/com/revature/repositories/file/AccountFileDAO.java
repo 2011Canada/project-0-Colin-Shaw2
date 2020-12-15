@@ -1,9 +1,11 @@
 package com.revature.repositories.file;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.revature.exceptions.AccountNotFoundException;
 import com.revature.models.Account;
 import com.revature.models.Customer;
 import com.revature.models.Employee;
@@ -43,6 +45,13 @@ public class AccountFileDAO implements AccountDAO {
 				return a;
 			}
 		}
+		return null;
+	}
+
+	@Override
+	public List<Account> findAllPendingAccountsFromCustomerName(String username)
+			throws AccountNotFoundException, SQLException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

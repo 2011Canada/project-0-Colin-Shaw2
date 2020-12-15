@@ -20,6 +20,16 @@ import com.revature.models.Customer;
 import com.revature.models.Employee;
 import com.revature.models.Transfer;
 import com.revature.models.User;
+import com.revature.repositories.AccountDAO;
+import com.revature.repositories.CustomerDAO;
+import com.revature.repositories.EmployeeDAO;
+import com.revature.repositories.TransferDAO;
+import com.revature.repositories.UserDAO;
+import com.revature.repositories.postgres.AccountPostgresDAO;
+import com.revature.repositories.postgres.CustomerPostgresDAO;
+import com.revature.repositories.postgres.EmployeePostgresDAO;
+import com.revature.repositories.postgres.TransferPostgressDAO;
+import com.revature.repositories.postgres.UserPostgresDAO;
 import com.revature.services.CustomerServiceController;
 import com.revature.services.CustomerServiceInterface;
 import com.revature.services.EmployeeServiceController;
@@ -34,9 +44,17 @@ public class DisplayController {
 	static User activeUser;
 	static Customer activeCustomer;
 	static Employee activeEmployee;
-	static UserServiceInterface userServiceManager = new UserServiceController();
-	static CustomerServiceInterface customerServiceManager = new CustomerServiceController();
-	static EmployeeServiceInterface employeeServiceManager = new EmployeeServiceController();
+
+	private static CustomerDAO custDAO = new CustomerPostgresDAO();
+	private static EmployeeDAO empDAO = new EmployeePostgresDAO();
+	private static AccountDAO accDAO = new AccountPostgresDAO();
+	private static TransferDAO transDAO = new TransferPostgressDAO();
+	
+	static UserServiceInterface userServiceManager = new UserServiceController(custDAO, empDAO);
+	static CustomerServiceInterface customerServiceManager = new CustomerServiceController(accDAO, custDAO, transDAO);
+	static EmployeeServiceInterface employeeServiceManager = new EmployeeServiceController(custDAO, accDAO, transDAO);
+	
+	
 	static Scanner userInputScanner = new Scanner(System.in);
 
 	// TODO make menu give more info
@@ -245,7 +263,6 @@ public class DisplayController {
 		System.out.println("viewlogs");
 		System.out.println("approveaccount {customerName} {accountID}");
 		System.out.println("declineaccount {customerName} {accountID}");
-		System.out.println("back");
 		activeEmployee = (Employee) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -272,7 +289,11 @@ public class DisplayController {
 			}
 		} else if (userArgs[0].equals("viewcust")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println(employeeServiceManager.viewCustomer(userArgs[1]));
+			Customer temp = employeeServiceManager.viewCustomer(userArgs[1]);
+			System.out.println(temp);
+			for(Account a :temp.getAccounts()) {
+				System.out.println(a);
+			}
 		} else if (userArgs[0].equals("viewlogs")) {
 			checkInputLength(1, userArgs.length);
 			for (String d : employeeServiceManager.viewTransactionLogs()) {

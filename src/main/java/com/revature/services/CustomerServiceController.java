@@ -25,11 +25,17 @@ import com.revature.repositories.file.TransferFileDAO;
 
 public class CustomerServiceController implements CustomerServiceInterface {
 
-	private static AccountDAO accountDAO = new AccountFileDAO();
-	private static CustomerDAO customerDAO = new CustomerFileDAO();
-	private static TransferDAO transferDAO = new TransferFileDAO();
+	private static AccountDAO accountDAO;
+	private static CustomerDAO customerDAO;
+	private static TransferDAO transferDAO;
 	private static Logger transactionLogger = LogManager.getLogger("com.revature.project0ColinTransactionLogger");
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
+	
+	public CustomerServiceController(AccountDAO accDAO, CustomerDAO custDAO, TransferDAO transDAO) {
+		accountDAO = accDAO;
+		customerDAO = custDAO;
+		transferDAO = transDAO;
+	}
 	
 	@Override
 	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException, NegativeBalanceException {

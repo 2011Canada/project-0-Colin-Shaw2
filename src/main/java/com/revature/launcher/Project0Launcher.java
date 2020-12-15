@@ -9,7 +9,6 @@ public class Project0Launcher {
 
 	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
-	//make all daos sql
 	//make cents
 	//TODO tests on service layer
 	//TODO remove all TODO

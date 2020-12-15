@@ -10,12 +10,10 @@ public class Account{
 
 	int accountID;//this is not unique for every account just for every user
 	String accountOwner;
-//	Date openDate;
 	long balance;
 	AccountState accountState = AccountState.PENDING;
 
 	public Account() {
-//		this.openDate = new Date();
 		this.balance = 0;
 		this.accountID = 0;
 		this.accountOwner = "default";
@@ -23,7 +21,6 @@ public class Account{
 	
 	
 	public Account(long balance, int acountID, String accountOwner) {
-//		this.openDate = new Date();
 		this.balance = balance;
 		this.accountID = acountID;
 		this.accountOwner = accountOwner;
@@ -36,7 +33,6 @@ public class Account{
 	}
 
 	public Account(long balance) {
-//		this.openDate = openDate;
 		this.balance = balance;
 		this.accountID = 0;
 	}
@@ -46,10 +42,6 @@ public class Account{
 		return accountID;
 	}
 	
-//	public Date getOpenDate() {
-//		return openDate;
-//	}
-//	
 	public long getBalance() {
 		return balance;
 	}
@@ -80,7 +72,7 @@ public class Account{
 	@Override
 	public String toString() {
 		return "Account owner is " + accountOwner + " accountID is " + accountID + 
-				" current balance is " + balance;
+				" current balance is " + balance + "account state is " + accountState;
 	}
 
 

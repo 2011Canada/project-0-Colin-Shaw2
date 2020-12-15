@@ -16,6 +16,8 @@ public interface AccountDAO {
 
 	public List<Account> findAllAccountsFromCustomerName(String username) throws AccountNotFoundException, SQLException;
 	
+	public List<Account> findAllPendingAccountsFromCustomerName(String username) throws AccountNotFoundException, SQLException;
+	
 	public Account findAccountByCustomerandID(Customer c,int id) throws AccountNotFoundException, SQLException;
 
 }

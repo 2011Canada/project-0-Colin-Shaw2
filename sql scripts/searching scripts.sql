@@ -38,6 +38,7 @@ where account_id = 4;
 
 
 select * from accounts where accountuser like 'kyle';
+select * from accounts where accountuser like 'kyle' and account_state='PENDING';
 
 
 select * from accounts where accountuser like 'kyle' and account_id = 3;

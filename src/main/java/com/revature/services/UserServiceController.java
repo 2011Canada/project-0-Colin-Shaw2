@@ -20,12 +20,14 @@ import com.revature.repositories.file.UserFileDAO;
 
 public class UserServiceController implements UserServiceInterface {
 
-	private static UserDAO userDAO = new UserFileDAO();
-	private static CustomerDAO customerDAO = new CustomerFileDAO();
-	private static EmployeeDAO employeeDAO = new EmployeeFileDAO();
+	private static CustomerDAO customerDAO;
+	private static EmployeeDAO employeeDAO;
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
-	public UserServiceController() {}
+	public UserServiceController(CustomerDAO custDAO, EmployeeDAO empDAO) {
+		customerDAO = custDAO;
+		employeeDAO = empDAO;
+	}
 
 	//can be null
 	@Override
@@ -33,8 +35,8 @@ public class UserServiceController implements UserServiceInterface {
 		eventLogger.info("login "  + username);
 		User u =
 		(isEmployee)?
-		customerDAO.findCustomerByName(username):
-		employeeDAO.findEmployeeByName(username);
+		employeeDAO.findEmployeeByName(username):
+		customerDAO.findCustomerByName(username);
 		if(u.getPassword().equals(password)) {
 			return u;
 		}

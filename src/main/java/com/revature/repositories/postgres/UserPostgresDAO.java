@@ -1,14 +1,9 @@
 package com.revature.repositories.postgres;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
-import com.revature.models.Customer;
-import com.revature.models.Employee;
 import com.revature.models.User;
 import com.revature.repositories.CustomerDAO;
 import com.revature.repositories.EmployeeDAO;

@@ -69,7 +69,9 @@ public class CustomerPostgresDAO implements CustomerDAO {
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, username);
 		ResultSet res = statement.executeQuery();
-		res.next();
+		if(!res.next()) {
+			throw new UserNotFoundException();
+		}
 		u = new Customer(res.getString("username"), res.getString("password"));
 		
 		

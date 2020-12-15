@@ -1,124 +1,43 @@
-2020-12-14 10:42:40 project0ColinEventLogger [INFO] Program started
-2020-12-14 10:42:48 project0ColinEventLogger [INFO] login colin
-2020-12-14 10:42:58 project0ColinEventLogger [INFO] Program started
-2020-12-14 10:43:00 project0ColinEventLogger [INFO] login kyle
-2020-12-14 10:43:30 project0ColinEventLogger [INFO] viewAccounts com.revature.models.Customer@638ef7ed
-2020-12-14 10:54:47 project0ColinEventLogger [INFO] Program started
-2020-12-14 10:54:51 project0ColinEventLogger [INFO] login kyle 
-2020-12-14 10:54:51 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 10:54:55 project0ColinEventLogger [INFO] login kyle
-2020-12-14 10:55:02 project0ColinEventLogger [INFO] viewAccounts com.revature.models.Customer@4bff7da0
-2020-12-14 10:58:28 project0ColinEventLogger [INFO] Program started
-2020-12-14 10:58:32 project0ColinEventLogger [INFO] login colin
-2020-12-14 10:58:32 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 10:58:35 project0ColinEventLogger [INFO] login Colin
-2020-12-14 10:58:35 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:04:05 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:04:08 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:04:08 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:04:23 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:04:23 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:04:30 project0ColinEventLogger [INFO] login erica
-2020-12-14 11:04:30 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:04:35 project0ColinEventLogger [INFO] login colin
-2020-12-14 11:04:35 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:05:42 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:05:45 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:05:45 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:06:09 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:06:20 project0ColinEventLogger [INFO] login kyle g
-2020-12-14 11:06:20 project0ColinEventLogger [INFO] Current User null User Not Found
-2020-12-14 11:06:25 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:06:38 project0ColinEventLogger [INFO] registerNewCustomerAccount w w
-2020-12-14 11:08:06 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:08:10 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:08:21 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 3 Got 2
-2020-12-14 11:08:28 project0ColinEventLogger [INFO] registerNewCustomerAccount w w
-2020-12-14 11:08:36 project0ColinEventLogger [INFO] viewAccounts User [username=kyle]
-2020-12-14 11:09:14 project0ColinEventLogger [INFO] viewBalance User [username=kyle] 0
-2020-12-14 11:09:22 project0ColinEventLogger [INFO] viewBalance User [username=kyle] 0
-2020-12-14 11:09:33 project0ColinEventLogger [INFO] Current User kyle For input string: "q"
-2020-12-14 11:09:55 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 1
-2020-12-14 11:10:54 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:10:56 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:11:00 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 3 Got 1
-2020-12-14 11:11:06 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 3 Got 1
-2020-12-14 11:11:16 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 1
-2020-12-14 11:13:19 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 0
-2020-12-14 11:14:42 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:14:45 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:14:52 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 3
-2020-12-14 11:15:43 project0ColinEventLogger [INFO] deposit User [username=kyle] 0 3
-2020-12-14 11:26:55 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 4 Got 1
-2020-12-14 11:27:07 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:27:16 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:27:35 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 1 Got 4
-2020-12-14 11:28:52 project0ColinEventLogger [INFO] Program started
-2020-12-14 11:28:54 project0ColinEventLogger [INFO] login kyle
-2020-12-14 11:29:14 project0ColinEventLogger [INFO] internalAccountTransfer User [username=kyle] 0 1 789
-2020-12-14 11:29:14 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 789
-2020-12-14 11:29:14 project0ColinEventLogger [INFO] Current User kyle Cannot have a negative balance
-2020-12-14 11:29:27 project0ColinEventLogger [INFO] internalAccountTransfer User [username=kyle] 0 1 1
-2020-12-14 11:29:27 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 1
-2020-12-14 11:29:27 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 1
-2020-12-14 11:29:54 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 0 12
-2020-12-14 11:30:16 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
-2020-12-14 12:04:20 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:04:28 project0ColinEventLogger [INFO] login kyle
-2020-12-14 12:04:45 project0ColinEventLogger [INFO] internalAccountTransfer User [username=kyle] 0 1 20
-2020-12-14 12:04:45 project0ColinEventLogger [INFO] withdraw User [username=kyle] 0 20
-2020-12-14 12:04:45 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 20
-2020-12-14 12:05:12 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 0 10
-2020-12-14 12:10:19 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
-2020-12-14 12:10:35 project0ColinEventLogger [INFO] acceptTransfer User [username=kyle] 0
-2020-12-14 12:10:52 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
-2020-12-14 12:10:52 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
-Excepted PENDING Got APPROVED
-2020-12-14 12:11:07 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
-2020-12-14 12:11:07 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
-Excepted PENDING Got APPROVED
-2020-12-14 12:11:11 project0ColinEventLogger [INFO] Current User kyle Wrong Number of Arguments Passed
-Excepted 2 Got 1
-2020-12-14 12:11:20 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
-2020-12-14 12:11:20 project0ColinEventLogger [INFO] Current User kyle Invalid Transfer State
-Excepted PENDING Got APPROVED
-2020-12-14 12:20:40 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:20:43 project0ColinEventLogger [INFO] login kyle
-2020-12-14 12:20:59 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
-2020-12-14 12:25:14 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:25:17 project0ColinEventLogger [INFO] login kyle
-2020-12-14 12:25:29 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
-2020-12-14 12:25:52 project0ColinEventLogger [INFO] externalAccountTransfer User [username=kyle] 0 1 100
-2020-12-14 12:26:53 project0ColinEventLogger [INFO] acceptTransfer User [username=kyle] 0
-2020-12-14 12:27:08 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 1
-2020-12-14 12:27:08 project0ColinEventLogger [INFO] Current User kyle Transfer Not Found
-2020-12-14 12:33:50 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:33:51 project0ColinEventLogger [INFO] login kyle
-2020-12-14 12:34:06 project0ColinEventLogger [INFO] viewPendingTransfers User [username=kyle]
-2020-12-14 12:34:53 project0ColinEventLogger [INFO] declineTransfer User [username=kyle] 0
-2020-12-14 12:42:31 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:42:34 project0ColinEventLogger [INFO] login colin
-2020-12-14 12:43:30 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
-Excepted 3 Got 1
-2020-12-14 12:45:09 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
-Excepted 1 Got 4
-2020-12-14 12:45:51 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:45:54 project0ColinEventLogger [INFO] login colin
-2020-12-14 12:46:18 project0ColinEventLogger [INFO] registerNewCustomerAccount a a
-2020-12-14 12:47:56 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:48:00 project0ColinEventLogger [INFO] login colin
-2020-12-14 12:48:09 project0ColinEventLogger [INFO] registerNewCustomerAccount sa a
-2020-12-14 12:48:15 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
-2020-12-14 12:49:17 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:49:21 project0ColinEventLogger [INFO] login colin
-2020-12-14 12:49:40 project0ColinEventLogger [INFO] Current User colin Wrong Number of Arguments Passed
-Excepted 2 Got 1
-2020-12-14 12:49:52 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
-2020-12-14 12:50:29 project0ColinEventLogger [INFO] Program started
-2020-12-14 12:50:32 project0ColinEventLogger [INFO] login colin
-2020-12-14 12:50:54 project0ColinEventLogger [INFO] viewTransactionLogs
+2020-12-15 10:27:05 project0ColinEventLogger [INFO] Program started
+2020-12-15 10:27:37 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:27:37 project0ColinEventLogger [INFO] Current User null ResultSet not positioned properly, perhaps you need to call next.
+2020-12-15 10:27:59 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:27:59 project0ColinEventLogger [INFO] Current User null ResultSet not positioned properly, perhaps you need to call next.
+2020-12-15 10:29:17 project0ColinEventLogger [INFO] Program started
+2020-12-15 10:29:23 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:29:52 project0ColinEventLogger [INFO] Program started
+2020-12-15 10:29:57 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:29:58 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 10:30:08 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:30:08 project0ColinEventLogger [INFO] Current User null ResultSet not positioned properly, perhaps you need to call next.
+2020-12-15 10:30:14 project0ColinEventLogger [INFO] login erica
+2020-12-15 10:31:11 project0ColinEventLogger [INFO] Program started
+2020-12-15 10:31:16 project0ColinEventLogger [INFO] login sd
+2020-12-15 10:31:16 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 10:31:23 project0ColinEventLogger [INFO] login colin
+2020-12-15 10:31:45 project0ColinEventLogger [INFO] logoutcolin
+2020-12-15 10:31:56 project0ColinEventLogger [INFO] login kurtis
+2020-12-15 10:32:11 project0ColinEventLogger [INFO] registerNewCustomerAccount asd d
+2020-12-15 10:32:31 project0ColinEventLogger [INFO] viewCustomer asd
+2020-12-15 10:33:17 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:01:13 project0ColinEventLogger [INFO] Program started
+2020-12-15 11:01:19 project0ColinEventLogger [INFO] login sdkj
+2020-12-15 11:01:19 project0ColinEventLogger [INFO] Current User null ResultSet not positioned properly, perhaps you need to call next.
+2020-12-15 11:03:41 project0ColinEventLogger [INFO] Program started
+2020-12-15 11:03:46 project0ColinEventLogger [INFO] login dfs
+2020-12-15 11:03:46 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 11:03:50 project0ColinEventLogger [INFO] login colin
+2020-12-15 11:03:51 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 11:03:57 project0ColinEventLogger [INFO] login colin
+2020-12-15 11:04:14 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:15:44 project0ColinEventLogger [INFO] Program started
+2020-12-15 11:15:49 project0ColinEventLogger [INFO] login colin
+2020-12-15 11:16:01 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:16:15 project0ColinEventLogger [INFO] viewCustomer erica
+2020-12-15 11:20:24 project0ColinEventLogger [INFO] Program started
+2020-12-15 11:20:28 project0ColinEventLogger [INFO] login colin
+2020-12-15 11:20:40 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:21:09 project0ColinEventLogger [INFO] viewCustomer erica
+2020-12-15 11:21:56 project0ColinEventLogger [INFO] viewTransactionLogs
+2020-12-15 11:22:27 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:23:17 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica

@@ -9,7 +9,7 @@ public class UserServiceControllerTest {
 	
 	@BeforeEach
 	public void setup() {
-		usController = new UserServiceController();
+		//usController = new UserServiceController();
 	}
 	
 	@BeforeEach

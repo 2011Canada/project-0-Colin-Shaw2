@@ -72,6 +72,24 @@ public class AccountPostgresDAO implements AccountDAO {
 
 		return accs;
 	}
+	
+	public List<Account> findAllPendingAccountsFromCustomerName(String username) throws AccountNotFoundException, SQLException{
+		Connection conn = cf.getConnection();
+		ArrayList<Account> accs = new ArrayList<>();
+		String sql = "select * from accounts where accountuser like ?  and account_state='PENDING';";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, username);
+		ResultSet res = statement.executeQuery();
+
+		while (res.next()) {
+			AccountState state = AccountState.valueOf(res.getString("account_state"));
+			accs.add(
+					new Account(res.getLong("balance"), res.getInt("account_id"), res.getString("accountuser"), state));
+		}
+
+		return accs;
+	}
+	
 
 	@Override
 	public Account findAccountByCustomerandID(Customer c, int id) throws AccountNotFoundException, SQLException {

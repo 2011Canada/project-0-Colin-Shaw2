@@ -27,11 +27,17 @@ import com.revature.repositories.file.TransferFileDAO;
 
 public class EmployeeServiceController implements EmployeeServiceInterface {
 
-	private static CustomerDAO custDAO = new CustomerFileDAO();
-	private static AccountDAO accDAO = new AccountFileDAO();
-	private static TransferDAO transDAO = new TransferFileDAO();
+	private static CustomerDAO custDAO;
+	private static AccountDAO accDAO;
+	private static TransferDAO transDAO;
 	private static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 
+	public EmployeeServiceController(CustomerDAO customerDAO, AccountDAO accountDAO, TransferDAO transferDAO) {
+		custDAO = customerDAO;
+		accDAO = accountDAO;
+		transDAO = transferDAO;
+	}
+	
 	@Override
 	public Customer viewCustomer(String customerName) throws UserNotFoundException, AccountNotFoundException, SQLException {
 		eventLogger.info("viewCustomer "  + customerName);
@@ -41,7 +47,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	@Override
 	public List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException, SQLException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
-		return accDAO.findAllAccountsFromCustomerName(customerName);
+		return accDAO.findAllPendingAccountsFromCustomerName(customerName);
 	}
 
 	@Override
