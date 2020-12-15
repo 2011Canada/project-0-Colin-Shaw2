@@ -52,3 +52,4 @@ update transfers set transfer_state='APPROVED' where transfers_id = 10;
 
 select * from transfers  where transfer_state like 'PENDING' and (receiving_customer like 'kyle' or sending_customer like 'kyle');
 
+select * from transfers where transfers_id = 1;

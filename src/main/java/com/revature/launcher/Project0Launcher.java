@@ -9,19 +9,12 @@ public class Project0Launcher {
 
 	static Logger eventLogger = LogManager.getLogger("com.revature.project0ColinEventLogger");
 	
-	//TODO makeDataBase
-	//TODO SQLdaos
+	//make all daos sql
+	//make cents
 	//TODO tests on service layer
-	//TODO consider re adding IDs
 	//TODO remove all TODO
-	//TODO addLogging
-	//TODO double check we are throwing errors
-	//TODO check deposit and withdraw are positive
 	//TODO make menu give more info
 	
-	
-	//Things to extend robustness
-	//move logs to a db
 	public static void main(String[] args) {
 		eventLogger.info("Program started");
 		while(true) {

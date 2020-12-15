@@ -14,7 +14,7 @@ import com.revature.models.Transfer;
 
 public interface CustomerServiceInterface{
 	
-	Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException;
+	Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException, NegativeBalanceException;
 	
 	List<Account> viewAccounts(Customer currentCustomer) throws UserNotFoundException, AccountNotFoundException, SQLException;
 	
@@ -31,7 +31,7 @@ public interface CustomerServiceInterface{
 	
 	Transfer externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException, AccountNotFoundException, SQLException, TransferNotFoundException;
 
-	Transfer acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException;
+	Transfer acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException, NegativeBalanceException;
 
 	Transfer declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException ;
 	
