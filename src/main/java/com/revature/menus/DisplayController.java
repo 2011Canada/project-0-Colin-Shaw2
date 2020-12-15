@@ -1,5 +1,6 @@
 package com.revature.menus;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -106,6 +107,8 @@ public class DisplayController {
 		}catch (SQLException e) {
 			logException(e);
 			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			logException(e);
 		}
 		System.out.println("Press Enter to continue");
 		userInputScanner.nextLine();
@@ -148,7 +151,7 @@ public class DisplayController {
 		System.out.println("getbal {accountnumber}");
 		System.out.println("withdraw {accountnumber} {amount}");
 		System.out.println("deposit {accountnumber} {amount}");
-		System.out.println("transfer !This will bring you to the transfer menu!");
+		System.out.println("transfer ->This will bring you to the transfer menu");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -253,7 +256,7 @@ public class DisplayController {
 
 	//TODO make this menu better
 	private static void showEmployeeInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
-			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException, SQLException {
+			UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, TransferNotFoundException, SQLException, IOException {
 		System.out.println("Please enter a menu option or q to quit");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");

@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -58,11 +59,10 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 
 	@Override
 	// this does not use a DAO for simplicity
-	public Collection<String> viewTransactionLogs() {
+	public Collection<String> viewTransactionLogs() throws IOException {
 		eventLogger.info("viewTransactionLogs");
 		BufferedReader reader;
 		Collection<String> allTransactions = new LinkedList<>();
-		try {
 			reader = new BufferedReader(new FileReader("transactions.log"));
 			String line = reader.readLine();
 			while (line != null) {
@@ -71,9 +71,6 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 				line = reader.readLine();
 			}
 			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		return allTransactions;
 				
 	}

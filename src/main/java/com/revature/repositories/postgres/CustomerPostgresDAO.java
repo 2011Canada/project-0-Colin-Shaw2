@@ -22,6 +22,9 @@ public class CustomerPostgresDAO implements CustomerDAO {
 	@Override
 	public Customer addCustomer(Customer c)
 			throws AccountNotFoundException, TransferNotFoundException, UserNotFoundException, SQLException {
+		if(c == null) {
+			throw new AccountNotFoundException();
+		}
 		Connection conn = cf.getConnection();
 
 		String sql = "insert into customers values\r\n" + "(?, ?);";

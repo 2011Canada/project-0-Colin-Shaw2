@@ -20,7 +20,7 @@ create table employees(
 
 create table accounts(
 	accountuser text references customers("username"),
-	balance int not null,
+	balance int not null check (balance >= 0),
 	account_state text check (account_state like 'PENDING' or account_state like 'APPROVED' or account_state like 'DENIED') not null,
 	account_id serial primary key
 );
@@ -29,7 +29,7 @@ create table accounts(
 --join table
 create table transfers (
 	date_made timestamp not null,
-	ammount int not null,
+	ammount int not null check (ammount >= 0),
 	sending_customer text references customers("username") not null,
 	sending_account_id int not null,
 	receiving_customer text references customers("username") not null,
@@ -75,27 +75,3 @@ date_made, ammount, sending_customer, sending_account_id, receiving_customer,rec
 
 commit;
 
-/*  			     
-
-select m.price , m."type" , m."name" , m.copyright_owner , m.release_date, m.rating, m.max_age , m.min_age , m.media_id , m2.runtime , m2.movie_id , array_agg(c."name") as credits from media m 
-			inner join movie m2 on m.media_id = m2.main_media 
-			inner join movie_crew mc on m2.movie_id = mc.movie_id 
-			inner join crew c on mc.crew_id = c.crew_id
-			group by m.media_id, m2.movie_id;
-		
-		
-create view all_movies as select m.price , m."type" , m."name" , m.copyright_owner , m.release_date, m.rating, m.max_age , m.min_age , m.media_id , m2.runtime , m2.movie_id , array_agg(c."name") as credits from media m 
-			inner join movie m2 on m.media_id = m2.main_media 
-			inner join movie_crew mc on m2.movie_id = mc.movie_id 
-			inner join crew c on mc.crew_id = c.crew_id
-			group by m.media_id, m2.movie_id;
-		
-		
-		
-select * from all_movies;
-
-select * from media m;
-
-insert into users ("username", "password", "first_name", "last_name")
-			values ('AB', 'password', 'Alec', 'Batson');
-*/

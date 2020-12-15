@@ -92,6 +92,58 @@ public class Transfer {
 				" account " + receivingAccountId + ", transfer is " + transferState.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ammount;
+		result = prime * result + ((dateMade == null) ? 0 : dateMade.hashCode());
+		result = prime * result + receivingAccountId;
+		result = prime * result + ((receivingCustomer == null) ? 0 : receivingCustomer.hashCode());
+		result = prime * result + sendingAccountId;
+		result = prime * result + ((sendingCustomer == null) ? 0 : sendingCustomer.hashCode());
+		result = prime * result + transferId;
+		result = prime * result + ((transferState == null) ? 0 : transferState.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transfer other = (Transfer) obj;
+		if (ammount != other.ammount)
+			return false;
+		if (dateMade == null) {
+			if (other.dateMade != null)
+				return false;
+		} else if (!dateMade.equals(other.dateMade))
+			return false;
+		if (receivingAccountId != other.receivingAccountId)
+			return false;
+		if (receivingCustomer == null) {
+			if (other.receivingCustomer != null)
+				return false;
+		} else if (!receivingCustomer.equals(other.receivingCustomer))
+			return false;
+		if (sendingAccountId != other.sendingAccountId)
+			return false;
+		if (sendingCustomer == null) {
+			if (other.sendingCustomer != null)
+				return false;
+		} else if (!sendingCustomer.equals(other.sendingCustomer))
+			return false;
+		if (transferId != other.transferId)
+			return false;
+		if (transferState != other.transferState)
+			return false;
+		return true;
+	}
+
 
 
 }

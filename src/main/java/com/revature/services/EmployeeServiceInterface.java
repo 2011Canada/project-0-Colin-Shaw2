@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +21,7 @@ public interface EmployeeServiceInterface {
 
 	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException;
 	
-	Collection<String> viewTransactionLogs();
+	Collection<String> viewTransactionLogs() throws  IOException;
 	
 	Boolean approveAccount(String customerName, int accountID)throws UnexpectedAccountStateException, AccountNotFoundException, UserNotFoundException, UnexpectedAccountStateException, SQLException;
 	
