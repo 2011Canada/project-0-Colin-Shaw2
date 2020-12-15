@@ -41,3 +41,32 @@
 2020-12-15 11:21:56 project0ColinEventLogger [INFO] viewTransactionLogs
 2020-12-15 11:22:27 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
 2020-12-15 11:23:17 project0ColinEventLogger [INFO] viewPendingAccountsForCustomer erica
+2020-12-15 11:25:27 project0ColinEventLogger [INFO] Program started
+2020-12-15 11:25:32 project0ColinEventLogger [INFO] login erica
+2020-12-15 11:25:33 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 11:25:38 project0ColinEventLogger [INFO] login ;lkd
+2020-12-15 11:25:38 project0ColinEventLogger [INFO] Current User null User Not Found
+2020-12-15 11:25:42 project0ColinEventLogger [INFO] login erica
+2020-12-15 11:25:51 project0ColinEventLogger [INFO] registerNewCustomerAccount a d
+2020-12-15 11:25:58 project0ColinEventLogger [INFO] logouterica
+2020-12-15 11:26:01 project0ColinEventLogger [INFO] login a
+2020-12-15 11:26:06 project0ColinEventLogger [INFO] logouta
+2020-12-15 11:26:20 project0ColinEventLogger [INFO] login erica
+2020-12-15 11:26:30 project0ColinEventLogger [INFO] viewAccounts User [username=erica]
+2020-12-15 11:26:47 project0ColinEventLogger [INFO] applyForBankAccount User [username=erica] 10003
+2020-12-15 11:29:05 project0ColinEventLogger [INFO] viewAccounts User [username=erica]
+2020-12-15 11:29:19 project0ColinEventLogger [INFO] viewBalance User [username=erica] 2
+2020-12-15 11:29:31 project0ColinEventLogger [INFO] Current User erica Wrong Number of Arguments Passed
+Excepted 3 Got 2
+2020-12-15 11:29:45 project0ColinEventLogger [INFO] withdraw User [username=erica] 2 -3
+2020-12-15 11:29:45 project0ColinEventLogger [INFO] Current User erica Cannot have a negative balance
+2020-12-15 11:30:01 project0ColinEventLogger [INFO] withdraw User [username=erica] 2 7
+2020-12-15 11:30:30 project0ColinEventLogger [INFO] deposit User [username=erica] 2 100
+2020-12-15 11:32:22 project0ColinEventLogger [INFO] internalAccountTransfer User [username=erica] 2 4 30
+2020-12-15 11:32:22 project0ColinEventLogger [INFO] withdraw User [username=erica] 2 30
+2020-12-15 11:32:22 project0ColinEventLogger [INFO] deposit User [username=erica] 4 30
+2020-12-15 11:32:43 project0ColinEventLogger [INFO] externalAccountTransfer User [username=erica] 2 1 20
+2020-12-15 11:32:50 project0ColinEventLogger [INFO] viewPendingTransfers User [username=erica]
+2020-12-15 11:33:45 project0ColinEventLogger [INFO] acceptTransfer User [username=erica] 21
+2020-12-15 11:33:45 project0ColinEventLogger [INFO] withdraw User [username=erica] 2 20
+2020-12-15 11:33:45 project0ColinEventLogger [INFO] deposit User [username=kyle] 1 20

@@ -104,6 +104,9 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException, NegativeBalanceException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
+		if(!t.getReceivingCustomer().getUsername().equals(currentCustomer.getUsername())) {
+			throw new UnexpectedTransferStateException();
+		}
 		withdraw(t.getSendingCustomer(), t.getSendingAccountId(), t.getAmmount());
 		deposit(t.getReceivingCustomer(), t.getReceivingAccountId(), t.getAmmount());
 		t.approveTransfer();
@@ -114,6 +117,9 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException {
 		eventLogger.info("declineTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
+		if(!t.getReceivingCustomer().getUsername().equals(currentCustomer.getUsername())) {
+			throw new UnexpectedTransferStateException();
+		}
 		t.declineTransfer();
 		return transferDAO.updateTransferByID(t, transferID);
 	}

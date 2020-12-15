@@ -1,0 +1,9 @@
+2020-12-14 11:09:55 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:11:16 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:13:19 project0ColinTransactionLogger [INFO] kyle Depositted 0 from account with ID 1
+2020-12-14 11:14:52 project0ColinTransactionLogger [INFO] kyle Withdrew 3 from account with ID 0
+2020-12-14 11:15:43 project0ColinTransactionLogger [INFO] kyle Depositted 3 from account with ID 0
+2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Withdrew 1 from account with ID 0
+2020-12-14 11:29:27 project0ColinTransactionLogger [INFO] kyle Depositted 1 from account with ID 1
+2020-12-14 12:04:45 project0ColinTransactionLogger [INFO] kyle Withdrew 20 from account with ID 0
+2020-12-14 12:04:45 project0ColinTransactionLogger [INFO] kyle Depositted 20 from account with ID 1

@@ -148,7 +148,7 @@ public class DisplayController {
 		System.out.println("getbal {accountnumber}");
 		System.out.println("withdraw {accountnumber} {amount}");
 		System.out.println("deposit {accountnumber} {amount}");
-		System.out.println("transfer This will bring you to the transfer menu");
+		System.out.println("transfer !This will bring you to the transfer menu!");
 		activeCustomer = (Customer) activeUser;
 		String[] userArgs = userInputScanner.nextLine().split(" "); // Read user input
 
@@ -170,9 +170,9 @@ public class DisplayController {
 			}
 		} else if (userArgs[0].equals("newacc")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println("New Account"
+			System.out.println("New Account made "
 					+ customerServiceManager.applyForBankAccount(activeCustomer, Integer.parseInt(userArgs[1]))
-					+ "made");
+					+ " starting balance is " + Integer.parseInt(userArgs[1]) +"\nAccount is pending until approved by an employee");
 
 		} else if (userArgs[0].equals("getbal")) {
 			checkInputLength(2, userArgs.length);
