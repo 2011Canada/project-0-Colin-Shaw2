@@ -12,17 +12,11 @@ public interface TransferDAO {
 	
 	Transfer addTransfer(Transfer t)  throws SQLException, TransferNotFoundException, UserNotFoundException, AccountNotFoundException;
 
-	Transfer updateTransferByID(Transfer c, int id);
-
-	Collection<Transfer> findAllTransfers();
+	Transfer updateTransferByID(Transfer c, int id) throws SQLException, AccountNotFoundException;
 	
-	Collection<Transfer> findAllTransfersForCustomer(String username) throws AccountNotFoundException;
+	Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException, SQLException, UserNotFoundException;
 	
-	Collection<Transfer> findAllPendingTransfers() throws AccountNotFoundException;
-	
-	Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException;
-	
-	Transfer findTransferByID(int id) throws TransferNotFoundException;
+	Transfer findTransferByID(int id) throws TransferNotFoundException, SQLException, UserNotFoundException, AccountNotFoundException;
 
 
 }

@@ -28,7 +28,7 @@ create table accounts(
 --to put all of the crew memebers in a movies credits
 --join table
 create table transfers (
-	date_made timestamp,
+	date_made timestamp not null,
 	ammount int not null,
 	sending_customer text references customers("username") not null,
 	sending_account_id int not null,

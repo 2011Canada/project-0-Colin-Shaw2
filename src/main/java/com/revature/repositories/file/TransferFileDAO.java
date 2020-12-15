@@ -22,29 +22,21 @@ public class TransferFileDAO implements TransferDAO {
 		return null;
 	}
 
+//	@Override
+//	public Collection<Transfer> findAllPendingTransfers() {
+//		
+//		Collection<Transfer> pending = new ArrayList<>();
+//		
+//		for (Transfer t : FakeFileDB.transfer.values()) {
+//			if(t.getTransferState().equals(TransferState.PENDING)) {
+//				pending.add(t);
+//			}
+//		}
+//
+//		return pending;
+//	}
+	
 	@Override
-	public Collection<Transfer> findAllTransfers() {
-		return FakeFileDB.transfer.values();
-	}
-
-	@Override
-	public Collection<Transfer> findAllTransfersForCustomer(String username){
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Collection<Transfer> findAllPendingTransfers() {
-		
-		Collection<Transfer> pending = new ArrayList<>();
-		
-		for (Transfer t : FakeFileDB.transfer.values()) {
-			if(t.getTransferState().equals(TransferState.PENDING)) {
-				pending.add(t);
-			}
-		}
-
-		return pending;
-	}@Override
 	public Collection<Transfer> findAllPendingTransfersForCustomer(String username){
 		// TODO Auto-generated method stub
 		return null;

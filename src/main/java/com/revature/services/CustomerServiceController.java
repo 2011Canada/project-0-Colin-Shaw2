@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.enums.TransferState;
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.TransferNotFoundException;
@@ -85,12 +86,12 @@ public class CustomerServiceController implements CustomerServiceInterface {
 				+ " " + toAccountID + " " + amount);
 		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
 		//TODO handle transferID
-		Transfer t = new Transfer(amount, currentCustomer, fromAccountID, toCustomer, toAccountID, 100);
+		Transfer t = new Transfer(amount, currentCustomer, fromAccountID, toCustomer, toAccountID, 100, TransferState.PENDING);
 		return transferDAO.addTransfer(t);
 	}
 
 	@Override
-	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException {
+	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.approveTransfer();
@@ -98,7 +99,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException {
+	public Transfer declineTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException {
 		eventLogger.info("declineTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		t.declineTransfer();
@@ -107,9 +108,9 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	
 	
 	@Override
-	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException {
+	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException, SQLException, UserNotFoundException {
 		eventLogger.info("viewPendingTransfers "  + currentCustomer );
-		return new ArrayList<>(transferDAO.findAllPendingTransfers());
+		return new ArrayList<>(transferDAO.findAllPendingTransfersForCustomer(currentCustomer.getUsername()));
 	}
 
 }

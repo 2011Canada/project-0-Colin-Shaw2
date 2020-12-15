@@ -31,10 +31,10 @@ public interface CustomerServiceInterface{
 	
 	Transfer externalAccountTransfer(Customer currentCustomer, int fromAccountID, String toCustomerName, int toAccountID, int amount) throws UserNotFoundException, AccountNotFoundException, SQLException, TransferNotFoundException;
 
-	Transfer acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException;
+	Transfer acceptTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException;
 
-	Transfer declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException ;
+	Transfer declineTransfer(Customer currentCustomer, int transferID)throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException ;
 	
-	List<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException;
+	List<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException, SQLException, UserNotFoundException;
 	
 }

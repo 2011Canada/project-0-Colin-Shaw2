@@ -45,7 +45,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException {
+	public List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return (List<Transfer>) transDAO.findAllPendingTransfersForCustomer(customerName);
 	}

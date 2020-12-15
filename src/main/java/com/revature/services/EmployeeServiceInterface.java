@@ -17,7 +17,7 @@ public interface EmployeeServiceInterface {
 	
 	List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException, SQLException;
 
-	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException;
+	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException;
 	
 	Collection<String> viewTransactionLogs();
 	
