@@ -143,8 +143,8 @@ public class DisplayController {
 	private static void showCustomerInputMenu() throws InvalidArgumentLengthException, NumberFormatException,
 			UnexpectedTransferStateException, NegativeBalanceException, UserNotFoundException, AccountNotFoundException,
 			TransferNotFoundException, SQLException, UnexpectedAccountStateException {
-		System.out.println("transfer ->This will bring you to the transfer menu");
 		System.out.println("Please enter a menu option or q to quit");
+		System.out.println("transfer ->This will bring you to the transfer menu");
 		System.out.println("logout");
 		System.out.println("newcust {username} {password}");
 		System.out.println("viewaccs");
@@ -196,7 +196,7 @@ public class DisplayController {
 			Double amount = Double.parseDouble(userArgs[2]);
 			Account a = customerServiceManager.deposit(activeCustomer, Integer.parseInt(userArgs[1]),
 					doubleToMoney(amount));
-			System.out.println("Deposited $" + String.format("%.2f", amount) + " from account #" + a.getAccountID());
+			System.out.println("Deposited $" + String.format("%.2f", amount) + " to account #" + a.getAccountID());
 			System.out.println("Balance is now $" + a.getMoney());
 		} else if (userArgs[0].equals("transfer")) {
 			checkInputLength(1, userArgs.length);
@@ -227,9 +227,9 @@ public class DisplayController {
 			checkInputLength(4, userArgs.length);
 			List<Account> accs = customerServiceManager.internalAccountTransfer(activeCustomer,
 					Integer.parseInt(userArgs[1]), Integer.parseInt(userArgs[2]), doubleToMoney(amount));
-			System.out.println("Account #" + accs.get(0).getAccountID() + " ------" + String.format("%.2f", amount)
+			System.out.println("Account #" + accs.get(0).getAccountID() + " ------$" + String.format("%.2f", amount)
 			+ "-----> Account #"+accs.get(1).getAccountID());
-			System.out.println(accs.get(0).getMoney() + " -----new-balances----- " + accs.get(1).getMoney());
+			System.out.println("$" + accs.get(0).getMoney() + " -----new-balances----- $" + accs.get(1).getMoney());
 		} 
 		else if (userArgs[0].equals("externaltrans")) {
 			checkInputLength(5, userArgs.length);
@@ -254,10 +254,14 @@ public class DisplayController {
 			}
 		} else if (userArgs[0].equals("approve")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println(customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
+			Transfer t = customerServiceManager.acceptTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
+			System.out.println("Transfer Accepted");
+			System.out.println("Account #" + t.getSendingAccountId()+ " ------$" + t.getMoney()
+			+ "-----> Account #"+ t.getReceivingAccountId());
 		} else if (userArgs[0].equals("decline")) {
 			checkInputLength(2, userArgs.length);
-			System.out.println(customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1])));
+			Transfer t = customerServiceManager.declineTransfer(activeCustomer, Integer.parseInt(userArgs[1]));
+			System.out.println("Transfer #" + t.getTransferId() +" Decline");
 		} else if (userArgs[0].equals("logout")) {
 			logout();
 		} else if (userArgs[0].equals("q")) {
