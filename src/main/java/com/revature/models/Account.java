@@ -16,10 +16,8 @@ public class Account {
 		this.accountID = 0;
 		this.accountOwner = "default";
 	}
-
-	public Account(long balance, int acountID, String accountOwner) {
+	public Account(long balance,String accountOwner) {
 		this.balance = balance;
-		this.accountID = acountID;
 		this.accountOwner = accountOwner;
 	}
 
@@ -30,10 +28,6 @@ public class Account {
 		this.accountState = accountState;
 	}
 
-	public Account(long balance) {
-		this.balance = balance;
-		this.accountID = 0;
-	}
 
 	public int getAccountID() {
 		return accountID;
@@ -41,6 +35,19 @@ public class Account {
 
 	public long getBalance() {
 		return balance;
+	}
+	
+	public String getMoney() {
+		String s = Long.toString(balance);
+		if(balance<10) {
+			return "0.0"+s;
+		}
+		else if(balance<100) {
+			return "0."+s;
+		}
+		String beforeDec = s.substring(0, s.length()-2);
+		String afterDec = s.substring(s.length()-2, s.length());
+		return beforeDec + "." + afterDec;
 	}
 
 	public void setBalance(long balance) throws NegativeBalanceException {

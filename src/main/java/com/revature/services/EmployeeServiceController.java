@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.exceptions.AccountNotFoundException;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
@@ -52,7 +53,7 @@ public class EmployeeServiceController implements EmployeeServiceInterface {
 	}
 
 	@Override
-	public List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException {
+	public List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException, TransferNotFoundException {
 		eventLogger.info("viewPendingAccountsForCustomer "  + customerName);
 		return (List<Transfer>) transDAO.findAllPendingTransfersForCustomer(customerName);
 	}

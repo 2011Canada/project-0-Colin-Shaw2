@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.revature.exceptions.AccountNotFoundException;
+import com.revature.exceptions.TransferNotFoundException;
 import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
@@ -19,7 +20,7 @@ public interface EmployeeServiceInterface {
 	
 	List<Account> viewPendingAccountsForCustomer(String customerName) throws AccountNotFoundException, SQLException;
 
-	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException;
+	List<Transfer> viewPendingTransfersForCustomer(String customerName) throws AccountNotFoundException, SQLException, UserNotFoundException, TransferNotFoundException;
 	
 	Collection<String> viewTransactionLogs() throws  IOException;
 	

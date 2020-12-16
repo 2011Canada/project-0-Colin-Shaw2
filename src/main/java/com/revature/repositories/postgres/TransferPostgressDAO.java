@@ -36,7 +36,6 @@ public class TransferPostgressDAO implements TransferDAO {
 		statement.setString(4, t.getReceivingCustomer().getUsername());
 		statement.setInt(5, t.getReceivingAccountId());
 		statement.setString(6, t.getTransferState().toString());
-		statement.executeQuery();
 		ResultSet rs = statement.executeQuery();
 		rs.next();
 		t.setTransferId(rs.getInt("transfers_id"));
@@ -62,7 +61,7 @@ public class TransferPostgressDAO implements TransferDAO {
 
 
 	@Override
-	public Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException, UserNotFoundException, SQLException {
+	public Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException, UserNotFoundException, SQLException, TransferNotFoundException {
 		Connection conn = cf.getConnection();
 		ArrayList<Transfer> transfers = new ArrayList<>();
 		
@@ -82,7 +81,10 @@ public class TransferPostgressDAO implements TransferDAO {
 					new Transfer(res.getInt("ammount"),send, res.getInt("sending_account_id"), 
 					receive, res.getInt("receiving_account_id"), res.getInt("transfers_id"), state));
 		}
-
+		
+		if(transfers.size() == 0) {
+			throw new TransferNotFoundException();
+		}
 		return transfers;
 	}
 

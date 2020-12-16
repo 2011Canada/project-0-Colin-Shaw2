@@ -86,7 +86,9 @@ public class AccountPostgresDAO implements AccountDAO {
 			accs.add(
 					new Account(res.getLong("balance"), res.getInt("account_id"), res.getString("accountuser"), state));
 		}
-
+		if(accs.size() == 0) {
+			throw new AccountNotFoundException();
+		}
 		return accs;
 	}
 	
@@ -100,7 +102,9 @@ public class AccountPostgresDAO implements AccountDAO {
 		statement.setString(1, c.getUsername());
 		statement.setInt(2, id);
 		ResultSet res = statement.executeQuery();
-		res.next();
+		if(!res.next()) {
+			throw new AccountNotFoundException();
+		}
 
 		AccountState state = AccountState.valueOf(res.getString("account_state"));
 		return new Account(res.getLong("balance"), res.getInt("account_id"), res.getString("accountuser"), state);

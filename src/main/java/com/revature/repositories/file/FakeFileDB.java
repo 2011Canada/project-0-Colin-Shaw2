@@ -24,11 +24,11 @@ public class FakeFileDB {
 		db.put(emp1.getUsername(), emp1);
 		db.put(emp2.getUsername(), emp2);
 
-		cust1.addAccount(new Account(100,0, cust1.getUsername()));
-		cust1.addAccount(new Account(200,1, cust1.getUsername()));
-		
-		cust2.addAccount(new Account(1000,0, cust2.getUsername()));
-		cust2.addAccount(new Account(2000,1, cust2.getUsername()));
+//		cust1.addAccount(new Account(100,0, cust1.getUsername()));
+//		cust1.addAccount(new Account(200,1, cust1.getUsername()));
+//		
+//		cust2.addAccount(new Account(1000,0, cust2.getUsername()));
+//		cust2.addAccount(new Account(2000,1, cust2.getUsername()));
 		
 		transfer.put(0, new Transfer(6, (Customer)db.get("kyle"), 0, (Customer)db.get("erica"), 1, 0, TransferState.PENDING));
 		transfer.put(0, new Transfer(11, (Customer)db.get("erica"), 0, (Customer)db.get("kyle"), 1, 0, TransferState.PENDING));

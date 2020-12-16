@@ -14,7 +14,7 @@ public interface TransferDAO {
 
 	Transfer updateTransferByID(Transfer c, int id) throws SQLException, AccountNotFoundException;
 	
-	Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException, SQLException, UserNotFoundException;
+	Collection<Transfer> findAllPendingTransfersForCustomer(String username) throws AccountNotFoundException, SQLException, UserNotFoundException, TransferNotFoundException;
 	
 	Transfer findTransferByID(int id) throws TransferNotFoundException, SQLException, UserNotFoundException, AccountNotFoundException;
 

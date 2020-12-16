@@ -55,22 +55,23 @@ insert into employees("username", "password")
 insert into accounts(accountuser, balance, account_state)
 	values 
 	('kyle', 100, 'APPROVED'),
-	('erica', 200,  'APPROVED'),
+	('erica', 200,  'PENDING'),
 	('kyle', 101, 'PENDING'),
 	('erica', 201,  'PENDING'),
 	('kyle', 102, 'DENIED'),
-	('erica', 202,  'DENIED')
+	('erica', 202,  'PENDING')
 	returning accountuser;
 
 insert into transfers(
 date_made, ammount, sending_customer, sending_account_id, receiving_customer,receiving_account_id, transfer_state)
 	values 
-	(current_timestamp, 1, 'kyle', 1, 'erica', 0, 'APPROVED'),
-	(current_timestamp, 2, 'kyle', 0, 'erica', 0, 'PENDING'),
-	(current_timestamp, 3, 'kyle', 0, 'erica', 1, 'DENIED'),
-	(current_timestamp, 4, 'erica', 0, 'kyle', 1, 'APPROVED'),
-	(current_timestamp, 5, 'erica', 0, 'kyle', 0, 'PENDING'),
-	(current_timestamp, 6, 'erica', 1, 'kyle', 0, 'DENIED')
+	(current_timestamp, 1, 'kyle', 1, 'erica', 2, 'APPROVED'),
+	(current_timestamp, 2, 'kyle', 1, 'erica', 2, 'PENDING'),
+	(current_timestamp, 3, 'kyle', 1, 'erica', 2, 'DENIED'),
+	(current_timestamp, 4, 'erica', 2, 'kyle', 1, 'APPROVED'),
+	(current_timestamp, 5, 'erica', 2, 'kyle', 1, 'PENDING'),
+	(current_timestamp, 6, 'erica', 2, 'kyle', 1, 'DENIED'),
+	(current_timestamp, 3729, 'kyle', 1, 'erica', 2, 'PENDING')
 	;
 
 commit;

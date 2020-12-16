@@ -7,7 +7,7 @@ import com.revature.exceptions.UnexpectedTransferStateException;
 
 public class Transfer {
 	Date dateMade;
-	int ammount;
+	int amount;
 	Customer sendingCustomer;
 	int sendingAccountId;
 	Customer receivingCustomer;
@@ -20,7 +20,7 @@ public class Transfer {
 	public Transfer(int ammount, Customer sendingCustomer,int sendingAccountId, Customer receivingCustomer,
 			int receivingAccountId, int transferID, TransferState transferState) {
 		this.dateMade = new Date();
-		this.ammount = ammount;
+		this.amount = ammount;
 		this.sendingCustomer = sendingCustomer;
 		this.sendingAccountId = sendingAccountId;
 		this.receivingCustomer = receivingCustomer;
@@ -35,9 +35,21 @@ public class Transfer {
 	
 	
 	public int getAmmount() {
-		return ammount;
+		return amount;
 	}
 	
+	public String getMoney() {
+		String s = Long.toString(amount);
+		if(amount<10) {
+			return "0.0"+s;
+		}
+		else if(amount<100) {
+			return "0."+s;
+		}
+		String beforeDec = s.substring(0, s.length()-2);
+		String afterDec = s.substring(s.length()-2, s.length());
+		return beforeDec + "." + afterDec;
+	}
 	
 	public Customer getSendingCustomer() {
 		return sendingCustomer;
@@ -87,7 +99,7 @@ public class Transfer {
 
 	@Override
 	public String toString() {
-		return "Transfer dateMade " + dateMade + " ammount=" + ammount + ", transferId=" + transferId
+		return "Transfer dateMade " + dateMade + " ammount=" + amount + ", transferId=" + transferId
 				+ ", from " + sendingCustomer + " account " + sendingAccountId+ " to " + receivingCustomer +
 				" account " + receivingAccountId + ", transfer is " + transferState.toString();
 	}
@@ -96,7 +108,7 @@ public class Transfer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ammount;
+		result = prime * result + amount;
 		result = prime * result + ((dateMade == null) ? 0 : dateMade.hashCode());
 		result = prime * result + receivingAccountId;
 		result = prime * result + ((receivingCustomer == null) ? 0 : receivingCustomer.hashCode());
@@ -116,7 +128,7 @@ public class Transfer {
 		if (getClass() != obj.getClass())
 			return false;
 		Transfer other = (Transfer) obj;
-		if (ammount != other.ammount)
+		if (amount != other.amount)
 			return false;
 		if (dateMade == null) {
 			if (other.dateMade != null)

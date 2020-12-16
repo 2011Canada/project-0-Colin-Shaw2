@@ -28,7 +28,6 @@ public class CustomerPostgresDAO implements CustomerDAO {
 		Connection conn = cf.getConnection();
 
 		String sql = "insert into customers values\r\n" + "(?, ?);";
-		conn.setAutoCommit(false);
 
 		// this sets the customer data
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -41,8 +40,6 @@ public class CustomerPostgresDAO implements CustomerDAO {
 			aDAO.updateAccountByCustomerandID(c, a.getAccountID(), a);
 		}
 
-		// this sets the transaction data
-		conn.commit();
 		return c;
 	}
 

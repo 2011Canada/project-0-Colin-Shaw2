@@ -7,10 +7,12 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.enums.AccountState;
 import com.revature.enums.TransferState;
 import com.revature.exceptions.AccountNotFoundException;
 import com.revature.exceptions.NegativeBalanceException;
 import com.revature.exceptions.TransferNotFoundException;
+import com.revature.exceptions.UnexpectedAccountStateException;
 import com.revature.exceptions.UnexpectedTransferStateException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.Account;
@@ -38,11 +40,13 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 	
 	@Override
-	public Customer applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException, NegativeBalanceException {
+	public Account applyForBankAccount(Customer currentCustomer, long initialBalance) throws UserNotFoundException, SQLException, NegativeBalanceException, AccountNotFoundException {
 		eventLogger.info("applyForBankAccount "  + currentCustomer + " " + initialBalance);
 		if(initialBalance < 0) {throw new NegativeBalanceException();}
-		currentCustomer.addAccount(new Account(initialBalance));
-		return customerDAO.updateCustomer(currentCustomer);
+		Account a = new Account(initialBalance, currentCustomer.getUsername());
+		a = accountDAO.addAccount(currentCustomer, a);
+		currentCustomer.addAccount(a);
+		return a;
 	}
 	
 	@Override
@@ -58,20 +62,26 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	}
 
 	@Override
-	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException{
+	public Account withdraw(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException, UnexpectedAccountStateException{
 		eventLogger.info("withdraw "  + currentCustomer + " " + accountID + " " + amount);
 		if(amount <= 0 ) {throw new NegativeBalanceException();}
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
+		if(acc.getAccountState()!=AccountState.APPROVED) {
+			throw new UnexpectedAccountStateException();
+		}
 		acc.setBalance(acc.getBalance() - amount);
 		transactionLogger.info(currentCustomer.getUsername() + " Withdrew "+ amount + " from account with ID "+ accountID);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
 	}
 
 	@Override
-	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException{
+	public Account deposit(Customer currentCustomer, int accountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException, UnexpectedAccountStateException{
 		eventLogger.info("deposit "  + currentCustomer + " " + accountID + " " + amount);
 		if(amount <= 0 ) {throw new NegativeBalanceException();}
 		Account acc = accountDAO.findAccountByCustomerandID(currentCustomer, accountID);
+		if(acc.getAccountState()!=AccountState.APPROVED) {
+			throw new UnexpectedAccountStateException();
+		}
 		acc.setBalance(acc.getBalance() + amount);
 		transactionLogger.info(currentCustomer.getUsername() + " Deposited "+ amount + " from account with ID "+ accountID);
 		return accountDAO.updateAccountByCustomerandID(currentCustomer, accountID, acc);
@@ -79,7 +89,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 
 	@Override
 	public List<Account> internalAccountTransfer(Customer currentCustomer, int fromAccountID, 
-			int toAccountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException {
+			int toAccountID, int amount)  throws NegativeBalanceException, AccountNotFoundException, UserNotFoundException, SQLException, UnexpectedAccountStateException {
 		eventLogger.info("internalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		if(amount <= 0 ) {throw new NegativeBalanceException();}
@@ -95,13 +105,12 @@ public class CustomerServiceController implements CustomerServiceInterface {
 		eventLogger.info("externalAccountTransfer "  + currentCustomer + " " + fromAccountID
 				+ " " + toAccountID + " " + amount);
 		Customer toCustomer = customerDAO.findCustomerByName(toCustomerName);
-		//TODO handle transferID
 		Transfer t = new Transfer(amount, currentCustomer, fromAccountID, toCustomer, toAccountID, 100, TransferState.PENDING);
 		return transferDAO.addTransfer(t);
 	}
 
 	@Override
-	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException, NegativeBalanceException {
+	public Transfer acceptTransfer(Customer currentCustomer, int transferID) throws UnexpectedTransferStateException, AccountNotFoundException, TransferNotFoundException, SQLException, UserNotFoundException, NegativeBalanceException, UnexpectedAccountStateException {
 		eventLogger.info("acceptTransfer "  + currentCustomer + " " + transferID);
 		Transfer t = transferDAO.findTransferByID(transferID);
 		if(!t.getReceivingCustomer().getUsername().equals(currentCustomer.getUsername())) {
@@ -126,7 +135,7 @@ public class CustomerServiceController implements CustomerServiceInterface {
 	
 	
 	@Override
-	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException, SQLException, UserNotFoundException {
+	public ArrayList<Transfer> viewPendingTransfers(Customer currentCustomer) throws AccountNotFoundException, SQLException, UserNotFoundException, TransferNotFoundException {
 		eventLogger.info("viewPendingTransfers "  + currentCustomer );
 		return new ArrayList<>(transferDAO.findAllPendingTransfersForCustomer(currentCustomer.getUsername()));
 	}
